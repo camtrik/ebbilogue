@@ -10770,6 +10770,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"search-insights@npm:^2.17.3":
+  version: 2.17.3
+  resolution: "search-insights@npm:2.17.3"
+  checksum: 1dcb291b766a55f14208bdef140dd0daac3e4f1c8fc20ff57e48208d2b14c9e11a2bd82cdeb9194554c658683f9228676c2680a9503131698e7fd2af7a29da88
+  languageName: node
+  linkType: hard
+
 "section-matter@npm:^1.0.0":
   version: 1.0.0
   resolution: "section-matter@npm:1.0.0"
@@ -11466,6 +11473,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "tailwind-nextjs-starter-blog@workspace:."
   dependencies:
+    "@algolia/client-search": ^5.19.0
     "@emotion/is-prop-valid": ^1.2.2
     "@headlessui/react": 1.7.19
     "@motionone/utils": ^10.17.0
@@ -11477,6 +11485,7 @@ __metadata:
     "@types/react": ^18.2.73
     "@typescript-eslint/eslint-plugin": ^6.1.0
     "@typescript-eslint/parser": ^6.1.0
+    algoliasearch: ^5.19.0
     autoprefixer: ^10.4.13
     contentlayer2: 0.4.4
     cross-env: ^7.0.3
@@ -11515,6 +11524,7 @@ __metadata:
     remark: ^15.0.0
     remark-gfm: ^4.0.0
     remark-math: ^6.0.0
+    search-insights: ^2.17.3
     sharp: ^0.33.3
     swr: ^2.2.5
     tailwindcss: ^3.4.3
