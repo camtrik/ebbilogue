@@ -1,0 +1,140 @@
+.bg-blue-pink {
+  background: rgb(238, 174, 202);
+  background: linear-gradient(
+    280deg,
+    rgba(238, 174, 202, 0.5) 0%,
+    rgba(199, 180, 215, 0.5) 40%,
+    rgba(148, 187, 233, 0.5) 100%
+  );
+}
+
+.bg-blue-pink:is(.dark *) {
+  background: rgb(238, 174, 202);
+  background: linear-gradient(
+    280deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(185, 185, 225, 1) 40%,
+    rgba(148, 187, 233, 1) 100%
+  );
+}
+
+.bg-pink-blue {
+  background: rgb(238, 174, 202);
+  background: linear-gradient(
+    100deg,
+    rgba(238, 174, 202, 0.5) 0%,
+    rgba(199, 180, 215, 0.5) 40%,
+    rgba(148, 192, 233, 0.5) 100%
+  );
+}
+
+.bg-pink-blue:is(.dark *) {
+  background: rgb(238, 174, 202);
+  background: linear-gradient(
+    100deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(185, 185, 225, 1) 40%,
+    rgba(148, 192, 233, 1) 100%
+  );
+}
+
+.bg-gray-purple {
+  background: rgb(138, 137, 143);
+  background: linear-gradient(
+    258deg,
+    rgba(138, 137, 143, 0.5) 0%,
+    rgba(131, 131, 184, 0.5) 20%,
+    rgba(185, 151, 250, 0.5) 100%
+  );
+}
+
+.bg-gray-purple:is(.dark *) {
+  background: rgb(138, 137, 143);
+  background: linear-gradient(
+    258deg,
+    rgba(138, 137, 143, 1) 0%,
+    rgba(131, 131, 184, 1) 20%,
+    rgba(185, 151, 250, 1) 100%
+  );
+}
+
+/* Animation */
+.bg-blue-purple-animated {
+  background: linear-gradient(90deg, rgba(96, 165, 250, 0.6), rgba(167, 139, 250, 0.6));
+  background-size: 400% 400%;
+  animation: bg-blue-purple-animated 6s ease infinite;
+}
+
+.bg-blue-purple-animated:is(.dark *) {
+  background: linear-gradient(90deg, rgba(96, 165, 250, 1), rgba(167, 139, 250, 1));
+  background-size: 400% 400%;
+  animation: bg-blue-purple-animated 6s ease infinite;
+}
+
+@keyframes bg-blue-purple-animated {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-pink-blue-animated {
+  background: linear-gradient(90deg, rgba(238, 174, 202, 0.5), rgba(148, 192, 233, 0.5));
+  background-size: 400% 400%;
+  animation: bg-pink-blue-animated 6s ease infinite;
+}
+
+.bg-pink-blue-animated:is(.dark *) {
+  background: linear-gradient(90deg, rgba(238, 174, 202, 1), rgba(148, 192, 233, 1));
+  background-size: 400% 400%;
+  animation: bg-pink-blue-animated 6s ease infinite;
+}
+
+@keyframes bg-pink-blue-animated {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animation-delay-1 {
+  animation-delay: 300ms !important;
+}
+
+.animation-delay-2 {
+  animation-delay: 600ms !important;
+}
+
+/* Text Colors */
+
+.text-primary {
+  @apply text-primary-300;
+}
+
+.text-primary:is(.dark *) {
+  @apply text-primary-400;
+}
+
+.text-white:is(.dark *) {
+  @apply text-black;
+}
+
+svg.text-white:hover,
+a .text-white:hover {
+  @apply text-primary-300;
+}
+
+svg.text-white:hover:is(.dark *),
+a .text-white:hover:is(.dark *) {
+  @apply text-primary-400;
+}

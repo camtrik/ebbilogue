@@ -1,0 +1,33 @@
+---
+title: Temporal Gaussian Hierarchy - Notes
+date: '2024-12-17'
+tags: ['4D Reconstruction', 'Gaussian Splatting', 'notes']
+draft: false
+summary: A guide on how to add custom fonts to a React application using Tailwind CSS.
+---
+# Introduction 
+A new method for 4D reconstruction based on Gaussian Splatting.
+- [Project Page](https://zju3dv.github.io/longvolcap/)
+![](/static/images/notes/4d-reconstruction/tgh-1.png)
+# Key idea
+- **Multi-level hierarchy** (hierarchical structure): Dynamic scenes consist of regions with different motion speeds (fast, slow, static). Temporal Gaussian Hierarchy leverages this property to efficiently render dynamic scenes. Deep levels correspond to fast motion (short time intervals), while shallow levels correspond to slow motion (long time intervals).  
+- **Compact Appearance Model**: Only view-dependent points (e.g., metallic or glass surfaces that change color based on the viewpoint) use all SH coefficients. Diffuse points (other points) are represented with basic colors (RGB). Since most points are not view-dependent, this reduces storage requirements.  
+- **Hardware-accelerated rasterization for rendering** (unique rendering method): Only Gaussians related to the current timestamp are rendered (thanks to the hierarchical structure, relevant Gaussians can be identified). Diffuse points and view-dependent points are rendered separately.  
+
+## Multi-level hierarchy of 4DGS (Temporal Gaussian Hierarchy)
+    - Divide scenes into **Levels**, each level containing multiple **temporal segments**.  
+    - **Shallow levels**: Longer time segments for slow-motion or static regions.  
+    - **Deeper levels**: Shorter segments for fast-motion regions.  
+    - **How to decide the levels of each Gaussian**: Based on the time range it influences.  
+    - **4DGS structure**:  
+    ![](/static/images/notes/4d-reconstruction/tgh-2.png)
+
+
+## Compact Appearance Model  
+    - Enable high-degree spherical harmonics only on demand: Not every point requires full SH coefficients.  
+    - **Diffuse points**: Only require basic colors.  
+    - **View-dependent points**: Require full SH coefficients (different appearances from different views).  
+    - **How to determine this**: Based on the gradient of SH at this point during training.  
+
+## Initialization
+    - Use Sfm (Structure-from-Motion) to generate sparse point clouds for every frame and use KNN sampling to initialize Gaussians.  

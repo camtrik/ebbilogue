@@ -1,0 +1,25 @@
+{
+  "menu_blog": "Blog",
+  "menu_tag": "Tags",
+  "menu_album": "Album",
+  "menu_projects": "Projects",
+  "menu_about": "About Me",
+  "desc_projects": "Personal projects so far",
+  "desc_about": "Less is more.",
+  "desc_album": "My Blog of Photos",
+  "home_title": "Ebbi's Catalogue",
+  "home_desc": "Technology, Game Modding, and Daily Life",
+  "label_read_more": "Read more",
+  "blog_title": "All Posts",
+  "btn_prev": "Previous",
+  "btn_next": "Next",
+  "label_learn_more": "Learn more",
+
+  "footer": {
+    "desc": "Made by Nextjs and Tailwind",
+    "view_source": "Template here"
+  },
+  "oc_title": "Original Characters",
+  "img_overlay_hint": "Drag to move. Scroll to Zoom.",
+  "img_overlay_hint_mobile": "Drag to move. Pinch to Zoom."
+}
