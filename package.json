@@ -13,6 +13,15 @@
     "compress": "node ./scripts/compress.mjs"
   },
   "dependencies": {
+    "@algolia/autocomplete-core": "1.17.7",
+    "@algolia/autocomplete-shared": "1.17.7",
+    "@algolia/client-search": "4.20.0",
+    "@algolia/autocomplete-plugin-algolia-insights": "1.17.7",
+    "algoliasearch": "4.20.0",
+    "search-insights": "2.13.0",
+    "@opentelemetry/api": "1.8.0",
+    "@opentelemetry/exporter-trace-otlp-grpc": "0.48.0",
+    "@effect-ts/otel-exporter-trace-otlp-grpc": "0.48.0",
     "@emotion/is-prop-valid": "^1.2.2",
     "@headlessui/react": "1.7.19",
     "@motionone/utils": "^10.17.0",
@@ -82,9 +91,13 @@
   },
   "packageManager": "yarn@3.6.1",
   "resolutions": {
-    "@algolia/client-search": "^4.20.0",
-    "algoliasearch": "^4.20.0",
+    "@algolia/client-search": "4.20.0",
+    "algoliasearch": "4.20.0",
     "@opentelemetry/api": "1.8.0",
-    "@opentelemetry/exporter-trace-otlp-grpc": "0.48.0"
+    "@opentelemetry/exporter-trace-otlp-grpc": "0.48.0",
+    "@algolia/autocomplete-core": "1.17.7",
+    "@algolia/autocomplete-shared": "1.17.7",
+    "@algolia/autocomplete-plugin-algolia-insights": "1.17.7",
+    "search-insights": "2.13.0"
   }
 }
