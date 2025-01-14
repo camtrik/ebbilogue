@@ -13,10 +13,10 @@
     "compress": "node ./scripts/compress.mjs"
   },
   "dependencies": {
-    "@algolia/autocomplete-core": "^1.17.9",
-    "@algolia/autocomplete-plugin-algolia-insights": "^1.17.9",
+    "@algolia/autocomplete-core": "latest",
+    "@algolia/autocomplete-plugin-algolia-insights": "latest",
     "@algolia/autocomplete-shared": "^1.17.9",
-    "@algolia/client-search": "^5.19.0",
+    "@algolia/client-search": "latest",
     "@emotion/is-prop-valid": "^1.2.2",
     "@headlessui/react": "1.7.19",
     "@motionone/utils": "^10.17.0",
@@ -24,7 +24,7 @@
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.12",
     "acorn": "^8.14.0",
-    "algoliasearch": "^5.19.0",
+    "algoliasearch": "latest",
     "autoprefixer": "^10.4.13",
     "contentlayer2": "0.4.4",
     "esbuild": "0.20.2",
@@ -54,7 +54,7 @@
     "remark": "^15.0.0",
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
-    "search-insights": "^2.17.3",
+    "search-insights": "latest",
     "sharp": "^0.33.3",
     "swr": "^2.2.5",
     "tailwindcss": "^3.4.3",
@@ -89,6 +89,8 @@
   },
   "packageManager": "yarn@3.6.1",
   "resolutions": {
+    "@algolia/autocomplete-core": "1.17.9",
+    "@algolia/autocomplete-plugin-algolia-insights": "1.17.9",
     "@opentelemetry/api": "1.8.0",
     "@opentelemetry/exporter-trace-otlp-grpc": "0.48.0"
   }
