@@ -6,7 +6,6 @@ draft: false
 summary: A guide on how to add custom fonts to a React application using Tailwind CSS.
 ---
 
-
 # Introduction
 
 4D Gaussian Splatting, or Dynamic Gaussian Splatting, is a series of state-of-the-art techniques for reconstructing dynamic scenes in real-time by leveraging AI-powered models.
@@ -18,19 +17,21 @@ The goal of our project is to train models using the 4DGS approach and render th
 # Achievements and Implementation
 
 ### Implementation Overview
+
 The implementation is divided into two key components:
 
 1. **AssetCreator**  
-   Developed in Python, the `AssetCreator` generates binary files that store the initial frame data and frame-specific parameter changes. This structure ensures efficient handling of dynamic data during rendering.  
+   Developed in Python, the `AssetCreator` generates binary files that store the initial frame data and frame-specific parameter changes. This structure ensures efficient handling of dynamic data during rendering.
 
 2. **Viewer**  
    Created platform-specific viewers to render the results of 4DGS on Unity and Metal. These viewers are designed to provide high-quality visualizations with real-time performance, leveraging the optimized binary data produced by the `AssetCreator`.
 
-### Results  
+### Results
+
 Below is a preview of our implementation in action, showcasing the rendering of dynamic scenes in Quest3 by using Unity. You can see the same results by Metal with Vision Pro.
 
-<img 
-  src="/static/images/notes/4d-reconstruction/4dgs.gif" 
-  alt="Dynamic Scene Rendering" 
-  style={{ maxWidth: '100%', height: 'auto' }} 
+<img
+  src="/static/images/notes/4d-reconstruction/4dgs.gif"
+  alt="Dynamic Scene Rendering"
+  style={{ maxWidth: '100%', height: 'auto' }}
 />

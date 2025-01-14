@@ -25,7 +25,7 @@ const projectsData: Project[] = [
       Based on the tailwind-nextjs-starter-blog.`,
     imgSrc: '/static/images/projects/homepage.png',
     href: '/',
-  }
+  },
 ]
 
 export default projectsData

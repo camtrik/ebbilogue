@@ -26,7 +26,7 @@ const TypedBios = () => {
       <span>🎯 </span>
       <ul id="bios" className="hidden">
         <li key="1">
-          {t('typed.Iam')} <b className='text-primary-300'>{t('typed.name')}</b>
+          {t('typed.Iam')} <b className="text-primary-300">{t('typed.name')}</b>
         </li>
         <li key="2">
           {t('typed.Iam-a')} <b className="text-primary-300">{t('typed.swe')}</b>.
