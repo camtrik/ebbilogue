@@ -1,4 +1,3 @@
-<img src="public/static/favicons/icon.png" height="48" >
 <div align="center">
   <img src="public/static/images/logo.png" height="64" >
 </div>
