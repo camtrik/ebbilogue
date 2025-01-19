@@ -6,10 +6,10 @@ export default function NotFound() {
     <div className="flex flex-col items-start justify-start xl:mt-24 xl:flex-row xl:items-center xl:justify-center xl:space-x-6">
       <div className="flex flex-col items-center space-x-2 pb-8 pt-6">
         <Image
-          src="/static/images/404.jpeg"
+          src="/static/images/404.png"
           width={512}
           height={512}
-          className="h-80 w-80"
+          className="h-80 w-80 lightcone"
           alt="404"
         ></Image>
       </div>

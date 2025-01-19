@@ -48,3 +48,5 @@ yarn-error.log*
 .contentlayer
 
 *Zone.Identifier
+
+test_blog*.mdx

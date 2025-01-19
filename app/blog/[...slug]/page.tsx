@@ -11,6 +11,7 @@ import PostSimple from '@/layouts/PostSimple'
 import PostLayout from '@/layouts/PostLayout'
 import PostBanner from '@/layouts/PostBanner'
 import PostPhotos from '@/layouts/PostLayPhotos'
+import PostBannerInfo from '@/layouts/PostBannerInfo'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { notFound } from 'next/navigation'
@@ -21,6 +22,7 @@ const layouts = {
   PostLayout,
   PostBanner,
   PostPhotos,
+  PostBannerInfo, 
 }
 
 export async function generateMetadata({
