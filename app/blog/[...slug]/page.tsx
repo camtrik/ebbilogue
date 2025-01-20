@@ -108,7 +108,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   let mainContent = coreContent(post)
   // get an image for PostBannerInfo if it doesn't have one
   if (post.layout === 'PostBannerInfo' && (!post.images || post.images.length === 0)) {
-    const randomPhotoUrl = await getRandomPhotoUrl()
+    const randomPhotoUrl = await getRandomPhotoUrl(slug)
     mainContent = {
       ...mainContent,
       images: [randomPhotoUrl],
