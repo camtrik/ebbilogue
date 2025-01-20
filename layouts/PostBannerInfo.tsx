@@ -11,7 +11,6 @@ import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 
-
 interface LayoutProps {
   content: CoreContent<Blog>
   children: ReactNode
@@ -21,10 +20,9 @@ interface LayoutProps {
 
 export default function PostBannerInfo({ content, next, prev, children }: LayoutProps) {
   const { path, slug, date, title, images } = content
-  // const displayImage = 
+  // const displayImage =
   //   images && images.length > 0 ? images[0] : 'https://picsum.photos/seed/picsum/800/400'
   const displayImage = images?.[0] || 'https://picsum.photos/seed/picsum/800/400'
-
 
   return (
     <SectionContainer>
@@ -44,15 +42,15 @@ export default function PostBannerInfo({ content, next, prev, children }: Layout
               <div>
                 <PageTitle>{title}</PageTitle>
               </div>
-              <div className='w-full'>
+              <div className="w-full">
                 <Bleed>
-                  <div className='text-center'>
-                    <Image 
-                      src={displayImage} 
-                      alt={title} 
+                  <div className="text-center">
+                    <Image
+                      src={displayImage}
+                      alt={title}
                       width={1600}
                       height={1600}
-                      className="lightcone mx-auto [max-width:800px] [max-height:800px] w-auto h-auto object-contain"
+                      className="lightcone mx-auto h-auto w-auto object-contain [max-height:800px] [max-width:800px]"
                     />
                   </div>
                 </Bleed>

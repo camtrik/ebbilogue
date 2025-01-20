@@ -30,14 +30,14 @@ const projectsData: Project[] = [
     title: 'LLMUnions (WIP)',
     description: `a chat application that integrates multiple Large Language Models (LLMs) including ChatGPT, Claude, and Gemini. Made by Vue3 and Express.`,
     imgSrc: '/static/images/projects/llmunions.png',
-    href: 'https://github.com/camtrik/LLMs-Unions'
+    href: 'https://github.com/camtrik/LLMs-Unions',
   },
   {
-    title: 'Gin Blog Management Sysmte (WIP)', 
+    title: 'Gin Blog Management Sysmte (WIP)',
     description: `A Gin based blog management system. The system might become the backend management system for my personal website.`,
     imgSrc: '/static/images/projects/ginblog.png',
     href: 'https://github.com/camtrik/gin-blog',
-  }
+  },
 ]
 
 export default projectsData

@@ -9,7 +9,7 @@ export default function NotFound() {
           src="/static/images/404.png"
           width={512}
           height={512}
-          className="h-80 w-80 lightcone"
+          className="lightcone h-80 w-80"
           alt="404"
         ></Image>
       </div>

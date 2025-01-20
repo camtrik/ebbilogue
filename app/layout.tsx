@@ -16,8 +16,6 @@ import { LanguageProvider } from 'utils/locale'
 import { ImageOverlayProvider } from '@/components/overlay/providers'
 import ImageViewOverlay from '@/components/overlay/ImageOverlay'
 
-
-
 // default english text
 const pangolin = Pangolin({
   subsets: ['latin'],

@@ -15,8 +15,7 @@ import PostBannerInfo from '@/layouts/PostBannerInfo'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { notFound } from 'next/navigation'
-import { getRandomPhotoUrl } from 'app/api/googlePhotos/route'
-
+import { getRandomPhotoUrl } from 'utils/googlePhotos'
 
 const defaultLayout = 'PostLayout'
 const layouts = {
@@ -24,7 +23,7 @@ const layouts = {
   PostLayout,
   PostBanner,
   PostPhotos,
-  PostBannerInfo, 
+  PostBannerInfo,
 }
 
 export async function generateMetadata({
@@ -107,12 +106,12 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
     .flat()
   // const mainContent = coreContent(post)
   let mainContent = coreContent(post)
-  // get an image for PostBannerInfo if it doesn't have one 
+  // get an image for PostBannerInfo if it doesn't have one
   if (post.layout === 'PostBannerInfo' && (!post.images || post.images.length === 0)) {
     const randomPhotoUrl = await getRandomPhotoUrl()
     mainContent = {
-      ...mainContent, 
-      images: [randomPhotoUrl]
+      ...mainContent,
+      images: [randomPhotoUrl],
     }
   }
 
