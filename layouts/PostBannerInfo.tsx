@@ -1,4 +1,3 @@
-'use client';
 import { ReactNode, useEffect, useState } from 'react'
 import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
@@ -24,28 +23,9 @@ export default function PostBannerInfo({ content, next, prev, children }: Layout
   const { path, slug, date, title, images } = content
   // const displayImage = 
   //   images && images.length > 0 ? images[0] : 'https://picsum.photos/seed/picsum/800/400'
-  const [displayImage, setDisplayImage] = useState<string>(
-    images && images.length > 0 ? images[0] : 'https://picsum.photos/seed/picsum/800/400'
-  );
+  const displayImage = images?.[0] || 'https://picsum.photos/seed/picsum/800/400'
 
-  useEffect(() => {
-    const fetchRandomPhoto = async () => {
-      if (!images || images.length === 0) {
-        try {
-          const response = await fetch('/api/googlePhotos');
-          const data = await response.json();
-          if (data.photoUrl) {
-            setDisplayImage(data.photoUrl);
-          }
-        } catch (error) {
-          console.error('Error fetching random photo:', error);
-        }
-      }
-    };
 
-    fetchRandomPhoto();
-  }, [images]);
-  
   return (
     <SectionContainer>
       <ScrollTopAndComment />
