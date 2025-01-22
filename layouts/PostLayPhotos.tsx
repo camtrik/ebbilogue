@@ -2,7 +2,7 @@
 import { Key, ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog, Authors } from 'contentlayer/generated'
-import PostLayout from './PostLayout'
+import PostLayout from './PostSimple'
 import Photo from '@/components/gallery/photo'
 
 interface LayoutProps {
@@ -17,7 +17,8 @@ export default function PostPhotos({ content, authorDetails, next, prev, childre
   const { images } = content
 
   return (
-    <PostLayout content={content} authorDetails={authorDetails} next={next} prev={prev}>
+    // <PostLayout content={content} authorDetails={authorDetails} next={next} prev={prev}>
+    <PostLayout content={content} next={next} prev={prev}>
       {children}
       <section className="divide-y divide-transparent">
         {images &&
