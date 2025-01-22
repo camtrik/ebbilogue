@@ -2,6 +2,7 @@ const {
     GOOGLE_CLIENT_ID: client_id,
     GOOGLE_CLIENT_SECRET: client_secret,
     GOOGLE_REFRESH_TOKEN: refresh_token,
+    GOOGLE_PHOTOS_ALBUM_ID: album_id,
   } = process.env
 
 const token = Buffer.from(`${client_id}:${client_secret}`).toString('base64')
@@ -51,6 +52,7 @@ class PhotoManager {
         },
         body: JSON.stringify({
           pageSize: 100, 
+          albumId: album_id, 
         }),
       });
 
