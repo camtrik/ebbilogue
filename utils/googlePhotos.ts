@@ -37,6 +37,7 @@ class PhotoManager {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: `grant_type=refresh_token&refresh_token=${refresh_token}`,
+        cache: 'no-cache',
       });
 
       const { access_token } = await tokenResponse.json(); 
