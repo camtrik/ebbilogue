@@ -10,8 +10,18 @@ Based off the [**Tailwind Nextjs Starter Blog**](https://github.com/timlrx/tailw
 
 This is a [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/) project which is based on Next App directory with [React Server Component](https://nextjs.org/docs/getting-started/react-essentials#server-components) and uses [Contentlayer](https://www.contentlayer.dev/) to manage markdown content.
 
-## Original Features From the Template
+Some features and designs come from [Azurtelie](https://github.com/AmosChenZixuan/Azurtelier.com). Thanks!
 
+## New features roadmap:
+- [x] Random banner images from Google Photos/Local
+- [x] Banner preview for blogs
+- [ ] Japanese support 
+- [ ] Store static resources online 
+- [ ] New homepage design 
+- [ ] Music api support 
+- [ ] New album design 
+
+## Original Features From the Template
 - Next.js with Typescript
 - [Contentlayer](https://www.contentlayer.dev/) to manage content logic
 - Easy styling customization with [Tailwind 3.0](https://tailwindcss.com/blog/tailwindcss-v3) and primary color attribute

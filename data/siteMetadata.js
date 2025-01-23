@@ -1,6 +1,6 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'EbbiLog™',
+  title: 'EbbiLogue™',
   author: 'Haitian Zhang',
   headerTitle: '',
   description: "Ebbi's Catalogue",
