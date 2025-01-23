@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'EbbiLog™',
   author: 'Haitian Zhang',
   headerTitle: '',
-  description: 'Ebbi\'s Catalogue',
+  description: "Ebbi's Catalogue",
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
@@ -15,7 +15,7 @@ const siteMetadata = {
   github: 'https://github.com/camtrik',
   linkedin: 'https://www.linkedin.com/in/haitian-zhang-690430269/',
   // mastodon: 'https://mastodon.social/@mastodonuser',
-  // twitter: 'https://twitter.com/Azurtelier',
+  // twitter: '',
   // facebook: 'https://facebook.com',
   // youtube: 'https://youtube.com',
   // threads: 'https://www.threads.net',
@@ -67,7 +67,7 @@ const siteMetadata = {
       metadata: '0',
       // theme example: light, dark, dark_dimmed, dark_high_contrast
       // transparent_dark, preferred_color_scheme, custom
-      theme: 'light',
+      theme: 'dark',
       // theme when dark mode
       darkTheme: 'transparent_dark',
       // If the theme option above is set to 'custom`
@@ -94,9 +94,9 @@ const siteMetadata = {
   },
   banner: {
     source: 'local', // 'local' or 'googlePhotos'
-    localPath: 'static/gallery/banners', 
+    localPath: 'static/gallery/banners',
     defaultImage: 'https://picsum.photos/seed/picsum/800/400',
-  }
+  },
 }
 
 module.exports = siteMetadata

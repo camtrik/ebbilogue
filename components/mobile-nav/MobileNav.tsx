@@ -13,10 +13,7 @@ const MobileNav = ({ navShow, onToggleNav }) => {
         ${navShow ? 'translate-x-0' : 'translate-x-full'}`}
     >
       <div className="mt-11 flex items-center justify-between">
-        <p className="item-start ml-8 font-orbitron text-[1.5rem] font-extrabold">
-          A Z <br /> U R
-        </p>
-
+        <p className="item-start ml-8 font-orbitron text-[1.5rem] font-extrabold">E B B I</p>
         <button className="mr-8 h-8 w-8" aria-label="Toggle Menu" onClick={onToggleNav}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

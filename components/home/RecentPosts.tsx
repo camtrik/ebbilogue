@@ -6,8 +6,10 @@ import { allBlogs } from 'contentlayer/generated'
 import { formatDate } from 'pliny/utils/formatDate'
 import { useTranslation, LanguageContext } from 'utils/locale'
 import { useContext } from 'react'
+import Image from 'next/image'
+import siteMetadata from '@/data/siteMetadata'
 
-const MAX_DISPLAY = 5
+const MAX_DISPLAY = 10
 
 export default function RecentPosts() {
   const sortedPosts = sortPosts(allBlogs)
@@ -27,15 +29,25 @@ export default function RecentPosts() {
           const { slug, date, title, summary, tags } = post
           return (
             <li key={slug} className="py-12">
-              <article>
-                <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+              <article className="flex gap-8">
+                {/* Banner Image */}
+                <div className="relative h-[200px] w-1/2 overflow-hidden rounded-lg">
+                  <Image
+                    src={post.images?.[0] || siteMetadata.banner.defaultImage}
+                    alt={title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                {/* Content */}
+                <div className="w-1/2 space-y-5">
                   <dl>
                     <dt className="sr-only">Published on</dt>
                     <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
                       <time dateTime={date}>{formatDate(date, currentLang)}</time>
                     </dd>
                   </dl>
-                  <div className="space-y-5 xl:col-span-3">
+                  <div className="space-y-5">
                     <div className="space-y-6">
                       <div>
                         <h2 className="text-2xl font-bold leading-8 tracking-tight">

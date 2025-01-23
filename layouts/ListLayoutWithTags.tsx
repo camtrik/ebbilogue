@@ -11,6 +11,8 @@ import Tag from '@/components/Tag'
 import tagData from 'app/tag-data.json'
 import { useTranslation, LanguageContext } from 'utils/locale'
 import { useContext } from 'react'
+import siteMetadata from '@/data/siteMetadata'
+import Image from 'next/image'
 
 interface PaginationProps {
   totalPages: number
@@ -123,22 +125,24 @@ export default function ListLayoutWithTags({
               </ul>
             </div>
           </div>
+          {/* Articles */}
           <div className="w-full">
             <ul>
               {displayPosts.map((post) => {
                 const { path, date, title, summary, tags } = post
                 return (
                   <li key={path} className="transform duration-300 hover:scale-[1.02]">
-                    <section className="card mb-5 border p-5">
-                      <article className="flex flex-col space-y-2 xl:space-y-0">
-                        <dl>
-                          <dt className="sr-only">Published on</dt>
-                          <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                            <time dateTime={date}>{formatDate(date, currentLang)}</time>
-                          </dd>
-                        </dl>
-                        <div className="space-y-3">
-                          <div>
+                    <section className="card mb-5 overflow-hidden border">
+                      <article className="relative flex h-[240px]">
+                        {/* Left content */}
+                        <div className="relative z-10 w-2/3 bg-gradient-to-r from-white via-white/70 via-white/90 to-transparent p-8 dark:from-gray-900 dark:via-gray-900/70 dark:via-gray-900/90">
+                          <dl>
+                            <dt className="sr-only">Published on</dt>
+                            <dd className="text-base font-medium text-gray-500 dark:text-gray-400">
+                              <time dateTime={date}>{formatDate(date, currentLang)}</time>
+                            </dd>
+                          </dl>
+                          <div className="mt-4 space-y-3">
                             <h2 className="text-2xl font-bold leading-8 tracking-tight">
                               <Link href={`/${path}`} className="text-gray-900 dark:text-gray-100">
                                 {title}
@@ -147,10 +151,19 @@ export default function ListLayoutWithTags({
                             <div className="flex flex-wrap">
                               {tags?.map((tag) => <Tag key={tag} text={tag} />)}
                             </div>
+                            <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                              {summary}
+                            </div>
                           </div>
-                          <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                            {summary}
-                          </div>
+                        </div>
+                        {/* Right image */}
+                        <div className="absolute inset-0 w-full">
+                          <Image
+                            src={post.images?.[0] || siteMetadata.banner.defaultImage}
+                            alt={title}
+                            fill
+                            className="object-cover"
+                          />
                         </div>
                       </article>
                     </section>

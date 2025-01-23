@@ -17,7 +17,7 @@ import siteMetadata from '@/data/siteMetadata'
 import { notFound } from 'next/navigation'
 import { getRandomPhotoUrl } from 'utils/bannerImages'
 
-const defaultLayout = 'PostLayout'
+const defaultLayout = 'PostBannerInfo'
 const layouts = {
   PostSimple,
   PostLayout,
@@ -104,16 +104,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
       return authorResults.map((authorResult) => coreContent(authorResult as Authors))
     })
     .flat()
-  // const mainContent = coreContent(post)
-  let mainContent = coreContent(post)
-  // get an image for PostBannerInfo if it doesn't have one
-  if (post.layout === 'PostBannerInfo' && (!post.images || post.images.length === 0)) {
-    const randomPhotoUrl = await getRandomPhotoUrl(slug)
-    mainContent = {
-      ...mainContent,
-      images: [randomPhotoUrl],
-    }
-  }
+  const mainContent = coreContent(post)
 
   const jsonLd = post.structuredData
   jsonLd['author'] = authorDetails.map((author) => {

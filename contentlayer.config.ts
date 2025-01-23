@@ -23,6 +23,8 @@ import rehypePresetMinify from 'rehype-preset-minify'
 import siteMetadata from './data/siteMetadata'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 
+import { getRandomPhotoUrl } from './utils/bannerImages'
+
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -115,6 +117,17 @@ export const Blog = defineDocumentType(() => ({
   },
   computedFields: {
     ...computedFields,
+    images: {
+      type: 'json',
+      resolve: async (doc) => {
+        if (doc.layout != 'PostPhoto' && (!doc.images || doc.images.length === 0)) {
+          console.log('No images found in: ', doc._id)
+          return [await getRandomPhotoUrl(doc._id)]
+        } else {
+          return doc.images
+        }
+      },
+    },
     structuredData: {
       type: 'json',
       resolve: (doc) => ({
@@ -181,6 +194,7 @@ export default makeSource({
   },
   onSuccess: async (importData) => {
     const { allBlogs } = await importData()
+
     createTagCount(allBlogs)
     createSearchIndex(allBlogs)
   },
