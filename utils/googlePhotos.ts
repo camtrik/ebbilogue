@@ -82,8 +82,8 @@ class PhotoManager {
     }
 
     const hash = Array.from(slug).reduce((acc, char) =>
-      ((acc << 5) - acc) + char.charCodeAt(0), 0);
-    const index = Math.abs(hash) % this.photos.length;
+      ((acc << 5) - acc) + char.charCodeAt(0), 0)
+    const index = Math.abs(hash) % this.photos.length
 
     return `${this.photos[index].baseUrl}=d`
   }
@@ -91,7 +91,7 @@ class PhotoManager {
 
 export const photoManager = PhotoManager.getInstance()
 
-export async function getRandomPhotoUrl(slug: string): Promise<string> {
+export async function getRandomGooglePhotoUrl(slug: string): Promise<string> {
   await photoManager.initialize()
   return photoManager.getPhotoFromSlug(slug)
 }

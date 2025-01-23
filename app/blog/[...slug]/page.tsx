@@ -15,7 +15,7 @@ import PostBannerInfo from '@/layouts/PostBannerInfo'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { notFound } from 'next/navigation'
-import { getRandomPhotoUrl } from 'utils/googlePhotos'
+import { getRandomPhotoUrl } from 'utils/bannerImages'
 
 const defaultLayout = 'PostLayout'
 const layouts = {

@@ -3,15 +3,14 @@ const siteMetadata = {
   title: 'EbbiLog™',
   author: 'Haitian Zhang',
   headerTitle: '',
-  description: '阿梓的数字炼金工坊',
+  description: 'Ebbi\'s Catalogue',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
   templateRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
-  siteRepo: 'https://github.com/AmosChenZixuan/amoschenzixuan.github.io',
+  siteRepo: '',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/avatar.png',
-  mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'haitian.zhang.c@gmail.com',
   github: 'https://github.com/camtrik',
   linkedin: 'https://www.linkedin.com/in/haitian-zhang-690430269/',
@@ -93,6 +92,11 @@ const siteMetadata = {
     //   indexName: 'docsearch',
     // },
   },
+  banner: {
+    source: 'local', // 'local' or 'googlePhotos'
+    localPath: 'static/gallery/banners', 
+    defaultImage: 'https://picsum.photos/seed/picsum/800/400',
+  }
 }
 
 module.exports = siteMetadata
