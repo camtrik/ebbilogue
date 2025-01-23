@@ -105,7 +105,7 @@ const Header = () => {
                   {link.title}
                 </Link>
               ))}
-            <ThemeSwitch />
+            {/* <ThemeSwitch /> */}
             <LocaleSwitch />
             <MobileNavToggle onToggleNav={onToggleNav} />
           </div>
