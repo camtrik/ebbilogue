@@ -10,4 +10,3 @@ export function ThemeProviders({ children }: { children: React.ReactNode }) {
     </ThemeProvider>
   )
 }
- 
