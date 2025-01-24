@@ -28,6 +28,7 @@
     "acorn": "^8.14.0",
     "algoliasearch": "latest",
     "autoprefixer": "^10.4.13",
+    "cloudinary": "^2.5.1",
     "contentlayer2": "0.4.4",
     "esbuild": "0.20.2",
     "express": "^4.21.2",

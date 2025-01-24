@@ -13,15 +13,21 @@ This is a [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com
 Some features and designs come from [Azurtelie](https://github.com/AmosChenZixuan/Azurtelier.com). Thanks!
 
 ## New features roadmap:
-- [x] Random banner images from Google Photos/Local
+
+- [x] Random banner images from Claudinary/GooglePhotos/Local
 - [x] Banner preview for blogs
-- [ ] Japanese support 
-- [ ] Store static resources online 
-- [ ] New homepage design 
-- [ ] Music api support 
-- [ ] New album design 
+- [ ] Japanese support
+- [ ] Store static resources online
+- [ ] New homepage design
+- [ ] Music api support
+- [ ] New album design
+
+## Problems
+
+- [ ] Google Photos API needs to be fixed: baseUrl will expire after a while
 
 ## Original Features From the Template
+
 - Next.js with Typescript
 - [Contentlayer](https://www.contentlayer.dev/) to manage content logic
 - Easy styling customization with [Tailwind 3.0](https://tailwindcss.com/blog/tailwindcss-v3) and primary color attribute

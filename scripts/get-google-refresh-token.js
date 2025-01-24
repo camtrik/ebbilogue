@@ -2,8 +2,8 @@ const { google } = require('googleapis')
 const express = require('express')
 const app = express()
 
-const client_id = '1016450232846-u0bntpumfh100ns276b9m2g9hg4omqku.apps.googleusercontent.com'
-const client_secret = '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'
+const client_id = process.env.GOOGLE_CLIENT_ID
+const client_secret = process.env.GOOGLE_CLIENT_SECRET
 
 const oauth2Client = new google.auth.OAuth2(
   client_id,
