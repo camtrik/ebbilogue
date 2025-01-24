@@ -1,8 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import siteMetadata from '../data/siteMetadata'
+import { v2 as cloudinary } from 'cloudinary'
 
-// Google Photos
 const {
   GOOGLE_CLIENT_ID: client_id,
   GOOGLE_CLIENT_SECRET: client_secret,
@@ -10,6 +10,13 @@ const {
   GOOGLE_PHOTOS_ALBUM_ID: album_id,
 } = process.env
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+})
+
+// Google Photos
 const token = Buffer.from(`${client_id}:${client_secret}`).toString('base64')
 const TOKEN_ENDPOINT = 'https://oauth2.googleapis.com/token'
 const PHOTOS_ENDPOINT = 'https://photoslibrary.googleapis.com/v1/mediaItems:search'
@@ -100,14 +107,36 @@ export async function getRandomGooglePhotoUrl(slug: string): Promise<string> {
 }
 
 // Cloudinary
+
+export async function updateCloudinaryUrls() {
+  try {
+    const result = await cloudinary.search
+      .expression('folder:BannerImages/*')
+      .max_results(500)
+      .execute()
+
+    const urls = result.resources.map((resource) => ({
+      name: resource.public_id.split('/').pop(),
+      url: resource.secure_url,
+    }))
+
+    fs.writeFileSync(
+      path.join(process.cwd(), 'public/bannerUrls.json'),
+      JSON.stringify(urls, null, 2)
+    )
+    console.log('URLs saved, total images:', urls.length)
+
+    return urls
+  } catch (error) {
+    console.error('Error updating Cloudinary URLs:', error)
+    return []
+  }
+}
+
 export async function getRandomCloudinaryUrl(id: string): Promise<string> {
   try {
+    updateCloudinaryUrls()
     const bannerUrlsPath = path.join(process.cwd(), 'public', 'bannerUrls.json')
-
-    if (!fs.existsSync(bannerUrlsPath)) {
-      console.warn('Warning: bannerUrls.json not found')
-      return siteMetadata.banner.defaultImage
-    }
 
     const bannerUrls = JSON.parse(fs.readFileSync(bannerUrlsPath, 'utf8'))
 
