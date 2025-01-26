@@ -6,7 +6,6 @@ import ResponsiveBox from './ResponsiveBox'
 import ClaimBox from './ClaimBox'
 
 export default function DashBoard() {
-
   return (
     <div className="divid-y space-y-3">
       <div className="mt-6 flex justify-between space-x-3">
