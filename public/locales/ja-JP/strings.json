@@ -22,5 +22,8 @@
   "Latest": "最新",
   "All Posts": "すべての記事",
   "img_overlay_hint": "長押しでドラッグ。スクロールでズーム。",
-  "img_overlay_hint_mobile": "長押しでドラッグ。ピンチでズーム。"
+  "img_overlay_hint_mobile": "長押しでドラッグ。ピンチでズーム。",
+  "home": {
+    "ai_notice": "このサイトのバナー画像はすべてAIで生成されています"
+  }
 }

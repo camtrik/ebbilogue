@@ -24,5 +24,9 @@
   "Latest": "动态",
   "All Posts": "所有文章",
   "img_overlay_hint": "长按拖动。滚动缩放。",
-  "img_overlay_hint_mobile": "长按拖动。双指缩放。"
+  "img_overlay_hint_mobile": "长按拖动。双指缩放。",
+
+  "home": {
+    "ai_notice": "本站所有图片均由AI生成"
+  }
 }
