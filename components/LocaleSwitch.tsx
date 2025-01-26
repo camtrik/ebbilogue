@@ -1,40 +1,82 @@
 'use client'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 // import { useEffect, useState } from 'react'
 import { LanguageContext } from 'utils/locale'
 
-const ThemeSwitch = () => {
+const LocaleSwitch = () => {
   const { currentLang, setCurrentLang } = useContext(LanguageContext)
+  const [isOpen, setIsOpen] = useState(false)
 
+  const languages = {
+    zh: '中文',
+    ja: '日本語',
+    en: 'English',
+  }
   // When mounted on client, now we can show the UI
   //   useEffect(() => setMounted(true), [])
 
   return (
-    <button
-      aria-label="Toggle Language"
-      className={`flex w-8 items-center justify-center rounded border-2 p-1 ${currentLang === 'zh' ? 'border-gray-700' : 'border-transparent'} transform duration-500`}
-      onClick={() => setCurrentLang(currentLang === 'zh' ? 'en' : 'zh')}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-        className="h-5 w-5 text-gray-900 dark:text-gray-100"
+    <div className="relative">
+      <button
+        aria-label="Toggle Language"
+        className={`flex items-center gap-1 rounded-md border px-3 py-2 
+          hover:bg-gray-100 dark:hover:bg-gray-800
+          ${currentLang !== 'en' ? 'border-gray-300' : 'border-gray-300'}
+          transform duration-200`}
+        onClick={() => setIsOpen(!isOpen)}
       >
-        <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-          <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-          <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
-          <g id="SVGRepo_iconCarrier">
-            {' '}
-            <rect x="0" fill="none" width="20" height="20"></rect>{' '}
-            <g>
-              <path d="M11 7H9.49c-.63 0-1.25.3-1.59.7L7 5H4.13l-2.39 7h1.69l.74-2H7v4H2c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h7c1.1 0 2 .9 2 2v2zM6.51 9H4.49l1-2.93zM10 8h7c1.1 0 2 .9 2 2v7c0 1.1-.9 2-2 2h-7c-1.1 0-2-.9-2-2v-7c0-1.1.9-2 2-2zm7.25 5v-1.08h-3.17V9.75h-1.16v2.17H9.75V13h1.28c.11.85.56 1.85 1.28 2.62-.87.36-1.89.62-2.31.62-.01.02.22.97.2 1.46.84 0 2.21-.5 3.28-1.15 1.09.65 2.48 1.15 3.34 1.15-.02-.49.2-1.44.2-1.46-.43 0-1.49-.27-2.38-.63.7-.77 1.14-1.77 1.25-2.61h1.36zm-3.81 1.93c-.5-.46-.85-1.13-1.01-1.93h2.09c-.17.8-.51 1.47-1 1.93l-.04.03s-.03-.02-.04-.03z"></path>{' '}
-            </g>{' '}
-          </g>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="h-5 w-5 text-gray-600 dark:text-gray-300"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+          />
         </svg>
-      </svg>
-    </button>
+        <span className="text-sm text-gray-700 dark:text-gray-300">{languages[currentLang]}</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={2}
+          stroke="currentColor"
+          className="ml-1 h-3 w-3 text-gray-400"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+        </svg>
+      </button>
+
+      <div
+        className={`absolute right-0 mt-2 w-32 transform rounded-md bg-white shadow-lg
+          transition-all duration-200 ease-in-out dark:bg-gray-800
+          ${isOpen ? 'scale-100 opacity-100' : 'pointer-events-none scale-95 opacity-0'}`}
+      >
+        <div className="py-1">
+          {Object.entries(languages).map(([code, label]) => (
+            <button
+              key={code}
+              className={`block w-full px-4 py-2 text-left text-sm 
+                transition-colors duration-200 ease-in-out
+                hover:bg-gray-100 dark:hover:bg-gray-700
+                ${currentLang === code ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
+              onClick={() => {
+                setCurrentLang(code)
+                setIsOpen(false)
+              }}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
   )
 }
 
-export default ThemeSwitch
+export default LocaleSwitch

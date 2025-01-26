@@ -20,22 +20,58 @@ const TypedBios = () => {
     })
     return () => typed.current?.destroy()
   }, [currentLang])
-
+  console.log(currentLang)
   return (
     <div>
       <span>🎯 </span>
       <ul id="bios" className="hidden">
         <li key="1">
-          {t('typed.Iam')} <b className="text-primary-300">{t('typed.name')}</b>
+          {currentLang === 'ja' ? (
+            <>
+              {t('typed.name')}
+              <b className="text-primary-300">{t('typed.desu')}</b>
+            </>
+          ) : (
+            <>
+              {t('typed.Iam')} <b className="text-primary-300">{t('typed.name')}</b>
+            </>
+          )}
         </li>
         <li key="2">
-          {t('typed.Iam-a')} <b className="text-primary-300">{t('typed.swe')}</b>.
+          {currentLang === 'ja' ? (
+            <>
+              <b className="text-primary-300">{t('typed.swe')}</b>
+              {t('typed.doing')}
+            </>
+          ) : (
+            <>
+              {t('typed.Iam-a')} <b className="text-primary-300">{t('typed.swe')}</b>.
+            </>
+          )}
         </li>
         <li key="3">
-          {t('typed.Iam-a')} <b className="text-primary-300">{t('typed.gamer')}</b>.
+          {currentLang === 'ja' ? (
+            <>
+              <b className="text-primary-300">{t('typed.gamer')}</b>
+              {t('typed.doing')}
+            </>
+          ) : (
+            <>
+              {t('typed.Iam-a')} <b className="text-primary-300">{t('typed.gamer')}</b>.
+            </>
+          )}
         </li>
         <li key="4">
-          {t('typed.Iam-a')} <b className="text-primary-300">{t('typed.anime')}</b>.
+          {currentLang === 'ja' ? (
+            <>
+              <b className="text-primary-300">{t('typed.anime')}</b>
+              {t('typed.doing')}
+            </>
+          ) : (
+            <>
+              {t('typed.Iam-a')} <b className="text-primary-300">{t('typed.anime')}</b>.
+            </>
+          )}
         </li>
       </ul>
       <span ref={el} className="text-neutral-900 dark:text-neutral-200" />

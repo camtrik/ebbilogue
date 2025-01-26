@@ -9,15 +9,15 @@
   "desc_album": "我的图片博客",
   "home_title": "Ebbi's Catalogue",
   "home_desc": "科技，Mod制作，和日常生活",
-  "label_read_more": "让我康康",
+  "label_read_more": "更多",
   "blog_title": "文章",
   "btn_prev": "上一页",
   "btn_next": "下一页",
-  "label_learn_more": "让我康康",
+  "label_learn_more": "更多",
 
   "footer": {
     "desc": "基于Nextjs和Tailwind开发",
-    "view_source": "查看源码"
+    "view_source": "查看模板源码"
   },
   "oc_title": "自设",
 

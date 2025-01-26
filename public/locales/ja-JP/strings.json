@@ -1,0 +1,26 @@
+{
+  "menu_blog": "Blog",
+  "menu_tag": "Tags",
+  "menu_album": "Album",
+  "menu_projects": "Projects",
+  "menu_about": "About Me",
+  "desc_projects": "個人プロジェクト",
+  "desc_about": "Less is more.",
+  "desc_album": "フォトブログ",
+  "home_title": "Ebbi's Catalogue",
+  "home_desc": "テクノロジー、ゲームMod、日常生活",
+  "label_read_more": "もっと見る",
+  "blog_title": "ブログ記事",
+  "btn_prev": "前のページ",
+  "btn_next": "次のページ",
+  "label_learn_more": "もっと見る",
+  "footer": {
+    "desc": "Made by Nextjs and Tailwind",
+    "view_source": "Template here"
+  },
+  "oc_title": "オリジナルキャラクター",
+  "Latest": "最新",
+  "All Posts": "すべての記事",
+  "img_overlay_hint": "長押しでドラッグ。スクロールでズーム。",
+  "img_overlay_hint_mobile": "長押しでドラッグ。ピンチでズーム。"
+}

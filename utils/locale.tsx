@@ -15,7 +15,7 @@ const LanguageContext = createContext<LanguageContextType>({
 })
 export { LanguageContext }
 
-const localePattern = /\/(en|zh)\//
+const localePattern = /\/(en|zh|jp)\//
 
 export function LanguageProvider({ children }) {
   const router = useRouter()
