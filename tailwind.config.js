@@ -2,7 +2,12 @@
 const { fontFamily } = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
 
-const fonts = ['var(--font-pangolin)', 'var(--font-zcool-kuaile)', ...fontFamily.sans]
+const fonts = [
+  'var(--font-pangolin)',
+  'var(--font-zcool-kuaile)',
+  'var(--font-zen-maru)',
+  ...fontFamily.sans,
+]
 /** @type {import("tailwindcss/types").Config } */
 module.exports = {
   content: [

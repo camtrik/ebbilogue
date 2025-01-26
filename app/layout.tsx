@@ -3,7 +3,7 @@ import 'css/fonts.css'
 import 'css/colors.css'
 import 'pliny/search/algolia.css'
 
-import { Pangolin, ZCOOL_KuaiLe, Orbitron } from 'next/font/google'
+import { Pangolin, ZCOOL_KuaiLe, Orbitron, Zen_Maru_Gothic } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
 import Header from '@/components/Header'
@@ -30,6 +30,14 @@ const zcool_kuaile = ZCOOL_KuaiLe({
   display: 'swap',
   variable: '--font-zcool-kuaile',
   weight: '400',
+})
+
+// default Japanese text
+const zenMaruGothic = Zen_Maru_Gothic({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-zen-maru',
+  weight: ['400', '500', '700'],
 })
 
 // logo Font
@@ -84,7 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang={siteMetadata.language}
-      className={`${pangolin.variable} ${zcool_kuaile.variable} ${orbitron.variable} scroll-smooth`}
+      className={`${pangolin.variable} ${zcool_kuaile.variable} ${orbitron.variable} ${zenMaruGothic.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       <head>

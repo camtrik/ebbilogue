@@ -31,3 +31,11 @@
   font-family: 'dragon';
   src: url('/static/fonts/dragon-alphabet.ttf') format('truetype');
 }
+
+.chinese-text {
+  font-family: var(--font-zcool-kuaile), system-ui, sans-serif;
+}
+
+.japanese-text {
+  font-family: var(--font-zen-maru), system-ui, sans-serif;
+}
