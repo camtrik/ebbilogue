@@ -93,9 +93,9 @@ const siteMetadata = {
     // },
   },
   banner: {
-    source: 'local', // 'local' or 'googlePhotos'
+    // source: 'local', // 'local' or 'googlePhotos'
     // source: 'googlePhotos',
-    // source: 'cloudinary',
+    source: 'cloudinary',
     localPath: 'static/gallery/bannersAIGC',
     defaultImage: 'https://picsum.photos/seed/picsum/800/400',
   },

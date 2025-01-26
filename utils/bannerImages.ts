@@ -10,6 +10,8 @@ const {
   GOOGLE_PHOTOS_ALBUM_ID: album_id,
 } = process.env
 
+const banner_folder = process.env.CLOUDINARY_BANNER_FOLDER
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -107,11 +109,11 @@ export async function getRandomGooglePhotoUrl(slug: string): Promise<string> {
 }
 
 // Cloudinary
-
 export async function updateCloudinaryUrls() {
   try {
     const result = await cloudinary.search
-      .expression('folder:BannerImages/*')
+      // .expression('folder:BannerImages/*')
+      .expression(`folder:${banner_folder}/*`)
       .max_results(500)
       .execute()
 

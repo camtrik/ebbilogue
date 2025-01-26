@@ -4,6 +4,8 @@ const cloudinary = require('cloudinary').v2
 const fs = require('fs')
 const path = require('path')
 
+const banner_folder = process.env.CLOUDINARY_BANNER_FOLDER
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -14,7 +16,7 @@ async function getImagesFromFolder() {
   try {
     console.log('Fetching from Cloudinary...')
     const result = await cloudinary.search
-      .expression('folder:BannerImages/*')
+      .expression(`folder:${banner_folder}/*`)
       .max_results(500)
       .execute()
 

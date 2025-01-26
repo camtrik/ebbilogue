@@ -16,8 +16,8 @@ Some features and designs come from [Azurtelie](https://github.com/AmosChenZixua
 
 - [x] Random banner images from Claudinary/GooglePhotos/Local
 - [x] Banner preview for blogs
-- [ ] Japanese support
-- [ ] Store static resources online
+- [x] Japanese support
+- [x] Store static resources online
 - [ ] New homepage design
 - [ ] Music api support
 - [ ] New album design
