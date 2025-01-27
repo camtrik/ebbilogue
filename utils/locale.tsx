@@ -3,6 +3,7 @@ import useLanguages, { defaultLang, defaultLangPack } from './locale-config.js'
 
 import { createContext, useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/navigation'
+import LocaleText from '@/components/LocaleText'
 
 type LanguageContextType = {
   currentLang: string
@@ -41,8 +42,9 @@ export function useTranslation(lang_pack: string = defaultLangPack) {
   const language = useLanguages(lang_pack)
   const translations = language.translations
   const { currentLang } = useContext(LanguageContext)
+
   return {
-    t: (key) => {
+    t: (key: string) => {
       const value = key
         .split('.')
         .reduce(
@@ -51,7 +53,7 @@ export function useTranslation(lang_pack: string = defaultLangPack) {
           translations[currentLang]
         )
       const translation = value !== null && value !== undefined ? value : key
-      return translation
+      return <LocaleText>{translation}</LocaleText>
     },
   }
 }

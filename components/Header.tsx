@@ -96,7 +96,7 @@ const Header = () => {
               .filter((link) => link.href !== '/')
               .map((link) => (
                 <Link
-                  key={link.title}
+                  key={link.key}
                   href={link.href}
                   className="hidden text-xl font-medium
               text-gray-900 transition duration-300 hover:text-primary-400 dark:text-gray-100

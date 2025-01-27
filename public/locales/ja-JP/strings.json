@@ -24,6 +24,6 @@
   "img_overlay_hint": "長押しでドラッグ。スクロールでズーム。",
   "img_overlay_hint_mobile": "長押しでドラッグ。ピンチでズーム。",
   "home": {
-    "ai_notice": "このサイトのバナー画像はすべてAIで生成されています"
+    "ai_notice": "このサイトのバナー画像はすべてDiffusion AIで生成されています"
   }
 }

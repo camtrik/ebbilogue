@@ -21,9 +21,7 @@ export default function ClaimBox() {
           d="M13 10V3L4 14h7v7l9-11h-7z"
         />
       </svg>
-      <LocaleText className="text-xl text-gray-600 dark:text-gray-300">
-        {t('home.ai_notice')}
-      </LocaleText>
+      <div className="text-xl text-gray-600 dark:text-gray-300">{t('home.ai_notice')}</div>
     </div>
   )
 }
