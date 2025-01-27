@@ -4,21 +4,20 @@ import SearchBox from './SearchBox'
 import ScrollTagsBox from './ScrollTagsBox'
 import ResponsiveBox from './ResponsiveBox'
 import ClaimBox from './ClaimBox'
+import TagBox from './TagBox'
+import ProfileCard from './ProfileCard'
 
 export default function DashBoard() {
   return (
-    <div className="divid-y space-y-3">
-      <div className="mt-6 flex justify-between space-x-3">
+    <div className="divid-y space-y-3 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mt-6 flex justify-between space-x-6">
         <Headline />
-        {/* <div className="flex-col space-y-3">
-          <IconBox />
-          <SearchBox />
-        </div> */}
+        <ProfileCard />
       </div>
+      <TagBox />
       <ClaimBox />
-      {/* <ResponsiveBox />
-
-      <ScrollTagsBox /> */}
+      {/* <ResponsiveBox /> */}
+      {/* <ScrollTagsBox /> */}
     </div>
   )
 }

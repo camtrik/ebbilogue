@@ -38,6 +38,17 @@
   );
 }
 
+.bg-blue-purple {
+  background: rgba(167, 139, 250, 1);
+  background: linear-gradient(
+    280deg,
+    rgba(96, 165, 250, 1) 0%,
+    rgb(163, 163, 255) 40%,
+    rgba(167, 139, 250, 1) 100%
+  );
+}
+ 
+
 .bg-gray-purple {
   background: rgb(138, 137, 143);
   background: linear-gradient(
@@ -47,6 +58,7 @@
     rgba(185, 151, 250, 0.5) 100%
   );
 }
+
 
 .bg-gray-purple:is(.dark *) {
   background: rgb(138, 137, 143);
@@ -107,6 +119,88 @@
   }
 }
 
+.bg-blue-gray-animated {
+  background: linear-gradient(90deg, 
+    rgba(96, 165, 250, 0.6), 
+    rgba(107, 114, 128, 0.6)
+  );
+  background-size: 400% 400%;
+  animation: bg-blue-gray-animated 6s ease infinite;
+}
+
+.bg-blue-gray-animated:is(.dark *) {
+  background: linear-gradient(90deg, 
+    rgba(96, 165, 250, 0.8), 
+    rgba(75, 85, 99, 0.8)
+  );
+  background-size: 400% 400%;
+  animation: bg-blue-gray-animated 6s ease infinite;
+}
+
+@keyframes bg-blue-gray-animated {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+.bg-blue-purple-mix {
+  background: linear-gradient(
+    45deg,
+    rgba(96, 165, 250, 0.3) 0%,
+    rgba(167, 139, 250, 0.3) 50%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-blue-purple-mix::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(96, 165, 250, 0.8) 0%,
+    transparent 50%
+  );
+  animation: rotate 10s linear infinite;
+}
+
+.bg-blue-purple-mix::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(167, 139, 250, 0.8) 0%,
+    transparent 50%
+  );
+  animation: rotate 10s linear infinite reverse;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+
 .animation-delay-1 {
   animation-delay: 300ms !important;
 }
@@ -138,3 +232,4 @@ svg.text-white:hover:is(.dark *),
 a .text-white:hover:is(.dark *) {
   @apply text-primary-400;
 }
+

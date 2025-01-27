@@ -19,13 +19,14 @@ Some features and designs come from [Azurtelie](https://github.com/AmosChenZixua
 - [x] Japanese support
 - [x] Store static resources online
 - [ ] New homepage design
-- [ ] Music api support
 - [ ] New album design
+- [ ] New blog list design
+- [ ] Music api support
+
 
 ## Problems
 
 - [ ] Google Photos API needs to be fixed: baseUrl will expire after a while
-- [ ] Optimize the logic of get random banners (seems each blog calculate the hash now)
 
 ## Original Features From the Template
 
