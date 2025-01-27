@@ -137,7 +137,6 @@ export async function updateCloudinaryUrls() {
 
 export async function getRandomCloudinaryUrl(id: string): Promise<string> {
   try {
-    updateCloudinaryUrls()
     const bannerUrlsPath = path.join(process.cwd(), 'public', 'bannerUrls.json')
 
     const bannerUrls = JSON.parse(fs.readFileSync(bannerUrlsPath, 'utf8'))
@@ -149,6 +148,8 @@ export async function getRandomCloudinaryUrl(id: string): Promise<string> {
 
     const hash = Array.from(id).reduce((acc, char) => (acc << 5) - acc + char.charCodeAt(0), 0)
     const index = Math.abs(hash) % bannerUrls.length
+    console.log('hash:', Math.abs(hash))
+    console.log('index:', index)
 
     return bannerUrls[index].url
   } catch (error) {
