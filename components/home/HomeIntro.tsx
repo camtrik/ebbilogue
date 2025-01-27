@@ -21,9 +21,7 @@ export default function HomeIntro() {
         <h1 className="text-3xl font-extrabold sm:text-4xl md:text-5xl lg:text-6xl">
           {t('home_title')}
         </h1>
-        <p className="text-lg text-white/80 sm:text-xl md:text-2xl">
-          {t('home_desc')}
-        </p>
+        <p className="text-lg text-white/80 sm:text-xl md:text-2xl">{t('home_desc')}</p>
       </motion.div>
 
       {/* Avatar and Content Container */}
