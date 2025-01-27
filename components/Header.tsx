@@ -8,7 +8,7 @@ import Link from './Link'
 import MobileNav from './mobile-nav/MobileNav'
 import MobileNavToggle from './mobile-nav/MobileNavToggle'
 import ThemeSwitch from './ThemeSwitch'
-
+import SearchButton from '@/components/SearchButton'
 import LocaleSwitch from './LocaleSwitch'
 import { useTranslation } from 'utils/locale'
 
@@ -92,6 +92,7 @@ const Header = () => {
             </div>
           </Link>
           <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
+            <SearchButton />
             {useHeaderNavLinks(t)
               .filter((link) => link.href !== '/')
               .map((link) => (
@@ -105,11 +106,9 @@ const Header = () => {
                   {link.title}
                 </Link>
               ))}
-            {/* <ThemeSwitch /> */}
             <LocaleSwitch />
             <MobileNavToggle onToggleNav={onToggleNav} />
           </div>
-          {/* <div className="absolute inset-x-0 middle-y-0 border-t border-gray-300"></div> */}
         </div>
       </motion.header>
       <MobileNav navShow={navShow} onToggleNav={onToggleNav} />
