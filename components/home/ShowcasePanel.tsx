@@ -32,24 +32,24 @@ export default function ShowcasePanel() {
   const sortedTags = Object.keys(tagData).sort((a, b) => tagData[b] - tagData[a])
   const totalPosts = allBlogs.length
   const timerRef = useRef<NodeJS.Timeout>()
-  const [currentIndex, setCurrentIndex] = useState(1) // 从原始第一张开始
-  const [carouselKey, setCarouselKey] = useState(0) // 用于强制重新渲染
+  const [currentIndex, setCurrentIndex] = useState(1) // Start from the original first image
+  const [carouselKey, setCarouselKey] = useState(0) // For forcing re-render
   const [isAnimating, setIsAnimating] = useState(false)
 
-  // 处理自动播放
+  // Auto play
   const startAutoPlay = () => {
     timerRef.current = setInterval(() => {
       handleNext(true)
     }, 5000)
   }
 
-  // 重置计时器
+  // Reset timer
   const resetTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current)
     startAutoPlay()
   }
 
-  // 切换到下一张
+  // Switch to next
   const handleNext = (auto = false) => {
     if (isAnimating) return
     setIsAnimating(true)
@@ -108,9 +108,9 @@ export default function ShowcasePanel() {
   }
 
   return (
-    <div className="flex gap-6">
-      {/* 轮播区域 */}
-      <div className="relative w-2/3 overflow-hidden rounded-2xl">
+    <div className="flex flex-col gap-6 md:flex-row">
+      {/* Carousel area */}
+      <div className="relative w-full overflow-hidden rounded-2xl md:w-2/3">
         <motion.div
           key={carouselKey} // 关键：强制重新挂载
           className="flex"
@@ -171,7 +171,7 @@ export default function ShowcasePanel() {
       </div>
 
       {/* 右侧标签云和统计 */}
-      <div className="flex w-1/3 flex-col gap-4">
+      <div className="flex w-full flex-col gap-4 md:w-1/3">
         <div className="card bg-blue-purple flex-1 overflow-hidden rounded-2xl p-6">
           <div className="flex flex-wrap items-start justify-start gap-4">
             {sortedTags.map((tag, index) => {

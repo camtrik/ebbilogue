@@ -10,16 +10,20 @@ export default function HomeIntro() {
   const linkedinUrl = siteMetadata.linkedin || ''
   const githubUrl = siteMetadata.github || ''
   return (
-    <div className="flex items-center justify-center gap-12">
+    <div className="flex flex-col items-center gap-8 md:flex-row md:justify-center md:gap-12">
       {/* Title and Description */}
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
-        className="max-w-2xl space-y-4 text-left"
+        className="max-w-2xl space-y-4 text-center md:text-left"
       >
-        <h1 className="text-4xl font-extrabold sm:text-5xl md:text-6xl">{t('home_title')}</h1>
-        <p className="text-xl text-white/80 md:text-2xl">{t('home_desc')}</p>
+        <h1 className="text-3xl font-extrabold sm:text-4xl md:text-5xl lg:text-6xl">
+          {t('home_title')}
+        </h1>
+        <p className="text-lg text-white/80 sm:text-xl md:text-2xl">
+          {t('home_desc')}
+        </p>
       </motion.div>
 
       {/* Avatar and Content Container */}
