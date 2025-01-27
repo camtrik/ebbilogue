@@ -135,24 +135,22 @@ export async function updateCloudinaryUrls() {
   }
 }
 
-// 追踪已使用的图片索引
 let usedBannerIndices: number[] = []
 
-// 获取可用的图片索引
 function getAvailableIndex(preferredIndex: number, maxLength: number): number {
   let index = preferredIndex
 
-  // 如果所有图片都被使用过了，重置记录
+  // if all indices are used, reset
   if (usedBannerIndices.length >= maxLength) {
     usedBannerIndices = []
   }
 
-  // 寻找未使用的索引
+  // find the first unused index
   while (usedBannerIndices.includes(index)) {
-    index = (index + 1) % maxLength
+    index = (index + 5) % maxLength
   }
 
-  // 记录使用过的索引
+  // record the used index
   usedBannerIndices.push(index)
   return index
 }
@@ -170,8 +168,8 @@ export async function getRandomCloudinaryUrl(id: string): Promise<string> {
 
     const hash = Array.from(id).reduce((acc, char) => (acc << 5) - acc + char.charCodeAt(0), 0)
     const preferredIndex = Math.abs(hash) % bannerUrls.length
-
-    // 获取可用的索引
+    
+    // get the available index
     const availableIndex = getAvailableIndex(preferredIndex, bannerUrls.length)
     console.log('hash:', Math.abs(hash))
     console.log('preferred index:', preferredIndex)
@@ -212,7 +210,7 @@ export async function getRandomPhotoUrl(id: string): Promise<string> {
 
     const hash = Array.from(id).reduce((acc, char) => (acc << 5) - acc + char.charCodeAt(0), 0)
     const preferredIndex = Math.abs(hash) % imageFiles.length
-
+    
     // 获取可用的索引
     const availableIndex = getAvailableIndex(preferredIndex, imageFiles.length)
 
