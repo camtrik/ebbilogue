@@ -27,6 +27,7 @@ Some features and designs come from [Azurtelie](https://github.com/AmosChenZixua
 ## Problems
 
 - [ ] Google Photos API needs to be fixed: baseUrl will expire after a while
+- [ ] Refresh will make the language reset
 
 ## Original Features From the Template
 
