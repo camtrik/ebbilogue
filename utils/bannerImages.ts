@@ -135,10 +135,32 @@ export async function updateCloudinaryUrls() {
   }
 }
 
+// 追踪已使用的图片索引
+let usedBannerIndices: number[] = []
+
+// 获取可用的图片索引
+function getAvailableIndex(preferredIndex: number, maxLength: number): number {
+  let index = preferredIndex
+
+  // 如果所有图片都被使用过了，重置记录
+  if (usedBannerIndices.length >= maxLength) {
+    usedBannerIndices = []
+  }
+
+  // 寻找未使用的索引
+  while (usedBannerIndices.includes(index)) {
+    index = (index + 1) % maxLength
+  }
+
+  // 记录使用过的索引
+  usedBannerIndices.push(index)
+  return index
+}
+
+// 修改 getRandomCloudinaryUrl 函数
 export async function getRandomCloudinaryUrl(id: string): Promise<string> {
   try {
     const bannerUrlsPath = path.join(process.cwd(), 'public', 'bannerUrls.json')
-
     const bannerUrls = JSON.parse(fs.readFileSync(bannerUrlsPath, 'utf8'))
 
     if (bannerUrls.length === 0) {
@@ -147,11 +169,15 @@ export async function getRandomCloudinaryUrl(id: string): Promise<string> {
     }
 
     const hash = Array.from(id).reduce((acc, char) => (acc << 5) - acc + char.charCodeAt(0), 0)
-    const index = Math.abs(hash) % bannerUrls.length
-    console.log('hash:', Math.abs(hash))
-    console.log('index:', index)
+    const preferredIndex = Math.abs(hash) % bannerUrls.length
 
-    return bannerUrls[index].url
+    // 获取可用的索引
+    const availableIndex = getAvailableIndex(preferredIndex, bannerUrls.length)
+    console.log('hash:', Math.abs(hash))
+    console.log('preferred index:', preferredIndex)
+    console.log('actual used index:', availableIndex)
+
+    return bannerUrls[availableIndex].url
   } catch (error) {
     console.error('Error getting Cloudinary photo: ', error)
     return siteMetadata.banner.defaultImage
@@ -172,11 +198,10 @@ export async function getRandomPhotoUrl(id: string): Promise<string> {
     const bannersDir = path.join(process.cwd(), 'public', siteMetadata.banner.localPath)
 
     if (!fs.existsSync(bannersDir)) {
-      console.warn('Warning: Banner directory does not exist at &{bannersDir')
+      console.warn('Warning: Banner directory does not exist at ${bannersDir}')
       return siteMetadata.banner.defaultImage
     }
 
-    // read banner images
     const files = fs.readdirSync(bannersDir)
     const imageFiles = files.filter((file) => /\.(jpg|png|jpeg|webp|gif)$/i.test(file))
 
@@ -186,9 +211,12 @@ export async function getRandomPhotoUrl(id: string): Promise<string> {
     }
 
     const hash = Array.from(id).reduce((acc, char) => (acc << 5) - acc + char.charCodeAt(0), 0)
-    const index = Math.abs(hash) % imageFiles.length
+    const preferredIndex = Math.abs(hash) % imageFiles.length
 
-    return `/${siteMetadata.banner.localPath}/${imageFiles[index]}`
+    // 获取可用的索引
+    const availableIndex = getAvailableIndex(preferredIndex, imageFiles.length)
+
+    return `/${siteMetadata.banner.localPath}/${imageFiles[availableIndex]}`
   } catch (error) {
     console.error('Error getting local photo: ', error)
     return siteMetadata.banner.defaultImage
