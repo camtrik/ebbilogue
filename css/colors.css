@@ -47,7 +47,6 @@
     rgba(167, 139, 250, 1) 100%
   );
 }
- 
 
 .bg-gray-purple {
   background: rgb(138, 137, 143);
@@ -58,7 +57,6 @@
     rgba(185, 151, 250, 0.5) 100%
   );
 }
-
 
 .bg-gray-purple:is(.dark *) {
   background: rgb(138, 137, 143);
@@ -120,19 +118,13 @@
 }
 
 .bg-blue-gray-animated {
-  background: linear-gradient(90deg, 
-    rgba(96, 165, 250, 0.6), 
-    rgba(107, 114, 128, 0.6)
-  );
+  background: linear-gradient(90deg, rgba(96, 165, 250, 0.6), rgba(107, 114, 128, 0.6));
   background-size: 400% 400%;
   animation: bg-blue-gray-animated 6s ease infinite;
 }
 
 .bg-blue-gray-animated:is(.dark *) {
-  background: linear-gradient(90deg, 
-    rgba(96, 165, 250, 0.8), 
-    rgba(75, 85, 99, 0.8)
-  );
+  background: linear-gradient(90deg, rgba(96, 165, 250, 0.8), rgba(75, 85, 99, 0.8));
   background-size: 400% 400%;
   animation: bg-blue-gray-animated 6s ease infinite;
 }
@@ -149,13 +141,8 @@
   }
 }
 
-
 .bg-blue-purple-mix {
-  background: linear-gradient(
-    45deg,
-    rgba(96, 165, 250, 0.3) 0%,
-    rgba(167, 139, 250, 0.3) 50%
-  );
+  background: linear-gradient(45deg, rgba(96, 165, 250, 0.3) 0%, rgba(167, 139, 250, 0.3) 50%);
   position: relative;
   overflow: hidden;
 }
@@ -167,11 +154,7 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(
-    circle at center,
-    rgba(96, 165, 250, 0.8) 0%,
-    transparent 50%
-  );
+  background: radial-gradient(circle at center, rgba(96, 165, 250, 0.8) 0%, transparent 50%);
   animation: rotate 10s linear infinite;
 }
 
@@ -182,11 +165,7 @@
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(
-    circle at center,
-    rgba(167, 139, 250, 0.8) 0%,
-    transparent 50%
-  );
+  background: radial-gradient(circle at center, rgba(167, 139, 250, 0.8) 0%, transparent 50%);
   animation: rotate 10s linear infinite reverse;
 }
 
@@ -198,8 +177,6 @@
     transform: rotate(360deg);
   }
 }
-
-
 
 .animation-delay-1 {
   animation-delay: 300ms !important;
@@ -232,4 +209,3 @@ svg.text-white:hover:is(.dark *),
 a .text-white:hover:is(.dark *) {
   @apply text-primary-400;
 }
-

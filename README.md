@@ -21,8 +21,8 @@ Some features and designs come from [Azurtelie](https://github.com/AmosChenZixua
 - [ ] New homepage design
 - [ ] New album design
 - [ ] New blog list design
+- [ ] AI Robot Support
 - [ ] Music api support
-
 
 ## Problems
 

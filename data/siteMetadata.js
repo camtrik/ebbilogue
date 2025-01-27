@@ -13,7 +13,7 @@ const siteMetadata = {
   socialBanner: '/static/images/avatar.png',
   email: 'haitian.zhang.c@gmail.com',
   github: 'https://github.com/camtrik',
-  linkedin: 'https://www.linkedin.com/in/haitian-zhang-690430269/',
+  linkedin: 'https://www.linkedin.com/in/haitian-zhang-690430269',
   // mastodon: 'https://mastodon.social/@mastodonuser',
   // twitter: '',
   // facebook: 'https://facebook.com',

@@ -2,21 +2,22 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import siteMetadata from '@/data/siteMetadata'
 
 export default function ProfileCard() {
   return (
-    <motion.div 
-      className="card bg-blue-purple flex flex-col items-center w-72 p-6 rounded-2xl"
+    <motion.div
+      className="card bg-blue-purple flex w-72 flex-col items-center rounded-2xl p-6"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
     >
       {/* Avatar Area */}
-      <Link href="/about" className="relative group">
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full opacity-75 group-hover:opacity-100 transition duration-200 blur"></div>
+      <Link href="/about" className="group relative">
+        <div className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 opacity-75 blur transition duration-200 group-hover:opacity-100"></div>
         <div className="relative">
           <Image
-            src="/static/images/avatar.png" 
+            src="/static/images/avatar.png"
             alt="Avatar"
             width={120}
             height={120}
@@ -27,8 +28,8 @@ export default function ProfileCard() {
 
       <div className="mt-4 text-center">
         <Link href="/about">
-          <h2 className="text-2xl font-bold text-gray-800 hover:text-blue-600 transition duration-200">
-            Ebbi
+          <h2 className="text-2xl font-bold text-gray-800 transition duration-200 hover:text-blue-600">
+            {siteMetadata.author}
           </h2>
         </Link>
       </div>
@@ -41,7 +42,6 @@ export default function ProfileCard() {
           </svg>
         </Link>
       </div> */}
-
     </motion.div>
   )
-} 
+}
