@@ -11,9 +11,6 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 
-// 添加类型声明来解决 TypeScript 错误
-const SlickSlider = Slider as any
-
 const COLORS = ['text-blue-700', 'text-indigo-700', 'text-purple-700', 'text-violet-700']
 
 const SHOWCASE_IMAGES = [
@@ -103,7 +100,7 @@ export default function ShowcasePanel() {
             display: none;
           }
         `}</style>
-        <SlickSlider ref={sliderRef} {...settings}>
+        <Slider ref={sliderRef} {...settings}>
           {SHOWCASE_IMAGES.map((img, index) => (
             <div key={index} className="relative h-96 w-full">
               <Image
@@ -116,7 +113,7 @@ export default function ShowcasePanel() {
               />
             </div>
           ))}
-        </SlickSlider>
+        </Slider>
       </div>
 
       {/* Right side tag cloud and stats */}
