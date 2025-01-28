@@ -18,7 +18,7 @@ Some features and designs come from [Azurtelie](https://github.com/AmosChenZixua
 - [x] Banner preview for blogs
 - [x] Japanese support
 - [x] Store static resources online
-- [ ] New homepage design
+- [x] New homepage design
 - [ ] New album design
 - [ ] New blog list design
 - [ ] AI Robot Support
@@ -28,6 +28,7 @@ Some features and designs come from [Azurtelie](https://github.com/AmosChenZixua
 
 - [ ] Google Photos API needs to be fixed: baseUrl will expire after a while
 - [ ] Refresh will make the language reset
+- [ ] Carousel area may disppear sometimes
 
 ## Original Features From the Template
 

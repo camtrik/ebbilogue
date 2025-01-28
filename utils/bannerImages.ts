@@ -167,7 +167,7 @@ export async function getRandomCloudinaryUrl(id: string): Promise<string> {
 
     const hash = Array.from(id).reduce((acc, char) => (acc << 5) - acc + char.charCodeAt(0), 0)
     const preferredIndex = Math.abs(hash) % bannerUrls.length
-
+    
     // get the available index
     const availableIndex = getAvailableIndex(preferredIndex, bannerUrls.length)
     console.log('hash:', Math.abs(hash))
@@ -209,8 +209,7 @@ export async function getRandomPhotoUrl(id: string): Promise<string> {
 
     const hash = Array.from(id).reduce((acc, char) => (acc << 5) - acc + char.charCodeAt(0), 0)
     const preferredIndex = Math.abs(hash) % imageFiles.length
-
-    // 获取可用的索引
+    
     const availableIndex = getAvailableIndex(preferredIndex, imageFiles.length)
 
     return `/${siteMetadata.banner.localPath}/${imageFiles[availableIndex]}`

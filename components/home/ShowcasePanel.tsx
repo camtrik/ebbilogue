@@ -36,6 +36,25 @@ export default function ShowcasePanel() {
   const [carouselKey, setCarouselKey] = useState(0) // For forcing re-render
   const [isAnimating, setIsAnimating] = useState(false)
 
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        clearInterval(timerRef.current!) // 暂停定时器
+      } else {
+        startAutoPlay() // 重新激活
+      }
+    }
+    if (currentIndex > SHOWCASE_IMAGES.length) {
+      setCurrentIndex(1)
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }, [])
+
+  useEffect(() => {
+    console.log('Current Index:', currentIndex);
+    console.log('Is Animating:', isAnimating);
+  }, [currentIndex, isAnimating]);
   // Auto play
   const startAutoPlay = () => {
     timerRef.current = setInterval(() => {
@@ -133,6 +152,7 @@ export default function ShowcasePanel() {
                 fill
                 className="object-cover"
                 priority={index === currentIndex}
+                loading="eager"
               />
             </div>
           ))}
