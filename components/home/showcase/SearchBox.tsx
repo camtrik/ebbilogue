@@ -1,4 +1,4 @@
-import SearchButton from '../SearchButton'
+import SearchButton from '@/components/SearchButton'
 
 export default function SearchBox() {
   return (

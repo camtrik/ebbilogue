@@ -51,3 +51,6 @@ yarn-error.log*
 
 test_blog*.mdx
 bannersUrl.json
+
+# OLD files
+*_OLD.*
