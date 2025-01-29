@@ -10,8 +10,9 @@ import 'slick-carousel/slick/slick-theme.css'
 
 const SHOWCASE_IMAGES = [
   'https://res.cloudinary.com/camtrik/image/upload/v1737910275/00154-320790827_neorft.png',
-  'https://res.cloudinary.com/camtrik/image/upload/v1737991653/00181-3663116070_rbsjfe.png',
+  'https://res.cloudinary.com/camtrik/image/upload/v1737910321/00140-2807411078_l250nj.png',
   'https://res.cloudinary.com/camtrik/image/upload/v1737991589/00192-3141175425_oie8yc.png',
+  'https://res.cloudinary.com/camtrik/image/upload/v1738170498/00298-2664667207_d8i9w6.png',
   'https://res.cloudinary.com/camtrik/image/upload/v1737901033/00103-736225594_eqhwzm.png',
   'https://res.cloudinary.com/camtrik/image/upload/v1737991713/00240-2547697752_irljwa.png',
   'https://res.cloudinary.com/camtrik/image/upload/v1737991768/00259-3107429704_tjlnkp.png',
@@ -81,6 +82,12 @@ export default function CarouselArea() {
         }
         .slick-dots li button:before {
           display: none;
+        }
+        .slick-slide {
+          width: 100% !important;
+        }
+        .slick-track {
+          display: flex !important;
         }
       `}</style>
       <Slider ref={sliderRef} {...settings}>

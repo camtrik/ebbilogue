@@ -4,7 +4,7 @@ export default function useHeaderNavLinks(translate: (key: string) => string | J
     { href: '/', titleKey: 'home_title' },
     { href: '/blog', titleKey: 'menu_blog' },
     { href: '/album', titleKey: 'menu_album' },
-    { href: '/tags', titleKey: 'menu_tag' },
+    // { href: '/tags', titleKey: 'menu_tag' },
     { href: '/projects', titleKey: 'menu_projects' },
     { href: '/about', titleKey: 'menu_about' },
   ].map((link) => ({
