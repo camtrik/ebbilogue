@@ -19,9 +19,11 @@ Some features and designs come from [Azurtelie](https://github.com/AmosChenZixua
 - [x] Japanese support
 - [x] Store static resources online
 - [x] New homepage design
-- [ ] New album design
+- [ ] Game Collection Page
+- [ ] Useful Tools Page
 - [ ] New blog list design
 - [ ] AI Robot Support
+- [ ] New album design
 - [ ] Music api support
 
 ## Problems
