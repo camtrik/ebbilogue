@@ -64,7 +64,7 @@ export default function TrophyList() {
     platform: undefined,
     sortBy: 'progress',
   })
-  const baseApiUrl = process.env.NEXT_PUBLIC_BASE_API_URL
+  const baseApiUrl = process.env.NEXT_PUBLIC_API_URL
 
   useEffect(() => {
     const fetchTrophies = async () => {
