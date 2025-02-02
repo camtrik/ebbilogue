@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'utils/locale'
 import Image from 'next/image'
 import { Marquee } from '@/components/ui/marquee'
+import { TrophyIcon } from '@/components/gaming/TrophyIcon'
+import ComingSoon from '@/components/ComingSoon'
+
 
 interface Trophy {
   trophyTitleName: string
@@ -60,7 +63,7 @@ export default function TrophyList() {
   const [filters, setFilters] = useState<TrophyFilters>({
     minProgress: 30,
     platform: undefined,
-    sortBy: undefined,
+    sortBy: 'progress',
   })
   const baseApiUrl = process.env.NEXT_PUBLIC_BASE_API_URL
 
@@ -87,105 +90,184 @@ export default function TrophyList() {
     }
 
     fetchTrophies()
-  }, [])
+  }, [filters, baseApiUrl])
 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Error: {error}</div>
 
-  const sortedTrophies = [...trophies].sort((a, b) => b.progress - a.progress)
+  // const sortedTrophies = [...trophies].sort((a, b) => b.progress - a.progress)
   const platinumTrophies = trophies.filter((t) => t.earnedTrophies.platinum > 0)
+  const nonPlatinumTrophies = trophies.filter((t) => t.earnedTrophies.platinum === 0)
 
   return (
-    <div className="divide-y divide-gray-200 dark:divide-gray-700">
+    <div className="space-y-8">
       <div className="space-y-2 pb-8 pt-6 md:space-y-5">
         <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-          PSN Trophies
+          Playstation
         </h1>
-        <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-          My PlayStation Trophy Collection
-        </p>
       </div>
 
-      {/* 白金奖杯展示区 */}
+      {/* Platinum Trophy */}
       {platinumTrophies.length > 0 && (
-        <div className="py-4">
-          <h2 className="mb-4 text-2xl font-bold">白金奖杯</h2>
-          <Marquee className="py-4" pauseOnHover>
-            {platinumTrophies.map((trophy) => (
+        <div className="relative py-4">
+          <h2 className="mb-6 text-3xl font-bold">{t('gaming_platinum')}</h2>
+          <div className="relative flex flex-col gap-6">
+            <Marquee pauseOnHover className="[--duration:40s]">
+              <div className="flex">
+                {platinumTrophies.slice(0, Math.ceil(platinumTrophies.length / 2)).map((trophy) => (
+                  <div
+                    key={trophy.trophyTitleName}
+                    className="group/card mx-3 w-80 overflow-hidden rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 
+                      shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl 
+                      dark:from-gray-800 dark:to-gray-900"
+                  >
+                    <div className="relative aspect-[4/3]">
+                      <Image
+                        src={trophy.trophyTitleIconUrl}
+                        alt={trophy.trophyTitleName}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover/card:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <h3 className="mb-2 truncate text-xl font-bold text-white">
+                          {trophy.trophyTitleName}
+                        </h3>
+                        <div className="flex items-center space-x-4 text-white">
+                          <span className="flex items-center space-x-1">
+                            <TrophyIcon type="platinum" />
+                            <span>{trophy.earnedTrophies.platinum}</span>
+                          </span>
+                          <span className="flex items-center space-x-1">
+                            <TrophyIcon type="gold" />
+                            <span>{trophy.earnedTrophies.gold}</span>
+                          </span>
+                          <span className="flex items-center space-x-1">
+                            <TrophyIcon type="silver" />
+                            <span>{trophy.earnedTrophies.silver}</span>
+                          </span>
+                          <span className="flex items-center space-x-1">
+                            <TrophyIcon type="bronze" />
+                            <span>{trophy.earnedTrophies.bronze}</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Marquee>
+            <Marquee pauseOnHover reverse className="[--duration:40s]">
+              <div className="flex">
+                {platinumTrophies.slice(Math.ceil(platinumTrophies.length / 2)).map((trophy) => (
+                  <div
+                    key={trophy.trophyTitleName}
+                    className="group/card mx-3 w-80 overflow-hidden rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 
+                      shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl 
+                      dark:from-gray-800 dark:to-gray-900"
+                  >
+                    <div className="relative aspect-[4/3]">
+                      <Image
+                        src={trophy.trophyTitleIconUrl}
+                        alt={trophy.trophyTitleName}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover/card:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-4">
+                        <h3 className="mb-2 truncate text-xl font-bold text-white">
+                          {trophy.trophyTitleName}
+                        </h3>
+                        <div className="flex items-center space-x-4 text-white">
+                          <span className="flex items-center space-x-1">
+                            <TrophyIcon type="platinum" />
+                            <span>{trophy.earnedTrophies.platinum}</span>
+                          </span>
+                          <span className="flex items-center space-x-1">
+                            <TrophyIcon type="gold" />
+                            <span>{trophy.earnedTrophies.gold}</span>
+                          </span>
+                          <span className="flex items-center space-x-1">
+                            <TrophyIcon type="silver" />
+                            <span>{trophy.earnedTrophies.silver}</span>
+                          </span>
+                          <span className="flex items-center space-x-1">
+                            <TrophyIcon type="bronze" />
+                            <span>{trophy.earnedTrophies.bronze}</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                ))}
+              </div>
+            </Marquee>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-gray-950"></div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-gray-950"></div>
+          </div>
+        </div>
+      )}
+
+      {/* Non-Platinum Games */}
+      {nonPlatinumTrophies.length > 0 && (
+        <div className="py-8">
+          <h2 className="mb-6 text-2xl font-bold">{t('gaming_playing')}</h2>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {nonPlatinumTrophies.map((trophy) => (
               <div
                 key={trophy.trophyTitleName}
-                className="mx-4 flex w-64 flex-col items-center rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800"
+                className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 
+                  shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl 
+                  dark:from-gray-800 dark:to-gray-900"
               >
-                <div className="relative h-32 w-32">
+                <div className="relative aspect-[4/3]">
                   <Image
                     src={trophy.trophyTitleIconUrl}
                     alt={trophy.trophyTitleName}
                     fill
-                    className="rounded-lg object-cover"
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <h3 className="mb-2 truncate text-lg font-bold text-white">
+                      {trophy.trophyTitleName}
+                    </h3>
+                    <div className="flex items-center space-x-3 text-white">
+                      <span className="flex items-center space-x-1">
+                        <TrophyIcon type="gold" />
+                        <span>{trophy.earnedTrophies.gold}</span>
+                        <span className="text-xs text-gray-300">/{trophy.definedTrophies.gold}</span>
+                      </span>
+                      <span className="flex items-center space-x-1">
+                        <TrophyIcon type="silver" />
+                        <span>{trophy.earnedTrophies.silver}</span>
+                        <span className="text-xs text-gray-300">/{trophy.definedTrophies.silver}</span>
+                      </span>
+                      <span className="flex items-center space-x-1">
+                        <TrophyIcon type="bronze" />
+                        <span>{trophy.earnedTrophies.bronze}</span>
+                        <span className="text-xs text-gray-300">/{trophy.definedTrophies.bronze}</span>
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="mt-2 text-center text-sm font-bold">{trophy.trophyTitleName}</h3>
-                <div className="mt-1 flex items-center space-x-2">
-                  <span className="text-platinum">🏆</span>
-                  <span className="text-sm text-gray-500">
-                    {formatDateTime(trophy.lastUpdatedDateTime)}
-                  </span>
+                <div className="absolute right-3 top-3 rounded-full bg-black/50 px-2 py-1 text-sm text-white">
+                  {trophy.progress}%
                 </div>
+
               </div>
             ))}
-          </Marquee>
+          </div>
         </div>
       )}
 
-      {/* 所有游戏奖杯列表 */}
-      <div className="grid grid-cols-1 gap-4 pt-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {sortedTrophies.map((trophy) => (
-          <div
-            key={trophy.trophyTitleName}
-            className="flex flex-col overflow-hidden rounded-lg bg-white shadow-lg dark:bg-gray-800"
-          >
-            <div className="relative h-48">
-              <Image
-                src={trophy.trophyTitleIconUrl}
-                alt={trophy.trophyTitleName}
-                fill
-                className="object-cover"
-              />
-              <div className="absolute bottom-0 right-0 m-2 rounded bg-black/50 px-2 py-1 text-xs text-white">
-                {trophy.category === 'ps5_native_game'
-                  ? 'PS5'
-                  : trophy.category === 'ps4_game'
-                    ? 'PS4'
-                    : trophy.category === 'pspc_game'
-                      ? 'PC'
-                      : ''}
-              </div>
-            </div>
-            <div className="flex flex-1 flex-col justify-between p-4">
-              <h3 className="mb-2 text-xl font-bold">{trophy.trophyTitleName}</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <div className="flex space-x-2">
-                    {trophy.earnedTrophies.platinum > 0 && (
-                      <span className="text-platinum">🏆 {trophy.earnedTrophies.platinum}</span>
-                    )}
-                    <span className="text-gold">🥇 {trophy.earnedTrophies.gold}</span>
-                    <span className="text-silver">🥈 {trophy.earnedTrophies.silver}</span>
-                    <span className="text-bronze">🥉 {trophy.earnedTrophies.bronze}</span>
-                  </div>
-                  <span className="text-sm text-gray-500">{trophy.progress}%</span>
-                </div>
-                {/* {trophy.playDuration > 0 && (
-                  <div className="text-sm text-gray-500">
-                    <div>游戏时间: {formatPlayTime(trophy.playDuration)}</div>
-                    <div>游玩次数: {trophy.playCount}次</div>
-                    <div>最近游玩: {formatDateTime(trophy.lastPlayedDateTime)}</div>
-                  </div>
-                )} */}
-              </div>
-            </div>
-          </div>
-        ))}
+      {/* Steam */}
+      <div className="py-8">
+        <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+          Steam
+        </h1>
+        <ComingSoon />
       </div>
     </div>
   )

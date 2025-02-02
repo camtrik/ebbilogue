@@ -3,7 +3,8 @@ import Link from '@/components/Link'
 import useHeaderNavLinks from '@/data/headerNavLinks'
 import { useTranslation } from 'utils/locale'
 import { useState } from 'react'
-import DropdownMenu, { MenuItem } from '../DropdownMenu'
+import DropdownMenu from '../DropdownMenu'
+import { MenuItem } from '@/types/menu'
 
 const MobileNav = ({ navShow, onToggleNav }) => {
   const { t } = useTranslation()

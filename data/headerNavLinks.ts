@@ -8,8 +8,8 @@ export default function useHeaderNavLinks(translate: (key: string) => string | J
     { href: '/projects', titleKey: 'menu_projects' },
     { href: '/about', titleKey: 'menu_about' },
     {
-      titleKey: 'menu_hobbies',
-      key: 'menu_hobbies',
+      titleKey: 'menu_hobbty',
+      key: 'menu_hobbty',
       items: [
         { href: '/gaming', titleKey: 'sub_menu_gaming' },
         { href: '/anime', titleKey: 'sub_menu_anime' },

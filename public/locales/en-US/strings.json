@@ -5,7 +5,7 @@
   "menu_album": "Album",
   "menu_projects": "Projects",
   "menu_about": "About Me",
-  "menu_hobbies": "Hobbies",
+  "menu_hobbty": "Hobby",
   "sub_menu_gaming": "Gaming",
   "sub_menu_anime": "Anime",
   "desc_projects": "Personal projects so far",
@@ -26,6 +26,8 @@
   },
   "oc_title": "Original Characters",
   "gaming_title": "Another World",
+  "gaming_platinum": "Platinum",
+  "gaming_playing": "Playing",
   "img_overlay_hint": "Drag to move. Scroll to Zoom.",
   "img_overlay_hint_mobile": "Drag to move. Pinch to Zoom.",
 

@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import siteMetadata from '@/data/siteMetadata'
-import useHeaderNavLinks from '@/data/headerNavLinks'
+import useHeaderNavLinks from 'data/headerNavLinks'
 import Image from 'next/image'
 import Link from './Link'
 import MobileNav from './mobile-nav/MobileNav'
@@ -12,7 +12,7 @@ import SearchButton from '@/components/SearchButton'
 import LocaleSwitch from './LocaleSwitch'
 import { useTranslation } from 'utils/locale'
 import DropdownMenu from './DropdownMenu'
-import { MenuItem } from './DropdownMenu'
+import { MenuItem } from '@/types/menu'
 
 const Header = () => {
   const { t } = useTranslation()
