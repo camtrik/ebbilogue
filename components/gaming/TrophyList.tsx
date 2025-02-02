@@ -6,7 +6,6 @@ import { Marquee } from '@/components/ui/marquee'
 import { TrophyIcon } from '@/components/gaming/TrophyIcon'
 import ComingSoon from '@/components/ComingSoon'
 
-
 interface Trophy {
   trophyTitleName: string
   trophyTitleIconUrl: string
@@ -198,7 +197,6 @@ export default function TrophyList() {
                         </div>
                       </div>
                     </div>
-
                   </div>
                 ))}
               </div>
@@ -237,17 +235,23 @@ export default function TrophyList() {
                       <span className="flex items-center space-x-1">
                         <TrophyIcon type="gold" />
                         <span>{trophy.earnedTrophies.gold}</span>
-                        <span className="text-xs text-gray-300">/{trophy.definedTrophies.gold}</span>
+                        <span className="text-xs text-gray-300">
+                          /{trophy.definedTrophies.gold}
+                        </span>
                       </span>
                       <span className="flex items-center space-x-1">
                         <TrophyIcon type="silver" />
                         <span>{trophy.earnedTrophies.silver}</span>
-                        <span className="text-xs text-gray-300">/{trophy.definedTrophies.silver}</span>
+                        <span className="text-xs text-gray-300">
+                          /{trophy.definedTrophies.silver}
+                        </span>
                       </span>
                       <span className="flex items-center space-x-1">
                         <TrophyIcon type="bronze" />
                         <span>{trophy.earnedTrophies.bronze}</span>
-                        <span className="text-xs text-gray-300">/{trophy.definedTrophies.bronze}</span>
+                        <span className="text-xs text-gray-300">
+                          /{trophy.definedTrophies.bronze}
+                        </span>
                       </span>
                     </div>
                   </div>
@@ -255,7 +259,6 @@ export default function TrophyList() {
                 <div className="absolute right-3 top-3 rounded-full bg-black/50 px-2 py-1 text-sm text-white">
                   {trophy.progress}%
                 </div>
-
               </div>
             ))}
           </div>

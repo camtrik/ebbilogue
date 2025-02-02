@@ -46,7 +46,7 @@ const DropdownMenu = ({
       >
         <div className="relative top-0">
           <div className="absolute -top-2 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-gray-800"></div>
-          <div className="relative min-w-max flex flex-row items-center justify-center gap-1 rounded-full bg-gray-800/95 p-1 shadow-lg whitespace-nowrap">
+          <div className="relative flex min-w-max flex-row items-center justify-center gap-1 whitespace-nowrap rounded-full bg-gray-800/95 p-1 shadow-lg">
             {items.map((item) => (
               <Link
                 key={item.titleKey}

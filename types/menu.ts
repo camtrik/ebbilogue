@@ -1,5 +1,5 @@
 export interface MenuItem {
-    href: string
-    title: string
-    titleKey: string
-  }
+  href: string
+  title: string
+  titleKey: string
+}
