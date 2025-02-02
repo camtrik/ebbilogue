@@ -22,7 +22,8 @@
       "@/layouts/*": ["layouts/*"],
       "@/css/*": ["css/*"],
       "@/types/*": ["types/*"],
-      "@/utils/": ["utils/"],
+      "@/utils/*": ["utils/*"],
+      "@/lib/*": ["lib/*"],
       "contentlayer/generated": ["./.contentlayer/generated"]
     },
     "plugins": [
@@ -31,6 +32,11 @@
       }
     ],
     "strictNullChecks": true
+  },
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifiers": true,
+    "require": ["tsconfig-paths/register"]
   },
   "include": [
     "next-env.d.ts",
@@ -41,7 +47,9 @@
     "**/*.json",
     ".contentlayer/generated",
     ".contentlayer/generated/**/*.json",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "scripts/get-psn-trophies.mts",
+    "scripts/get-psn-trophies.mts"
   ],
   "exclude": ["node_modules"]
 }

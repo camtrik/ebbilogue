@@ -5,9 +5,13 @@
   "menu_album": "Album",
   "menu_projects": "Projects",
   "menu_about": "About Me",
+  "menu_hobbies": "Hobbies",
+  "sub_menu_gaming": "Gaming",
+  "sub_menu_anime": "Anime",
   "desc_projects": "Personal projects so far",
   "desc_about": "What you have desperately accumulated will never betray you.",
   "desc_album": "My Blog of Photos",
+  "desc_trophies": "My PlayStation Trophy Collection",
   "home_title": "Ebbi's Catalogue",
   "home_desc": "Everyone who works hard is a warrior",
   "label_read_more": "Read more",
@@ -21,6 +25,7 @@
     "view_source": "Template here"
   },
   "oc_title": "Original Characters",
+  "gaming_title": "Another World",
   "img_overlay_hint": "Drag to move. Scroll to Zoom.",
   "img_overlay_hint_mobile": "Drag to move. Pinch to Zoom.",
 

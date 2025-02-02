@@ -5,6 +5,9 @@
   "menu_album": "アルバム",
   "menu_projects": "プロジェクト",
   "menu_about": "自己紹介",
+  "menu_hobbies": "趣味",
+  "sub_menu_gaming": "ゲーム",
+  "sub_menu_anime": "アニメ",
   "desc_projects": "個人プロジェクト",
   "desc_about": "必死に積み上げてきたものは、決して裏切りません.",
   "desc_album": "フォトブログ",
@@ -20,6 +23,7 @@
     "view_source": "Template here"
   },
   "oc_title": "オリジナルキャラクター",
+  "gaming_title": "もう一つの世界",
   "Latest": "最新",
   "All Posts": "すべての記事",
   "img_overlay_hint": "長押しでドラッグ。スクロールでズーム。",

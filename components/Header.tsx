@@ -11,6 +11,8 @@ import ThemeSwitch from './ThemeSwitch'
 import SearchButton from '@/components/SearchButton'
 import LocaleSwitch from './LocaleSwitch'
 import { useTranslation } from 'utils/locale'
+import DropdownMenu from './DropdownMenu'
+import { MenuItem } from './DropdownMenu'
 
 const Header = () => {
   const { t } = useTranslation()
@@ -95,17 +97,31 @@ const Header = () => {
             <SearchButton />
             {useHeaderNavLinks(t)
               .filter((link) => link.href !== '/')
-              .map((link) => (
-                <Link
-                  key={link.key}
-                  href={link.href}
-                  className="hidden text-xl font-medium
-              text-gray-900 transition duration-300 hover:text-primary-400 dark:text-gray-100
-              dark:hover:text-primary-300 sm:block"
-                >
-                  {link.title}
-                </Link>
-              ))}
+              .map((link) =>
+                link.items ? (
+                  <DropdownMenu
+                    key={link.key}
+                    items={link.items as MenuItem[]}
+                    trigger={
+                      <button
+                        className="hidden text-xl font-medium text-gray-900 transition duration-300 
+                        hover:text-primary-400 dark:text-gray-100 dark:hover:text-primary-300 sm:block"
+                      >
+                        {link.title}
+                      </button>
+                    }
+                  />
+                ) : (
+                  <Link
+                    key={link.key}
+                    href={link.href ?? ''}
+                    className="hidden text-xl font-medium text-gray-900 transition duration-300 
+                    hover:text-primary-400 dark:text-gray-100 dark:hover:text-primary-300 sm:block"
+                  >
+                    {link.title}
+                  </Link>
+                )
+              )}
             <LocaleSwitch />
             <MobileNavToggle onToggleNav={onToggleNav} />
           </div>

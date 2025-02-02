@@ -196,10 +196,6 @@
   @apply text-primary-400;
 }
 
-.text-white:is(.dark *) {
-  @apply text-black;
-}
-
 svg.text-white:hover,
 a .text-white:hover {
   @apply text-primary-300;

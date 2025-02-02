@@ -12,6 +12,12 @@
     "prepare": "husky",
     "compress": "node ./scripts/compress.mjs"
   },
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022",
+    "esModuleInterop": true
+  },
   "dependencies": {
     "@algolia/autocomplete-core": "latest",
     "@algolia/autocomplete-plugin-algolia-insights": "latest",
@@ -29,7 +35,9 @@
     "acorn": "^8.14.0",
     "algoliasearch": "latest",
     "autoprefixer": "^10.4.13",
+    "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.5.1",
+    "clsx": "^2.1.1",
     "contentlayer2": "0.4.4",
     "esbuild": "0.20.2",
     "express": "^4.21.2",
@@ -40,6 +48,7 @@
     "hast-util-from-html-isomorphic": "^2.0.0",
     "image-size": "1.0.0",
     "lucide-react": "^0.474.0",
+    "motion": "^12.0.6",
     "next": "^14.2.23",
     "next-auth": "^4.24.11",
     "next-contentlayer2": "0.4.4",
@@ -47,6 +56,7 @@
     "open": "^10.1.0",
     "pliny": "0.2.0",
     "postcss": "^8.4.24",
+    "psn-api": "^2.11.0",
     "react": "18",
     "react-activity-calendar": "^2.2.8",
     "react-dom": "18",
@@ -69,7 +79,9 @@
     "sharp": "^0.33.3",
     "slick-carousel": "^1.8.1",
     "swr": "^2.2.5",
+    "tailwind-merge": "^3.0.1",
     "tailwindcss": "^3.4.3",
+    "tailwindcss-animate": "^1.0.7",
     "typed.js": "^2.1.0",
     "unist-util-visit": "^5.0.0",
     "uuid": "^9.0.1"
@@ -89,6 +101,7 @@
     "lint-staged": "^15.4.1",
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },
   "lint-staged": {

@@ -112,6 +112,20 @@ module.exports = {
         azure: '0 0 2px 2px rgba(240, 255, 255, 0.7)',
         purple: '0 0 2px 1px rgba(140, 140, 230,0.7)',
       },
+      animation: {
+        marquee: 'marquee var(--duration) linear infinite',
+        'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(calc(-100% - var(--gap)))' },
+        },
+        'marquee-vertical': {
+          from: { transform: 'translateY(0)' },
+          to: { transform: 'translateY(calc(-100% - var(--gap)))' },
+        },
+      },
     },
   },
   variants: {

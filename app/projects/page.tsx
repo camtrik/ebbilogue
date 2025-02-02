@@ -2,12 +2,10 @@
 import projectsData from '@/data/projectsData'
 import Card from '@/components/Card'
 import { useTranslation } from 'utils/locale'
-// import { genPageMetadata } from 'app/seo'
-
-// export const metadata = genPageMetadata({ title: 'Projects' })
 
 export default function Projects() {
   const { t } = useTranslation()
+
   return (
     <>
       <div className="divide-y divide-gray-200 dark:divide-gray-700">

@@ -7,10 +7,22 @@ export default function useHeaderNavLinks(translate: (key: string) => string | J
     // { href: '/tags', titleKey: 'menu_tag' },
     { href: '/projects', titleKey: 'menu_projects' },
     { href: '/about', titleKey: 'menu_about' },
+    {
+      titleKey: 'menu_hobbies',
+      key: 'menu_hobbies',
+      items: [
+        { href: '/gaming', titleKey: 'sub_menu_gaming' },
+        { href: '/anime', titleKey: 'sub_menu_anime' },
+      ],
+    },
   ].map((link) => ({
-    href: link.href,
+    ...link,
     title: t(link.titleKey),
-    key: link.titleKey, // 使用翻译的 key 作为 React 的 key
+    key: link.titleKey,
+    items: link.items?.map((item) => ({
+      ...item,
+      title: t(item.titleKey),
+    })),
   }))
 
   return headerNavLinks

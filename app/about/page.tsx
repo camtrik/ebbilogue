@@ -7,6 +7,7 @@ import { coreContent, CoreContent } from 'pliny/utils/contentlayer'
 import TypedBios from './TypedBio'
 import { LanguageContext } from 'utils/locale'
 import { useRef, useEffect, useContext } from 'react'
+import GamingViewProfile from '@/components/gaming/GamingViewProfile'
 // import { genPageMetadata } from 'app/seo'
 
 // export const metadata = genPageMetadata({ title: 'About' })
@@ -31,6 +32,9 @@ export default function Page() {
       <AuthorLayout content={mainContentRef.current}>
         <TypedBios />
         <MDXLayoutRenderer code={authorRef.current?.body.code} components={components} />
+        <div className="not-prose">
+          <GamingViewProfile />
+        </div>
       </AuthorLayout>
     </>
   )

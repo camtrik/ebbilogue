@@ -5,6 +5,9 @@
   "menu_album": "相册",
   "menu_projects": "项目",
   "menu_about": "关于我",
+  "menu_hobbies": "兴趣",
+  "sub_menu_gaming": "游戏",
+  "sub_menu_anime": "动漫",
   "desc_projects": "一些个人项目",
   "desc_about": "拼命积累起来的东西绝对不会背叛你.",
   "desc_album": "我的图片博客",
@@ -21,7 +24,7 @@
     "view_source": "查看模板源码"
   },
   "oc_title": "自设",
-
+  "gaming_title": "另一个世界",
   "Latest": "动态",
   "All Posts": "所有文章",
   "img_overlay_hint": "长按拖动。滚动缩放。",

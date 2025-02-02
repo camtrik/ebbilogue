@@ -2,9 +2,16 @@
 import Link from '@/components/Link'
 import useHeaderNavLinks from '@/data/headerNavLinks'
 import { useTranslation } from 'utils/locale'
+import { useState } from 'react'
+import DropdownMenu, { MenuItem } from '../DropdownMenu'
 
 const MobileNav = ({ navShow, onToggleNav }) => {
   const { t } = useTranslation()
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+
+  const handleDropdownClick = (key: string) => {
+    setActiveDropdown(activeDropdown === key ? null : key)
+  }
 
   return (
     <div
@@ -32,13 +39,32 @@ const MobileNav = ({ navShow, onToggleNav }) => {
       <nav className="fixed mt-8 h-full">
         {useHeaderNavLinks(t).map((link) => (
           <div key={link.key} className="px-12 py-4">
-            <Link
-              href={link.href}
-              className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
-              onClick={onToggleNav}
-            >
-              {link.title}
-            </Link>
+            {link.items ? (
+              <div className="flex">
+                <button
+                  onClick={() => handleDropdownClick(link.key)}
+                  className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
+                >
+                  {link.title}
+                </button>
+                {activeDropdown === link.key && (
+                  <DropdownMenu
+                    items={link.items as MenuItem[]}
+                    mobile
+                    onItemClick={onToggleNav}
+                    trigger={<button>{link.title}</button>}
+                  />
+                )}
+              </div>
+            ) : (
+              <Link
+                href={link.href ?? ''}
+                className="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
+                onClick={onToggleNav}
+              >
+                {link.title}
+              </Link>
+            )}
           </div>
         ))}
       </nav>
