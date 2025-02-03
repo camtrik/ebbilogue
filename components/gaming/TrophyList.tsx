@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Marquee } from '@/components/ui/marquee'
 import { TrophyIcon } from '@/components/gaming/TrophyIcon'
 import ComingSoon from '@/components/ComingSoon'
+import LoadingTrophy from './LoadingTrophy'
 
 interface Trophy {
   trophyTitleName: string
@@ -91,7 +92,7 @@ export default function TrophyList() {
     fetchTrophies()
   }, [filters, baseApiUrl])
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <LoadingTrophy />
   if (error) return <div>Error: {error}</div>
 
   // const sortedTrophies = [...trophies].sort((a, b) => b.progress - a.progress)

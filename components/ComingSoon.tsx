@@ -1,6 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { ImagesSlider } from '@/components/ui/images-slider'
+import { useTranslation } from 'utils/locale'
 
 interface GamingViewProfileProps {
   images?: string[]
@@ -15,10 +16,11 @@ const DEFAULT_IMAGES = [
 ]
 
 export default function GamingViewProfile({ images = DEFAULT_IMAGES }: GamingViewProfileProps) {
+  const { t } = useTranslation()
   return (
     <div className="my-4">
       <ImagesSlider
-        className="h-[24rem] rounded-3xl shadow-xl ring-1 ring-white/10"
+        className="h-[30rem] rounded-3xl shadow-xl ring-1 ring-white/10"
         overlayClassName="rounded-3xl bg-black/40"
         images={images}
       >
@@ -37,7 +39,7 @@ export default function GamingViewProfile({ images = DEFAULT_IMAGES }: GamingVie
           className="z-50 flex flex-col items-center justify-center"
         >
           <motion.p className="bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text py-4 text-center text-xl font-bold text-transparent md:text-6xl">
-            Coming Soon
+            {t("coming_soon")}
           </motion.p>
         </motion.div>
       </ImagesSlider>
