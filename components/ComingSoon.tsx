@@ -39,7 +39,7 @@ export default function GamingViewProfile({ images = DEFAULT_IMAGES }: GamingVie
           className="z-50 flex flex-col items-center justify-center"
         >
           <motion.p className="bg-gradient-to-b from-neutral-50 to-neutral-400 bg-clip-text py-4 text-center text-xl font-bold text-transparent md:text-6xl">
-            {t("coming_soon")}
+            {t('coming_soon')}
           </motion.p>
         </motion.div>
       </ImagesSlider>
