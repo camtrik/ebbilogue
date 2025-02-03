@@ -1,0 +1,150 @@
+---
+title: 通过PSN API获取PSN奖杯信息
+date: '2025-02-01'
+lastmod: '2025-02-02'
+tags: ['Web', 'Game']
+draft: false
+summary: PSN API的用法记录
+images:
+  [
+    'https://res.cloudinary.com/camtrik/image/upload/v1738572135/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_2025-02-03_164150_caqufb.png',
+  ]
+layout: 'PostBannerInfo'
+---
+
+想在主页加一个奖杯展示页面，发现PSN没有官方公开的API，但Github上有爬取获得的民间文档。
+
+主要参考:  
+[PlayStation-Trophies](https://github.com/andshrew/PlayStation-Trophies)  
+[psn-api-javascript](https://github.com/achievements-app/psn-api)
+
+文档是比较全面的，这里简洁记录一下获取奖杯的主要流程
+
+[效果页](/gaming)
+
+## 获取授权
+
+### 获取NPSSO
+
+- 访问[Playstation homepage](https://www.playstation.com/)，登录。
+- 同一个浏览器，访问[这里](https://ca.account.sony.com/api/v1/ssocookie)，看到JSON：
+
+```
+{ "npsso": "<64 character token>" }
+```
+
+复制npsso的值，以供后续使用。
+
+### 获取Access Code
+
+```
+curl -i -X GET \
+'https://ca.account.sony.com/api/authz/v3/oauth/authorize?access_type=offline&client_id=09515159-7237-4370-9b40-3806e67c0891&redirect_uri=com.scee.psxandroid.scecompcall://redirect&response_type=code&scope=psn:mobile.v2.core%20psn:clientapp' \
+-H 'Cookie: npsso=YOUR_NPSSO_TOKEN' \
+-H 'Accept: application/json' \
+--max-redirs 0
+```
+
+access code在返回的Location字段中：
+
+```
+Location: com.scee.psxandroid.scecompcall://redirect/?code='YOUR_ACCESS_CODE'&cid=xxxxxxx
+```
+
+### 获取Access Token & Refresh Token
+
+```
+curl -X POST 'https://ca.account.sony.com/api/authz/v3/oauth/token' \
+-H 'Content-Type: application/x-www-form-urlencoded' \
+-H 'Authorization: Basic MDk1MTUxNTktNzIzNy00MzcwLTliNDAtMzgwNmU2N2MwODkxOnVjUGprYTV0bnRCMktxc1A=' \
+--data-urlencode 'code=YOUR_ACCESS_CODE' \
+--data-urlencode 'redirect_uri=com.scee.psxandroid.scecompcall://redirect' \
+--data-urlencode 'grant_type=authorization_code' \
+--data-urlencode 'token_format=jwt'
+```
+
+即会返回Access Token和Refresh token
+
+由于access token会过期，在实际获取奖杯List时，先用Refresh Token交换Access Token
+
+## 获取奖杯List
+
+### 使用Refresh Token更新Access Token
+
+curl -X POST 'https://ca.account.sony.com/api/authz/v3/oauth/token' \
+-H 'Content-Type: application/x-www-form-urlencoded' \
+-H 'Authorization: Basic MDk1MTUxNTktNzIzNy00MzcwLTliNDAtMzgwNmU2N2MwODkxOnVjUGprYTV0bnRCMktxc1A=' \
+--data-urlencode 'refresh_token=YOUR_REFRESH_TOKEN' \
+--data-urlencode 'grant_type=refresh_token' \
+--data-urlencode 'token_format=jwt' \
+--data-urlencode 'scope=psn:mobile.v2.core psn:clientapp'
+
+只用到`access_token`字段
+
+### 获取所有奖杯
+
+curl -X GET 'https://m.np.playstation.com/api/trophy/v1/users/USER_ACCOUNT_ID/trophyTitles' \
+-H 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+-H 'Accept: application/json'
+
+返回的奖杯列表如下：
+
+```
+{
+   "trophyTitles":[
+      {
+         "npServiceName":"trophy2",
+         "npCommunicationId":"NPWR29948_00",
+         "trophySetVersion":"01.00",
+         "trophyTitleName":"MONSTER HUNTER RISE",
+         "trophyTitleIconUrl":"https://psnobj.prod.dl.playstation.net/psnobj/NPWR29948_00/c2784818-be41-4379-91db-c1fa28ed2593.png",
+         "trophyTitlePlatform":"PS5",
+         "hasTrophyGroups":true,
+         "trophyGroupCount":7,
+         "definedTrophies":{
+            "bronze":78,
+            "silver":15,
+            "gold":6,
+            "platinum":1
+         },
+         "progress":4,
+         "earnedTrophies":{
+            "bronze":6,
+            "silver":0,
+            "gold":0,
+            "platinum":0
+         },
+         "hiddenFlag":false,
+         "lastUpdatedDateTime":"2024-12-29T02:12:23Z"
+      },
+      {
+         "npServiceName":"trophy2",
+         "npCommunicationId":"NPWR37356_00",
+         "trophySetVersion":"01.00",
+         "trophyTitleName":"Stellar Blade",
+         "trophyTitleIconUrl":"https://psnobj.prod.dl.playstation.net/psnobj/NPWR37356_00/d1f990db-1929-4092-84dc-4b1c64af872d.png",
+         "trophyTitlePlatform":"PS5",
+         "hasTrophyGroups":true,
+         "trophyGroupCount":2,
+         "definedTrophies":{
+            "bronze":29,
+            "silver":12,
+            "gold":3,
+            "platinum":1
+         },
+         "progress":67,
+         "earnedTrophies":{
+            "bronze":22,
+            "silver":10,
+            "gold":1,
+            "platinum":0
+         },
+         "hiddenFlag":false,
+         "lastUpdatedDateTime":"2024-10-24T14:23:18Z"
+      },
+      ...
+```
+
+对列表进行一番处理，大致效果如图：  
+![showcase](https://res.cloudinary.com/camtrik/image/upload/v1738571894/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_2025-02-03_163740_su8fzg.png)  
+应用的组件在[这里](https://magicui.design/docs/components/marquee)

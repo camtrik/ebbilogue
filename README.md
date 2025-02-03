@@ -12,14 +12,14 @@ This is a [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com
 
 Some features and designs come from [Azurtelie](https://github.com/AmosChenZixuan/Azurtelier.com). Thanks!
 
-## New features roadmap:
+## TODO:
 
 - [x] Random banner images from Claudinary/GooglePhotos/Local
 - [x] Banner preview for blogs
 - [x] Japanese support
 - [x] Store static resources online
 - [x] New homepage design
-- [ ] Game Collection Page
+- [x] Game Collection Page
 - [ ] Useful Tools Page
 - [ ] New blog list design
 - [ ] AI Robot Support

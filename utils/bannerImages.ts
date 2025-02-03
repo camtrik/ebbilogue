@@ -165,16 +165,19 @@ export async function getRandomCloudinaryUrl(id: string): Promise<string> {
       return siteMetadata.banner.defaultImage
     }
 
+    console.log('id: ', id)
     const hash = Array.from(id).reduce((acc, char) => (acc << 5) - acc + char.charCodeAt(0), 0)
-    const preferredIndex = Math.abs(hash) % bannerUrls.length
+    let index = Math.abs(hash) % bannerUrls.length
 
     // get the available index
-    const availableIndex = getAvailableIndex(preferredIndex, bannerUrls.length)
+    if (usedBannerIndices.includes(index)) {
+      index = getAvailableIndex(index, bannerUrls.length)
+    }
     console.log('hash:', Math.abs(hash))
-    console.log('preferred index:', preferredIndex)
-    console.log('actual used index:', availableIndex)
+    console.log('preferred index:', index)
+    console.log('actual used index:', index)
 
-    return bannerUrls[availableIndex].url
+    return bannerUrls[index].url
   } catch (error) {
     console.error('Error getting Cloudinary photo: ', error)
     return siteMetadata.banner.defaultImage

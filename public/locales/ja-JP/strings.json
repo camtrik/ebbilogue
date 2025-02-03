@@ -30,7 +30,8 @@
   "All Posts": "すべての記事",
   "img_overlay_hint": "長押しでドラッグ。スクロールでズーム。",
   "img_overlay_hint_mobile": "長押しでドラッグ。ピンチでズーム。",
+  "coming_soon": "もうすぐ",
   "home": {
-    "ai_notice": "このサイトのバナー画像はすべてAIで生成されています"
+    "ai_notice": "バナー画像はAIで生成されています"
   }
 }
