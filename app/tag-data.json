@@ -1,6 +1,7 @@
 {
   "4d-reconstruction": 3,
   "aigc": 6,
+  "cloud": 1,
   "game": 6,
   "gaussian-splatting": 3,
   "image-to-3d": 1,
@@ -13,5 +14,5 @@
   "sgu": 1,
   "travel": 1,
   "unity": 1,
-  "web": 4
+  "web": 5
 }

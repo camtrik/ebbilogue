@@ -6,6 +6,9 @@
 
 # Personal Blog
 
+Frontend system for my personal website [EbbiLogue](https://ebbilogue.com).  
+Backend [here](https://github.com/camtrik/ebbilogue-backend)
+
 Based off the [**Tailwind Nextjs Starter Blog**](https://github.com/timlrx/tailwind-nextjs-starter-blog)
 
 This is a [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/) project which is based on Next App directory with [React Server Component](https://nextjs.org/docs/getting-started/react-essentials#server-components) and uses [Contentlayer](https://www.contentlayer.dev/) to manage markdown content.
@@ -22,7 +25,7 @@ Some features and designs come from [Azurtelie](https://github.com/AmosChenZixua
 - [x] Game Collection Page
 - [ ] Useful Tools Page
 - [ ] New blog list design
-- [ ] AI Robot Support
+- [ ] AI Chat Avatar Support
 - [ ] New album design
 - [ ] Music api support
 
