@@ -10,6 +10,7 @@ import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import PostDate from '@/components/PostDate'
 
 interface LayoutProps {
   content: CoreContent<Blog>
@@ -19,7 +20,7 @@ interface LayoutProps {
 }
 
 export default function PostBannerInfo({ content, next, prev, children }: LayoutProps) {
-  const { path, slug, date, title, images } = content
+  const { path, slug, date, lastmod, title, images } = content
   // const displayImage =
   //   images && images.length > 0 ? images[0] : 'https://picsum.photos/seed/picsum/800/400'
   const displayImage = images?.[0] || 'https://picsum.photos/seed/picsum/800/400'
@@ -35,7 +36,8 @@ export default function PostBannerInfo({ content, next, prev, children }: Layout
                 <div>
                   <dt className="sr-only">Published on</dt>
                   <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                    <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                    {/* <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time> */}
+                    <PostDate date={date} lastmod={lastmod} currentLang={siteMetadata.locale} />
                   </dd>
                 </div>
               </dl>

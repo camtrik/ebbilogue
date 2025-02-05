@@ -13,6 +13,7 @@ import { useTranslation, LanguageContext } from 'utils/locale'
 import { useContext } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import Image from 'next/image'
+import PostDate from '@/components/PostDate'
 
 interface PaginationProps {
   totalPages: number
@@ -139,7 +140,12 @@ export default function ListLayoutWithTags({
                           <dl>
                             <dt className="sr-only">Published on</dt>
                             <dd className="text-base font-medium text-gray-500 dark:text-gray-400">
-                              <time dateTime={date}>{formatDate(date, currentLang)}</time>
+                              {/* <time dateTime={date}>{formatDate(date, currentLang)}</time> */}
+                              <PostDate
+                                date={date}
+                                lastmod={post.lastmod}
+                                currentLang={currentLang}
+                              />
                             </dd>
                           </dl>
                           <div className="mt-4 space-y-3">

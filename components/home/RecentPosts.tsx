@@ -8,11 +8,12 @@ import { useTranslation, LanguageContext } from 'utils/locale'
 import { useContext } from 'react'
 import Image from 'next/image'
 import siteMetadata from '@/data/siteMetadata'
+import PostDate from '@/components/PostDate'
 
 const MAX_DISPLAY = 10
 
 export default function RecentPosts() {
-  const sortedPosts = sortPosts(allBlogs)
+  const sortedPosts = sortPosts(allBlogs, 'lastmod')
   const posts = allCoreContent(sortedPosts)
   const { t } = useTranslation()
   const currentLang = useContext(LanguageContext).currentLang
@@ -44,7 +45,7 @@ export default function RecentPosts() {
                   <dl>
                     <dt className="sr-only">Published on</dt>
                     <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                      <time dateTime={date}>{formatDate(date, currentLang)}</time>
+                      <PostDate date={date} lastmod={post.lastmod} currentLang={currentLang} />
                     </dd>
                   </dl>
                   <div className="space-y-5">

@@ -92,7 +92,7 @@ function createSearchIndex(allBlogs) {
   ) {
     writeFileSync(
       `public/${siteMetadata.search.kbarConfig.searchDocumentsPath}`,
-      JSON.stringify(allCoreContent(sortPosts(allBlogs)))
+      JSON.stringify(allCoreContent(sortPosts(allBlogs, 'lastmod')))
     )
     console.log('Local search index generated...')
   }
@@ -127,6 +127,10 @@ export const Blog = defineDocumentType(() => ({
           return doc.images
         }
       },
+    },
+    lastmod: {
+      type: 'date',
+      resolve: (doc) => doc.lastmod || doc.date,
     },
     structuredData: {
       type: 'json',
