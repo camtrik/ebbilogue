@@ -50,7 +50,7 @@ export default function PostBannerInfo({ content, next, prev, children }: Layout
                       alt={title}
                       width={1600}
                       height={1600}
-                      className="lightcone mx-auto h-auto w-auto object-contain [max-height:800px] [max-width:800px]"
+                      className="mx-auto h-auto w-auto rounded-md object-contain [max-height:800px] [max-width:800px]"
                     />
                   </div>
                 </Bleed>
