@@ -65,12 +65,13 @@ curl -X POST 'https://ca.account.sony.com/api/authz/v3/oauth/token' \
 
 即会返回Access Token和Refresh token
 
-由于access token会过期，在实际获取奖杯List时，先用Refresh Token交换Access Token
+由于access token会很快过期，在实际获取奖杯List时，先用Refresh Token交换Access Token
 
 ## 获取奖杯List
 
 ### 使用Refresh Token更新Access Token
 
+```
 curl -X POST 'https://ca.account.sony.com/api/authz/v3/oauth/token' \
 -H 'Content-Type: application/x-www-form-urlencoded' \
 -H 'Authorization: Basic MDk1MTUxNTktNzIzNy00MzcwLTliNDAtMzgwNmU2N2MwODkxOnVjUGprYTV0bnRCMktxc1A=' \
@@ -78,8 +79,9 @@ curl -X POST 'https://ca.account.sony.com/api/authz/v3/oauth/token' \
 --data-urlencode 'grant_type=refresh_token' \
 --data-urlencode 'token_format=jwt' \
 --data-urlencode 'scope=psn:mobile.v2.core psn:clientapp'
+```
 
-只用到`access_token`字段
+之后只用到`access_token`字段
 
 ### 获取所有奖杯
 
@@ -143,7 +145,15 @@ curl -X GET 'https://m.np.playstation.com/api/trophy/v1/users/USER_ACCOUNT_ID/tr
          "lastUpdatedDateTime":"2024-10-24T14:23:18Z"
       },
       ...
+      }
+  ],
+  "totalItemCount": 100
+}
 ```
+
+可选字段：
+limit&offset: pagination可用字段
+例：https://m.np.playstation.com/api/trophy/v1/users/USER_ACCOUNT_ID/trophyTitles?limit=20&offset=2
 
 对列表进行一番处理，大致效果如图：  
 ![showcase](https://res.cloudinary.com/camtrik/image/upload/v1738571894/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_2025-02-03_163740_su8fzg.png)  

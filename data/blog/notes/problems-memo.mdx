@@ -53,13 +53,19 @@ export default function LocaleText({ children, className = '' }: LocaleTextProps
 
 ## wsl-crashes
 
-cursor server导致
+1, vscode server导致, 删除后自动重装即可
+
+```
+rm -rf ~/.vscode-server
+```
+
+2, 手动删除
 
 ```bash
 rm -rf /mnt/c/Users/CamTrik/AppData/Local/Temp/wsl-crashes/*
 ```
 
-在.wslconfig中设置
+3, 在.wslconfig中设置 (没起作用)
 
 ```bash
 [wsl2]
