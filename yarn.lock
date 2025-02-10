@@ -8248,6 +8248,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"live2d-render@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "live2d-render@npm:0.0.5"
+  checksum: 33c83696fd4f0877c2c23303beb6e72ad61b6a8ebc2e0116c3457f23804be1a23cfac45a68b3973beb27a463b595c57828cc0f85f1e321eb5ae32abf69495276
+  languageName: node
+  linkType: hard
+
 "locate-path@npm:^6.0.0":
   version: 6.0.0
   resolution: "locate-path@npm:6.0.0"
@@ -12498,6 +12505,7 @@ search-insights@latest:
     husky: ^9.0.0
     image-size: 1.0.0
     lint-staged: ^15.4.1
+    live2d-render: ^0.0.5
     lucide-react: ^0.474.0
     motion: ^12.0.6
     next: ^14.2.23
