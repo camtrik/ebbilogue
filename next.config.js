@@ -91,6 +91,16 @@ module.exports = () => {
           hostname: 'psnobj.prod.dl.playstation.net',
           pathname: '/**',
         },
+        {
+          protocol: 'https',
+          hostname: 'cdn.cloudflare.steamstatic.com',
+          pathname: '/**',
+        },
+        {
+          protocol: 'https',
+          hostname: 'media.steampowered.com',
+          pathname: '/**',
+        },
       ],
     },
     async headers() {

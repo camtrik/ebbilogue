@@ -225,3 +225,18 @@ svg.text-white:hover:is(.dark *),
 a .text-white:hover:is(.dark *) {
   @apply text-primary-400;
 }
+
+@keyframes steam-ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+.animate-steam-ripple {
+  animation: steam-ripple 8s infinite linear;
+}

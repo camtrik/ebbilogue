@@ -4,7 +4,6 @@ import { useTranslation } from 'utils/locale'
 import Image from 'next/image'
 import { Marquee } from '@/components/ui/marquee'
 import { TrophyIcon } from '@/components/gaming/TrophyIcon'
-import ComingSoon from '@/components/ComingSoon'
 import LoadingTrophy from './LoadingTrophy'
 
 interface Trophy {
@@ -55,7 +54,7 @@ function formatDateTime(dateStr: string | null): string {
   })
 }
 
-export default function TrophyList() {
+export default function PSOverview() {
   const { t } = useTranslation()
   const [trophies, setTrophies] = useState<Trophy[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -265,14 +264,6 @@ export default function TrophyList() {
           </div>
         </div>
       )}
-
-      {/* Steam */}
-      <div className="py-8">
-        <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-          Steam
-        </h1>
-        <ComingSoon />
-      </div>
     </div>
   )
 }
