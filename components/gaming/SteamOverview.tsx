@@ -37,6 +37,8 @@ export default function SteamOverview({ steamId }: Props) {
   const [error, setError] = useState<string | null>(null)
   const baseApiUrl = process.env.NEXT_PUBLIC_API_URL
 
+  // console.log("Fetching from:", `${baseApiUrl}/api/steam/${steamId}/playerGameDetails`);
+
   useEffect(() => {
     const fetchGames = async () => {
       try {
