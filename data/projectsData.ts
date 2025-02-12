@@ -20,23 +20,17 @@ const projectsData: Project[] = [
     href: 'https://github.com/camtrik/ProjectErio',
   },
   {
-    title: 'Personal Website',
+    title: 'Personal Website: Ebbilogue (WIP)',
     description: `A Next.js, Tailwind CSS project which is based on Next App directory with React Server Component and uses Contentlayer to manage markdown content. 
       Based on the tailwind-nextjs-starter-blog.`,
     imgSrc: '/static/images/projects/homepage.png',
-    href: '/',
+    href: 'https://github.com/camtrik/ebbilogue',
   },
   {
-    title: 'LLMUnions (WIP)',
-    description: `a chat application that integrates multiple Large Language Models (LLMs) including ChatGPT, Claude, and Gemini. Made by Vue3 and Express.`,
-    imgSrc: '/static/images/projects/llmunions.png',
-    href: 'https://github.com/camtrik/LLMs-Unions',
-  },
-  {
-    title: 'Gin Blog Management Sysmte (WIP)',
-    description: `A Gin based blog management system. The system might become the backend management system for my personal website.`,
+    title: 'Ebbilogue Backend (WIP)',
+    description: `A Gin based blog management system. Support fetching data from PSN & Steam, more features are coming soon.`,
     imgSrc: '/static/images/projects/ginblog.png',
-    href: 'https://github.com/camtrik/gin-blog',
+    href: 'https://github.com/camtrik/ebbilogue-backend',
   },
 ]
 
