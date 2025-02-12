@@ -26,7 +26,7 @@ interface Props {
 
 function formatPlayTime(minutes: number): string {
   const hours = Math.floor(minutes / 60)
-  return `${hours}小时`
+  return `${hours} hours`
 }
 
 export default function SteamOverview({ steamId }: Props) {

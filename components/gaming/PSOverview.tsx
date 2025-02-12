@@ -75,7 +75,7 @@ export default function PSOverview() {
           sortBy: filters.sortBy || '',
         })
         const response = await fetch(
-          `${baseApiUrl}/api/psn/me/trophyTitles/filtered?${queryParams.toString()}`
+          `${baseApiUrl}/api/psn/me/trophyTitles?${queryParams.toString()}`
         )
 
         if (!response.ok) throw new Error('Failed to fetch trophies')
