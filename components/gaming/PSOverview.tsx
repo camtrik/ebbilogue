@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Marquee } from '@/components/ui/marquee'
 import { TrophyIcon } from '@/components/gaming/TrophyIcon'
 import LoadingTrophy from './LoadingTrophy'
+import { ExternalLink } from 'lucide-react'
 
 interface Trophy {
   trophyTitleName: string
@@ -65,6 +66,7 @@ export default function PSOverview() {
     sortBy: 'progress',
   })
   const baseApiUrl = process.env.NEXT_PUBLIC_API_URL
+  const psnStoreUrl = "https://store.playstation.com"
 
   useEffect(() => {
     const fetchTrophies = async () => {
@@ -128,6 +130,17 @@ export default function PSOverview() {
                         className="object-cover transition-transform duration-300 group-hover/card:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      {/* Store Link - Right Top */}
+                      <a
+                        href={psnStoreUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-black/0 px-2.5 py-1.5 
+                          text-white/0 transition-all duration-300 hover:bg-black/70 group-hover/card:bg-black/50 group-hover/card:text-white"
+                      >
+                        <span className="text-sm">PSN Store</span>
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
                       <div className="absolute bottom-0 left-0 right-0 p-4">
                         <h3 className="mb-2 truncate text-xl font-bold text-white">
                           {trophy.trophyTitleName}
@@ -173,6 +186,17 @@ export default function PSOverview() {
                         className="object-cover transition-transform duration-300 group-hover/card:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      {/* Store Link - Right Top */}
+                      <a
+                        href={psnStoreUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-black/0 px-2.5 py-1.5 
+                          text-white/0 transition-all duration-300 hover:bg-black/70 group-hover/card:bg-black/50 group-hover/card:text-white"
+                      >
+                        <span className="text-sm">PSN Store</span>
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
                       <div className="absolute bottom-0 left-0 right-0 p-4">
                         <h3 className="mb-2 truncate text-xl font-bold text-white">
                           {trophy.trophyTitleName}
@@ -227,6 +251,21 @@ export default function PSOverview() {
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  {/* Progress Badge - Left Top */}
+                  <div className="absolute left-3 top-3 rounded-full bg-black/50 px-2 py-1 text-sm text-white">
+                    {trophy.progress}%
+                  </div>
+                  {/* Store Link - Right Top */}
+                  <a
+                    href={psnStoreUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-black/0 px-2.5 py-1.5 
+                      text-white/0 transition-all duration-300 hover:bg-black/70 group-hover:bg-black/50 group-hover:text-white"
+                  >
+                    <span className="text-sm">PSN Store</span>
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <h3 className="mb-2 truncate text-lg font-bold text-white">
                       {trophy.trophyTitleName}
@@ -255,9 +294,6 @@ export default function PSOverview() {
                       </span>
                     </div>
                   </div>
-                </div>
-                <div className="absolute right-3 top-3 rounded-full bg-black/50 px-2 py-1 text-sm text-white">
-                  {trophy.progress}%
                 </div>
               </div>
             ))}
