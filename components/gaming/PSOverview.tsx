@@ -66,7 +66,7 @@ export default function PSOverview() {
     sortBy: 'progress',
   })
   const baseApiUrl = process.env.NEXT_PUBLIC_API_URL
-  const psnStoreUrl = "https://store.playstation.com"
+  const psnStoreUrl = 'https://store.playstation.com'
 
   useEffect(() => {
     const fetchTrophies = async () => {

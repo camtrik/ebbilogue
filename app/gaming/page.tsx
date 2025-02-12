@@ -10,8 +10,8 @@ export const metadata: Metadata = genPageMetadata({ title: 'PSN Trophies' })
 export default function TrophiesPage() {
   const steamId = process.env.STEAM_ID || ''
   const psnId = process.env.PSN_ID || ''
-  const steamURL = "https://steamcommunity.com/profiles/" + steamId
-  const psnURL = "https://psnprofiles.com/" + psnId
+  const steamURL = 'https://steamcommunity.com/profiles/' + steamId
+  const psnURL = 'https://psnprofiles.com/' + psnId
   return (
     <div>
       <GamingProfile
