@@ -27,10 +27,10 @@ const projectsData: Project[] = [
     href: 'https://github.com/camtrik/ebbilogue',
   },
   {
-    title: 'Ebbilogue Backend (WIP)',
-    description: `A Gin based blog management system. Support fetching data from PSN & Steam, more features are coming soon.`,
+    title: 'PSN & Steam APIs in Golang (WIP)',
+    description: `A Golang project that provides APIs for PSN and Steam. It allows users to fetch data from PSN and Steam.`,
     imgSrc: '/static/images/projects/ginblog.png',
-    href: 'https://github.com/camtrik/ebbilogue-backend',
+    href: 'https://github.com/camtrik/psn-steam-api-go',
   },
 ]
 
