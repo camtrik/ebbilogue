@@ -8,7 +8,7 @@ summary: Problems and Solutions
 layout: 'PostBannerInfo'
 ---
 
-## 使中文和日文分别应用自己的字体
+# 使中文和日文分别应用自己的字体
 
 由于中文和日文有一些字符是相同的，简单将字体加进fontFamily有时会导致两种字体混合出现的情况。
 
@@ -51,7 +51,7 @@ export default function LocaleText({ children, className = '' }: LocaleTextProps
 // utils/locale.tsx
 ```
 
-## wsl-crashes
+# wsl-crashes
 
 1, vscode server导致, 删除后自动重装即可
 
@@ -64,7 +64,17 @@ rm -rf ~/.vscode-server
 ```bash
 rm -rf /mnt/c/Users/CamTrik/AppData/Local/Temp/wsl-crashes/*
 ```
+在wsl中设置定时任务：  
+运行`crontab -e`，在文件末尾添加每分钟执行一次上面命令
 
+```
+*/1 * * * * rm -rf /mnt/c/Users/CamTrik/AppData/Local/Temp/wsl-crashes/*
+```
+
+保证cron已经在运行
+```
+sudo service cron start
+```
 3, 在.wslconfig中设置 (没起作用)
 
 ```bash
@@ -72,7 +82,7 @@ rm -rf /mnt/c/Users/CamTrik/AppData/Local/Temp/wsl-crashes/*
 kernelCommandLine = sysctl.kernel.core_pattern=/dev/null
 ```
 
-## react-slick问题
+# react-slick问题
 
 react-slick导入后无法Build成功
 
@@ -88,3 +98,15 @@ react-slick导入后无法Build成功
 yarn dedupe '@types/react'
 
 ```
+
+# TOC类型问题
+TOC的类型认证报错：
+```
+{toc && <TOC toc={toc as TOCItem[]} />}
+
+# error info
+Conversion of type 'string' to type 'TOCItem[]' may be a mistake because neither type 
+sufficiently overlaps with the other. If this was intentional, 
+convert the expression to 'unknown' first.
+```
+将`contentlayer.config.ts`中toc的类型改为`json`即可。
