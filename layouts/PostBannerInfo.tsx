@@ -59,8 +59,8 @@ export default function PostBannerInfo({ content, next, prev, children }: Layout
           </header>
           <div className="relative mx-auto mt-10 flex">
             {/* TOC Sidebar */}
-            {toc && <TOC toc={toc} />}
-            {/* {toc && <TOC toc={toc as TOCItem[]} />} */}
+            {/* {toc && <TOC toc={toc} />} */}
+            {toc && <TOC toc={toc as TOCItem[]} />}
 
             {/* Main Content */}
             <div className="min-w-0 flex-1 xl:ml-[30px]">
