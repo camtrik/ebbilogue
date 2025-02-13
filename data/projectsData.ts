@@ -30,7 +30,7 @@ const projectsData: Project[] = [
     title: 'PSN & Steam APIs in Golang (WIP)',
     description: `A Golang project that provides APIs for PSN and Steam. It allows users to fetch data from PSN and Steam.`,
     imgSrc: '/static/images/projects/ginblog.png',
-    href: 'https://github.com/camtrik/psn-steam-api-go',
+    href: 'https://res.cloudinary.com/camtrik/image/upload/v1738572135/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_2025-02-03_164150_caqufb.png',
   },
 ]
 
