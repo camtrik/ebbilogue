@@ -116,14 +116,7 @@ export default function SteamOverview({ steamId }: Props) {
           <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Favorites</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {favoriteGames.map((game) => (
-              <a
-                key={game.AppId}
-                href={game.StoreUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900/90 to-gray-800/90 
-                  shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
-              >
+              <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900/90 to-gray-800/90 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
                 <div className="relative aspect-[16/9]">
                   <Image
                     src={game.ArtUrl}
@@ -133,11 +126,21 @@ export default function SteamOverview({ steamId }: Props) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent opacity-60 transition-opacity group-hover:opacity-80" />
 
+                  <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-blue-800/25 px-3 py-1">
+                    <Trophy className="text-white-400 h-4 w-4" />
+                    <span className="text-white-400 text-sm font-medium">{game.Achieved}</span>
+                  </div>
                   {/* Store Link Indicator */}
-                  <div className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-blue-500/0 px-2 py-1 text-transparent transition-all group-hover:bg-blue-500/20 group-hover:text-white">
+                  <a
+                    key={game.AppId}
+                    href={game.StoreUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-blue-500/0 px-2 py-1 text-transparent transition-all group-hover:bg-blue-500/20 group-hover:text-white"
+                  >
                     <span className="text-sm">View in Store</span>
                     <ExternalLink className="h-4 w-4" />
-                  </div>
+                  </a>
 
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <div className="flex items-center gap-3">
@@ -151,19 +154,15 @@ export default function SteamOverview({ steamId }: Props) {
                       <div className="group/title relative flex-1">
                         <h3 className="line-clamp-1 text-lg font-bold text-white">{game.Name}</h3>
                         {/* Full title tooltip */}
-                        <div className="absolute -top-12 left-0 z-50 hidden whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-sm text-white opacity-0 transition-opacity group-hover/title:block group-hover/title:opacity-100">
+                        <div className="absolute -top-12 left-0 z-50 hidden whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-sm text-white opacity-0 transition-opacity">
                           {game.Name}
                         </div>
                         <p className="text-sm text-gray-300">{formatPlayTime(game.PlayTime)}</p>
                       </div>
-                      <div className="flex items-center gap-1.5 rounded-full bg-blue-500/20 px-3 py-1">
-                        <Trophy className="h-4 w-4 text-blue-400" />
-                        <span className="text-sm font-medium text-blue-400">{game.Achieved}</span>
-                      </div>
                     </div>
                   </div>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </div>

@@ -64,6 +64,7 @@ rm -rf ~/.vscode-server
 ```bash
 rm -rf /mnt/c/Users/CamTrik/AppData/Local/Temp/wsl-crashes/*
 ```
+
 在wsl中设置定时任务：  
 运行`crontab -e`，在文件末尾添加每分钟执行一次上面命令
 
@@ -72,9 +73,11 @@ rm -rf /mnt/c/Users/CamTrik/AppData/Local/Temp/wsl-crashes/*
 ```
 
 保证cron已经在运行
+
 ```
 sudo service cron start
 ```
+
 3, 在.wslconfig中设置 (没起作用)
 
 ```bash
@@ -100,13 +103,16 @@ yarn dedupe '@types/react'
 ```
 
 # TOC类型问题
+
 TOC的类型认证报错：
+
 ```
 {toc && <TOC toc={toc as TOCItem[]} />}
 
 # error info
-Conversion of type 'string' to type 'TOCItem[]' may be a mistake because neither type 
-sufficiently overlaps with the other. If this was intentional, 
+Conversion of type 'string' to type 'TOCItem[]' may be a mistake because neither type
+sufficiently overlaps with the other. If this was intentional,
 convert the expression to 'unknown' first.
 ```
+
 将`contentlayer.config.ts`中toc的类型改为`json`即可。
