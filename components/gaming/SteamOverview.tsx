@@ -116,7 +116,10 @@ export default function SteamOverview({ steamId }: Props) {
           <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Favorites</h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {favoriteGames.map((game) => (
-              <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900/90 to-gray-800/90 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
+              <div
+                key={game.AppId}
+                className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900/90 to-gray-800/90 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+              >
                 <div className="relative aspect-[16/9]">
                   <Image
                     src={game.ArtUrl}
