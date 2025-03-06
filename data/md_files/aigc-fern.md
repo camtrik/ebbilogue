@@ -1,0 +1,20 @@
+---
+title: 菲伦/Fern/フェルン - 葬送のフリーレン
+date: '2024-8-11'
+lastmod: '2024-8-11'
+tags: ['photos', 'game', 'AIGC']
+authors: ['default']
+images:
+  [
+    'https://res.cloudinary.com/camtrik/image/upload/v1737910293/00174-3005650318_cqmx1l.png',
+    'https://res.cloudinary.com/camtrik/image/upload/v1737901041/fern-3_iouvyd.png',
+    'https://res.cloudinary.com/camtrik/image/upload/v1737901040/fern-6_yhywki.png',
+    'https://res.cloudinary.com/camtrik/image/upload/v1737901040/fern-5_h2xdpd.png',
+    'https://res.cloudinary.com/camtrik/image/upload/v1737901039/fern-4_gjjwfx.png',
+    'https://res.cloudinary.com/camtrik/image/upload/v1737901039/fern-2_tbgs1g.png',
+    'https://res.cloudinary.com/camtrik/image/upload/v1737901034/fern-1_yfsdj4.png',
+  ]
+layout: 'PostPhotos'
+---
+
+时尚大喷菇

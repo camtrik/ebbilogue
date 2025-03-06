@@ -54,3 +54,5 @@ bannersUrl.json
 
 # OLD files
 *_OLD.*
+
+md_files/*

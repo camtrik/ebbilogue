@@ -15,6 +15,7 @@ import { Metadata } from 'next'
 import { LanguageProvider } from 'utils/locale'
 import { ImageOverlayProvider } from '@/components/overlay/providers'
 import ImageViewOverlay from '@/components/overlay/ImageOverlay'
+import ChatButton from '@/components/chat/ChatButton'
 
 // default english text
 const pangolin = Pangolin({
@@ -122,6 +123,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <Header />
                     <main className="mb-auto mt-20">{children}</main>
                     <ImageViewOverlay />
+                    <ChatButton />
                   </ImageOverlayProvider>
                 </SearchProvider>
                 <Footer />

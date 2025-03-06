@@ -1,0 +1,118 @@
+---
+title: 记录一些开发中遇到的问题
+date: '2024-01-09'
+lastmod: '2025-02-02'
+tags: ['Web', 'notes']
+draft: false
+summary: Problems and Solutions
+layout: 'PostBannerInfo'
+---
+
+# 使中文和日文分别应用自己的字体
+
+由于中文和日文有一些字符是相同的，简单将字体加进fontFamily有时会导致两种字体混合出现的情况。
+
+通过在font.css中设置，并且实现LocaleText组件，可以实现中文和日文分别应用自己的字体。
+
+```css
+.chinese-text {
+  font-family: var(--font-pangolin), var(--font-zcool-kuaile), system-ui, sans-serif;
+}
+
+.japanese-text {
+  font-family: var(--font-pangolin), var(--font-zen-maru), system-ui, sans-serif;
+}
+```
+
+```tsx
+// components/LocaleText.tsx
+'use client'
+import { useContext } from 'react'
+import { LanguageContext } from 'utils/locale'
+
+interface LocaleTextProps {
+  children: React.ReactNode
+  className?: string
+}
+
+export default function LocaleText({ children, className = '' }: LocaleTextProps) {
+  const { currentLang } = useContext(LanguageContext)
+
+  const textClass =
+    currentLang === 'zh' ? 'chinese-text' : currentLang === 'ja' ? 'japanese-text' : ''
+
+  return <span className={`${textClass} ${className}`}>{children}</span>
+}
+```
+
+最后在自动翻译中调用LocaleText组件
+
+```tsx
+// utils/locale.tsx
+```
+
+# wsl-crashes
+
+1, vscode server导致, 删除后自动重装即可
+
+```
+rm -rf ~/.vscode-server
+```
+
+2, 手动删除
+
+```bash
+rm -rf /mnt/c/Users/CamTrik/AppData/Local/Temp/wsl-crashes/*
+```
+
+在wsl中设置定时任务：  
+运行`crontab -e`，在文件末尾添加每分钟执行一次上面命令
+
+```
+*/1 * * * * rm -rf /mnt/c/Users/CamTrik/AppData/Local/Temp/wsl-crashes/*
+```
+
+保证cron已经在运行
+
+```
+sudo service cron start
+```
+
+3, 在.wslconfig中设置 (没起作用)
+
+```bash
+[wsl2]
+kernelCommandLine = sysctl.kernel.core_pattern=/dev/null
+```
+
+# react-slick问题
+
+react-slick导入后无法Build成功
+
+```bash
+'Slider' cannot be used as a JSX component.
+  Its instance type 'Slider' is not a valid JSX element.
+    The types returned by 'render()' are incompatible between these types.
+      Type 'React.ReactNode' is not assignable to type 'import("c:/Users/bello/node_modules/@types/react/ts5.0/index").ReactNode'.
+        Type 'PromiseLikeOfReactNode' is not assignable to type 'ReactNode'.ts(2786)
+```
+
+```bash
+yarn dedupe '@types/react'
+
+```
+
+# TOC类型问题
+
+TOC的类型认证报错：
+
+```
+{toc && <TOC toc={toc as TOCItem[]} />}
+
+# error info
+Conversion of type 'string' to type 'TOCItem[]' may be a mistake because neither type
+sufficiently overlaps with the other. If this was intentional,
+convert the expression to 'unknown' first.
+```
+
+将`contentlayer.config.ts`中toc的类型改为`json`即可。

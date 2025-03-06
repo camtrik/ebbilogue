@@ -1,0 +1,150 @@
+---
+title: Deploy Golang App by fly.io
+date: '2025-01-02'
+tags: ['Web', 'Cloud']
+draft: false
+summary: Pipeline for deploying golang app by fly.io
+images:
+layout: 'PostBannerInfo'
+---
+
+Modify the Dockerfile can make it adapt to any languages
+
+## Full Pipeline
+
+1. Install
+
+```bash
+curl -L https://fly.io/install.sh | sh
+fly auth signup # or fly auth login
+```
+
+follow the instruction to add the flyctl binary to your PATH
+
+```bash
+sudo nano ~/.bashrc
+
+# add the following lines
+export FLYCTL_INSTALL="/home/username/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+```
+
+2. Initialize your fly.io project
+
+```bash
+fly launch
+# select app name, region, etc.
+# fly.toml generated automatically
+```
+
+4. Create Redis instance
+
+```bash
+fly redis create
+# get Redis URL，e.g. redis://default:password@redis.xxx.fly.dev:6379
+```
+
+5. Set environmental variables
+
+```bash
+fly secrets set REDIS_URL='redis://default:password@redis.xxx.fly.dev:6379'
+fly secrets set OTHER_ENV_VAR='value'
+```
+
+6. fly.toml settings
+   A free tier example
+
+```toml
+# fly.toml app configuration file generated for ebbilogue-backend on 2025-02-03T03:25:42+09:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'app-name'
+primary_region = 'nrt'
+
+[build]
+
+[http_service]
+  internal_port = 6061
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '256mb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+```
+
+7. Dockerfile
+
+```dockerfile
+FROM golang:1.22-alpine
+
+WORKDIR /app
+COPY . .
+
+RUN go mod download
+
+RUN CGO_ENABLED=0 GOOS=linux go build -o main ./cmd/main.go
+
+CMD ["/app/main"]
+```
+
+8. Deploy app
+
+```bash
+fly deploy
+```
+
+9. Check status
+
+```bash
+fly status
+fly logs
+```
+
+## Automatic Deployment with Github
+
+1. Create config file in your workdir: `.github/workflows/fly.yml`  
+   This would be created automatically when you run `fly deploy` for the first time
+
+```
+name: Fly Deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy to fly.io
+        run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+```
+
+2. Get your token
+
+```bash
+fly auth token
+```
+
+3. Add Github Secret
+
+- Go to Settings > Secrets and variables > Actions
+- Create FLY_API_TOKEN
+- Paste token
+
+The app will now auto-deploy on push to main branch

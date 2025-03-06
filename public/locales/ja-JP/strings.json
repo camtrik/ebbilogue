@@ -32,6 +32,15 @@
   "img_overlay_hint_mobile": "長押しでドラッグ。ピンチでズーム。",
   "toc": "目次",
   "coming_soon": "もうすぐ",
+  "chat": {
+    "title": "AIアシスタント",
+    "new_session": "新規会話",
+    "close": "閉じる",
+    "provider": "プロバイダー",
+    "anthropic": "Claude",
+    "tencent": "Tencent-Deepseek",
+    "loading": "入力中..."
+  },
   "home": {
     "ai_notice": "バナー画像はAIで生成されています"
   }

@@ -33,6 +33,15 @@
   "img_overlay_hint_mobile": "长按拖动。双指缩放。",
   "toc": "目录",
   "coming_soon": "还没做",
+  "chat": {
+    "title": "AI助手",
+    "new_session": "新会话",
+    "close": "关闭",
+    "provider": "提供者",
+    "anthropic": "Claude",
+    "tencent": "腾讯-Deepseek",
+    "loading": "输入中..."
+  },
   "home": {
     "ai_notice": "封面图片由AI生成"
   }
