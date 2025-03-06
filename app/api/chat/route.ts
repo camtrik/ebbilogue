@@ -4,8 +4,9 @@ import { NextResponse } from 'next/server'
 export async function POST(request: Request) {
   try {
     const { message, provider, session_id } = await request.json()
-    const charUrl = process.env.NEXT_PUBLIC_CHAT_URL
-    const response = await fetch(`${charUrl}/api/chat`, {
+    const charBaseUrl = process.env.CHAT_BASE_URL
+    console.log('charBaseUrl: ', charBaseUrl)
+    const response = await fetch(`${charBaseUrl}/api/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
