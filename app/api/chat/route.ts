@@ -5,7 +5,6 @@ export async function POST(request: Request) {
   try {
     const { message, provider, session_id } = await request.json()
     const chatBaseUrl = process.env.CHAT_BASE_URL
-    console.log('chatBaseUrl: ', chatBaseUrl)
     const response = await fetch(`${chatBaseUrl}/api/chat`, {
       method: 'POST',
       headers: {
@@ -19,7 +18,6 @@ export async function POST(request: Request) {
     })
 
     if (!response.ok) {
-      console.log('response: ', response)
       throw new Error('API 请求失败')
     }
 

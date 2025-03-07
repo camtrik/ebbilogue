@@ -3,26 +3,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'utils/locale'
 import Image from 'next/image'
 import { Trophy, Gamepad, Clock, ExternalLink } from 'lucide-react'
-
-interface SteamGame {
-  AppId: number
-  Name: string
-  PlayTime: number
-  Achieved: number
-  TotalAchievenments: number
-  IconUrl: string
-  ArtUrl: string
-  StoreUrl: string
-}
-
-interface SteamData {
-  GameCount: number
-  Games: SteamGame[]
-}
-
-interface Props {
-  steamId: string
-}
+import { SteamGame, SteamData, Props } from '@/types/steam'
 
 function formatPlayTime(minutes: number): string {
   const hours = Math.floor(minutes / 60)
@@ -35,20 +16,17 @@ export default function SteamOverview({ steamId }: Props) {
   const [favoriteGames, setFavoriteGames] = useState<SteamGame[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const baseApiUrl = process.env.NEXT_PUBLIC_API_URL
-
-  // console.log("Fetching from:", `${baseApiUrl}/api/steam/${steamId}/playerGameDetails`);
 
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const allGamesResponse = await fetch(`${baseApiUrl}/api/steam/${steamId}/playerGameDetails`)
+        const allGamesResponse = await fetch(`/api/steam/${steamId}/playerGameDetails`)
         if (!allGamesResponse.ok) throw new Error('Failed to fetch Steam games')
         const allGamesData: SteamData = await allGamesResponse.json()
         setAllGames(allGamesData.Games)
 
         const favGamesResponse = await fetch(
-          `${baseApiUrl}/api/steam/${steamId}/playerGameDetails?minPlayTime=3000&sortByTime=true`
+          `/api/steam/${steamId}/playerGameDetails?minPlayTime=3000&sortByTime=true`
         )
         if (!favGamesResponse.ok) throw new Error('Failed to fetch favorite games')
         const favGamesData: SteamData = await favGamesResponse.json()
@@ -61,7 +39,7 @@ export default function SteamOverview({ steamId }: Props) {
     }
 
     fetchGames()
-  }, [baseApiUrl, steamId])
+  }, [steamId])
 
   if (isLoading) return <div className="animate-pulse">Loading...</div>
   if (error) return <div>Error: {error}</div>

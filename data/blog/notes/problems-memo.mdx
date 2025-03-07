@@ -1,7 +1,7 @@
 ---
 title: 记录一些开发中遇到的问题
 date: '2024-01-09'
-lastmod: '2025-02-02'
+lastmod: '2025-02-28'
 tags: ['Web', 'notes']
 draft: false
 summary: Problems and Solutions
@@ -116,3 +116,46 @@ convert the expression to 'unknown' first.
 ```
 
 将`contentlayer.config.ts`中toc的类型改为`json`即可。
+
+# VSCode缩进问题
+
+在 VSCode 中，您可以为不同的项目分别设置不同的缩进规则。这可以通过项目级别的设置文件来实现。以下是设置方法：
+
+1. 为每个项目创建一个项目级别的设置文件：
+
+   - 在项目根目录下创建一个 `.vscode` 文件夹
+   - 在该文件夹中创建一个 `settings.json` 文件
+
+2. 在 TypeScript 项目的 `settings.json` 中添加以下配置：
+
+```json
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "[typescript]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[typescriptreact]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  }
+}
+```
+
+3. 在 Go 项目的 `settings.json` 中添加以下配置：
+
+```json
+{
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  "[go]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false
+  }
+}
+```
+
+这样，当您在 TypeScript 项目中创建新文件时，缩进将默认为 2 个空格，而在 Go 项目中创建新文件时，缩进将默认为 4 个空格（实际上 Go 通常使用制表符而非空格，所以我设置了 `"editor.insertSpaces": false`）。
+
+VSCode 会自动识别并应用项目级别的设置，这样您就可以在不同项目中拥有不同的默认缩进了。

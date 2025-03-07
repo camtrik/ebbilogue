@@ -6,54 +6,7 @@ import { Marquee } from '@/components/ui/marquee'
 import { TrophyIcon } from '@/components/gaming/TrophyIcon'
 import LoadingTrophy from './LoadingTrophy'
 import { ExternalLink } from 'lucide-react'
-
-interface Trophy {
-  trophyTitleName: string
-  trophyTitleIconUrl: string
-  trophyTitlePlatform: string
-  definedTrophies: {
-    bronze: number
-    silver: number
-    gold: number
-    platinum: number
-  }
-  earnedTrophies: {
-    bronze: number
-    silver: number
-    gold: number
-    platinum: number
-  }
-  progress: number
-  lastUpdatedDateTime: string
-  playDuration: number
-  playCount: number
-  category: 'ps4_game' | 'ps5_native_game' | 'pspc_game' | 'unknown'
-  lastPlayedDateTime: string | null
-  firstPlayedDateTime: string | null
-}
-
-interface TrophyFilters {
-  minProgress: number
-  platform?: string
-  sortBy?: string
-}
-
-function formatPlayTime(minutes: number): string {
-  if (minutes < 60) return `${minutes}分钟`
-  const hours = Math.floor(minutes / 60)
-  if (hours < 24) return `${hours}小时`
-  const days = Math.floor(hours / 24)
-  return `${days}天${hours % 24}小时`
-}
-
-function formatDateTime(dateStr: string | null): string {
-  if (!dateStr) return '未知'
-  return new Date(dateStr).toLocaleDateString('zh-CN', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
-}
+import { Trophy, TrophyFilters } from '@/types/psn'
 
 export default function PSOverview() {
   const { t } = useTranslation()
@@ -65,7 +18,7 @@ export default function PSOverview() {
     platform: undefined,
     sortBy: 'progress',
   })
-  const baseApiUrl = process.env.NEXT_PUBLIC_API_URL
+
   const psnStoreUrl = 'https://store.playstation.com'
 
   useEffect(() => {
@@ -76,9 +29,7 @@ export default function PSOverview() {
           platform: filters.platform || '',
           sortBy: filters.sortBy || '',
         })
-        const response = await fetch(
-          `${baseApiUrl}/api/psn/me/trophyTitles?${queryParams.toString()}`
-        )
+        const response = await fetch(`/api/psn/me/trophyTitles?${queryParams.toString()}`)
 
         if (!response.ok) throw new Error('Failed to fetch trophies')
         const data = await response.json()
@@ -91,7 +42,7 @@ export default function PSOverview() {
     }
 
     fetchTrophies()
-  }, [filters, baseApiUrl])
+  }, [filters])
 
   if (isLoading) return <LoadingTrophy />
   if (error) return <div>Error: {error}</div>
