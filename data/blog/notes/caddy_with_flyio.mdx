@@ -1,0 +1,111 @@
+---
+title: Use Caddy to reverse proxy with Fly.io
+date: '2025-03-08'
+tags: ['Web', 'Cloud']
+draft: false
+images:
+layout: 'PostBannerInfo'
+---
+
+# Introduction 
+To deploy several services in one fly.io app, using Caddy as reverse proxy.
+
+Project directory: 
+```
+├── chat-avatar (Service 1)
+├── psn-steam-api (Service 2)
+├── Caddyfile
+├── Dockerfile
+└── fly.toml
+```
+
+# Steps 
+
+## Caddyfile 
+```bash
+:7070 {
+    # psn-steam-api
+    handle /psn-steam-api/* {
+        # remove /psn-steam-api from the request
+        uri strip_prefix /psn-steam-api 
+        reverse_proxy localhost:7071
+    }
+
+    # chat-avatar 
+    handle /chat-avatar/* {
+        uri strip_prefix /chat-avatar 
+        reverse_proxy localhost:7072
+    }
+
+    # homepage 
+    handle / {
+        respond "NO CONTENT" 200
+    }
+
+    log {
+        output stdout 
+    }
+}
+```
+
+## Dockerfile 
+```
+FROM golang:1.22-alpine AS builder 
+
+# psn-steam-api
+WORKDIR /app/psn-steam-api 
+COPY ./psn-steam-api . 
+RUN go mod download
+RUN go build -o main ./cmd/main.go
+
+# chat-avatar 
+WORKDIR /app/chat-avatar 
+COPY ./chat-avatar . 
+RUN go mod download
+RUN go build -o main ./cmd/main.go
+
+# caddy 
+FROM caddy:2.7-alpine 
+
+COPY ./Caddyfile /etc/caddy/Caddyfile
+
+COPY --from=builder /app/psn-steam-api/main /usr/local/bin/psn-steam-api
+COPY --from=builder /app/chat-avatar/main /usr/local/bin/chat-avatar
+
+# start script 
+RUN printf '#!/bin/sh\npsn-steam-api &\nchat-avatar &\ncaddy run --config /etc/caddy/Caddyfile\n' > /usr/local/bin/start.sh
+
+RUN chmod +x /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/psn-steam-api
+RUN chmod +x /usr/local/bin/chat-avatar
+
+EXPOSE 7070
+
+CMD ["/usr/local/bin/start.sh"]
+```
+
+## fly.toml 
+```bash
+app = 'app-name'
+primary_region = 'nrt'
+
+[build]
+
+[http_service]
+  internal_port = 7070
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ['app']
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
+```  
+
+## Deploy 
+```bash
+fly deploy
+```

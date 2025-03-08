@@ -1,0 +1,71 @@
+---
+title: LLM's Knowledge Base Platforms / 大模型知识库平台 (Updating...)
+date: '2025-03-09'
+tags: ['Web', 'Cloud', 'AI', 'LLM']
+draft: false
+images:
+layout: 'PostBannerInfo'
+summary: 记录一下可以自定义大模型知识库的平台
+---
+# 腾讯云
+
+主页地址：[大模型知识引擎 LKE](https://cloud.tencent.com/product/lke)
+目前免费额度较多，比较适合个人先尝试着使用，支持deepseek-r1。
+
+**新建步骤**
+
+1. 进入主页，点击产品体验->登录
+2. 应用管理->新建应用
+3. 选择模型之后就可以开始测试了
+
+**设置知识库** 
+
+支持上传md, pdf, docx, txt等文档作为知识库。 
+如果选择设置标签，则prompt有类似标签的时候会调用这个知识库，如果不设置标签则会默认调用。  
+
+**发布**  
+点击发布后，回到应用管理，点击调用，则可以看到调用知识库的步骤
+
+记住appkey，APPID和密钥，利用官方给的SDK就可以开始调用了。
+
+[WebSocket方式官方文档](https://cloud.tencent.com/document/product/1759/105560)  
+提供了多种语言的SDK，比如go的可以在将SDK放到项目中后，直接使用下面的方式调用：
+
+```go 
+func websocketExample() {
+	ctx := context.TODO()
+	option := websocket.WithConnEndpoint(webSocketUrl)
+	c := websocket.NewClient(option)
+	c.On(event.EventReply, onReply)
+	token, err := c.GetToken(ctx, &websocket.GetTokenReq{
+		Type:               websocket.ConnTypeAPI,
+		BotAppKey:          botAppKey,
+		VisitorBizID:       visitorBizID,
+		VisitorLabels:      labels,
+		TencentCloudDomain: tencentCloudDomain,
+		Scheme:             scheme,
+		ReqMethod:          reqMethod,
+		SecretID:           secretID,
+		SecretKey:          secretKey,
+		Region:             region,
+	})
+	if err != nil {
+		log.Fatalf("get token error: %+v", err)
+	}
+
+	if err := c.Connect(ctx, token); err != nil {
+		log.Fatalf("connect error: %+v", err)
+	}
+	sessionID = getSessionID()
+	requestID = getRequestID()
+	c.Send(ctx, &event.SendEvent{
+		SessionID:         sessionID,
+		Content:           question,
+		RequestID:         requestID,
+		StreamingThrottle: streamingThrottle,
+	})
+}
+
+```
+
+准备再尝试一下其他平台，有的话再更新
