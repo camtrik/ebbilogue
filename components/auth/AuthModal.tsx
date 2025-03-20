@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useAuth } from 'contexts/AuthContext'
 
 interface AuthModalProps {
   isOpen: boolean
   onClose: () => void
-  onLoginSuccess?: (userData: any) => void 
 }
 
-const AuthModal = ({ isOpen, onClose, onLoginSuccess }: AuthModalProps) => {
+const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
+	const { login } = useAuth()
   const [isLogin, setIsLogin] = useState(true)
   const [formData, setFormData] = useState({
     username: '',
@@ -47,17 +48,8 @@ const AuthModal = ({ isOpen, onClose, onLoginSuccess }: AuthModalProps) => {
           email: data.email,
           roles: data.roles,
         }
-        localStorage.setItem('user', JSON.stringify(userData))
+				login(userData)
         
-        // refresh page to update the login status
-        // window.location.reload()
-
-				// callback function 
-				if (onLoginSuccess) {
-					onLoginSuccess(userData)
-				} else {
-					window.location.reload()
-				}
       }
 
       onClose()

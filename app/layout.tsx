@@ -16,6 +16,7 @@ import { LanguageProvider } from 'utils/locale'
 import { ImageOverlayProvider } from '@/components/overlay/providers'
 import ImageViewOverlay from '@/components/overlay/ImageOverlay'
 import ChatButton from '@/components/chat/ChatButton'
+import { AuthProvider } from 'contexts/AuthContext'
 
 // default english text
 const pangolin = Pangolin({
@@ -114,9 +115,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         ></script>
       </head>
       <body className="bg-white text-black antialiased dark:bg-gray-950 dark:text-white">
-        <ThemeProviders>
-          <LanguageProvider>
-            <SectionContainer>
+        <AuthProvider>
+          <ThemeProviders>
+            <LanguageProvider>
+              <SectionContainer>
               <div className="flex h-screen flex-col justify-between font-sans">
                 <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
                   <ImageOverlayProvider>
@@ -129,8 +131,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Footer />
               </div>
             </SectionContainer>
-          </LanguageProvider>
-        </ThemeProviders>
+            </LanguageProvider>
+          </ThemeProviders>
+        </AuthProvider>
       </body>
     </html>
   )

@@ -14,7 +14,7 @@ import { useTranslation } from 'utils/locale'
 import DropdownMenu from './DropdownMenu'
 import { MenuItem } from '@/types/menu'
 import AuthModal from './auth/AuthModal'
-import { User } from '@/types/user'
+import { useAuth } from 'contexts/AuthContext'
 
 const Header = () => {
   const { t } = useTranslation()
@@ -25,10 +25,9 @@ const Header = () => {
   const triggerHeight = 100
 
   // user login 
-  const [user, setUser] = useState<User | null>(null)
+  const { user, logout } = useAuth()
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
 
-  
   // mount initial scroll position
   useEffect(() => {
     const initialScrollTop = window.scrollY || document.documentElement.scrollTop
@@ -69,25 +68,6 @@ const Header = () => {
     })
   }
 
-  // User login status 
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user')
-    if (storedUser) {
-      setUser(JSON.parse(storedUser))
-    }
-  }, [])
-
-  const handleLogout = () => { 
-    localStorage.removeItem('token')
-    localStorage.removeItem('user')
-    setUser(null)
-  }
-
-  // callback function 
-  const handleLoginSuccess = (userData: any) => { 
-    setUser(userData)
-  }
-
   return (
     <>
       <motion.header
@@ -124,10 +104,10 @@ const Header = () => {
             {user ? (
               <div className="flex items-center space-x-4">
                 <span className="text-xl font-medium text-gray-900 dark:text-gray-100">
-                  {user.username}
+                  Welcome, {user.username}
                 </span>
                 <button
-                  onClick={handleLogout}
+                  onClick={logout}
                   className="text-xl font-medium text-gray-900 transition duration-300 
                   hover:text-primary-400 dark:text-gray-100 dark:hover:text-primary-300"
                 >
@@ -181,7 +161,8 @@ const Header = () => {
       <AuthModal 
         isOpen={isAuthModalOpen} 
         onClose={() => setIsAuthModalOpen(false)} 
-        onLoginSuccess={handleLoginSuccess} />
+        // onLoginSuccess={handleLoginSuccess} 
+        />
     </>
   )
 }
