@@ -83,6 +83,11 @@ const Header = () => {
     setUser(null)
   }
 
+  // callback function 
+  const handleLoginSuccess = (userData: any) => { 
+    setUser(userData)
+  }
+
   return (
     <>
       <motion.header
@@ -173,7 +178,10 @@ const Header = () => {
         </div>
       </motion.header>
       <MobileNav navShow={navShow} onToggleNav={onToggleNav} />
-      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+        onLoginSuccess={handleLoginSuccess} />
     </>
   )
 }

@@ -4,9 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 interface AuthModalProps {
   isOpen: boolean
   onClose: () => void
+  onLoginSuccess?: (userData: any) => void 
 }
 
-const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
+const AuthModal = ({ isOpen, onClose, onLoginSuccess }: AuthModalProps) => {
   const [isLogin, setIsLogin] = useState(true)
   const [formData, setFormData] = useState({
     username: '',
@@ -40,15 +41,23 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
       if (isLogin) {
         // save token and user info to localstorage
         localStorage.setItem('token', data.accessToken)
-        localStorage.setItem('user', JSON.stringify({
-          id: data.id,
+        const userData = { 
+        	id: data.id,
           username: data.username,
           email: data.email,
           roles: data.roles,
-        }))
+        }
+        localStorage.setItem('user', JSON.stringify(userData))
         
         // refresh page to update the login status
-        window.location.reload()
+        // window.location.reload()
+
+				// callback function 
+				if (onLoginSuccess) {
+					onLoginSuccess(userData)
+				} else {
+					window.location.reload()
+				}
       }
 
       onClose()
