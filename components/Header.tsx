@@ -13,6 +13,8 @@ import LocaleSwitch from './LocaleSwitch'
 import { useTranslation } from 'utils/locale'
 import DropdownMenu from './DropdownMenu'
 import { MenuItem } from '@/types/menu'
+import AuthModal from './auth/AuthModal'
+import { User } from '@/types/user'
 
 const Header = () => {
   const { t } = useTranslation()
@@ -22,6 +24,11 @@ const Header = () => {
   const [isScrolled, setScrolled] = useState(false)
   const triggerHeight = 100
 
+  // user login 
+  const [user, setUser] = useState<User | null>(null)
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
+
+  
   // mount initial scroll position
   useEffect(() => {
     const initialScrollTop = window.scrollY || document.documentElement.scrollTop
@@ -62,6 +69,20 @@ const Header = () => {
     })
   }
 
+  // User login status 
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user')
+    if (storedUser) {
+      setUser(JSON.parse(storedUser))
+    }
+  }, [])
+
+  const handleLogout = () => { 
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    setUser(null)
+  }
+
   return (
     <>
       <motion.header
@@ -93,7 +114,31 @@ const Header = () => {
               )}
             </div>
           </Link>
+          
           <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <span className="text-xl font-medium text-gray-900 dark:text-gray-100">
+                  {user.username}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="text-xl font-medium text-gray-900 transition duration-300 
+                  hover:text-primary-400 dark:text-gray-100 dark:hover:text-primary-300"
+                >
+                  退出
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setIsAuthModalOpen(true)}
+                className="text-xl font-medium text-gray-900 transition duration-300 
+                hover:text-primary-400 dark:text-gray-100 dark:hover:text-primary-300"
+              >
+                登录
+              </button>
+            )}
+            
             <SearchButton />
             {useHeaderNavLinks(t)
               .filter((link) => link.href !== '/')
@@ -128,6 +173,7 @@ const Header = () => {
         </div>
       </motion.header>
       <MobileNav navShow={navShow} onToggleNav={onToggleNav} />
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
     </>
   )
 }
