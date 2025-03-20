@@ -119,18 +119,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ThemeProviders>
             <LanguageProvider>
               <SectionContainer>
-              <div className="flex h-screen flex-col justify-between font-sans">
-                <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
-                  <ImageOverlayProvider>
-                    <Header />
-                    <main className="mb-auto mt-20">{children}</main>
-                    <ImageViewOverlay />
-                    <ChatButton />
-                  </ImageOverlayProvider>
-                </SearchProvider>
-                <Footer />
-              </div>
-            </SectionContainer>
+                <div className="flex h-screen flex-col justify-between font-sans">
+                  <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+                    <ImageOverlayProvider>
+                      <Header />
+                      <main className="mb-auto mt-20">{children}</main>
+                      <ImageViewOverlay />
+                      <ChatButton />
+                    </ImageOverlayProvider>
+                  </SearchProvider>
+                  <Footer />
+                </div>
+              </SectionContainer>
             </LanguageProvider>
           </ThemeProviders>
         </AuthProvider>

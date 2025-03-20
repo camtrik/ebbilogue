@@ -24,8 +24,8 @@ const Header = () => {
   const [isScrolled, setScrolled] = useState(false)
   const triggerHeight = 100
 
-  // user login 
-  const { user, logout } = useAuth()
+  // user login
+  const { user, logout, login } = useAuth()
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
 
   // mount initial scroll position
@@ -99,7 +99,7 @@ const Header = () => {
               )}
             </div>
           </Link>
-          
+
           <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
             {user ? (
               <div className="flex items-center space-x-4">
@@ -111,7 +111,7 @@ const Header = () => {
                   className="text-xl font-medium text-gray-900 transition duration-300 
                   hover:text-primary-400 dark:text-gray-100 dark:hover:text-primary-300"
                 >
-                  退出
+                  {t('auth.logout')}
                 </button>
               </div>
             ) : (
@@ -120,10 +120,10 @@ const Header = () => {
                 className="text-xl font-medium text-gray-900 transition duration-300 
                 hover:text-primary-400 dark:text-gray-100 dark:hover:text-primary-300"
               >
-                登录
+                {t('auth.login')}
               </button>
             )}
-            
+
             <SearchButton />
             {useHeaderNavLinks(t)
               .filter((link) => link.href !== '/')
@@ -158,11 +158,7 @@ const Header = () => {
         </div>
       </motion.header>
       <MobileNav navShow={navShow} onToggleNav={onToggleNav} />
-      <AuthModal 
-        isOpen={isAuthModalOpen} 
-        onClose={() => setIsAuthModalOpen(false)} 
-        // onLoginSuccess={handleLoginSuccess} 
-        />
+      <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} login={login} />
     </>
   )
 }

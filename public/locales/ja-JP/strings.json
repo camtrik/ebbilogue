@@ -41,6 +41,15 @@
     "tencent": "Tencent-Deepseek",
     "loading": "入力中..."
   },
+  "auth": {
+    "register": "新規登録",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "welcome": "ようこそ、",
+    "username": "ユーザー名",
+    "email": "メールアドレス",
+    "password": "パスワード"
+  },
   "home": {
     "ai_notice": "バナー画像はAIで生成されています"
   }
