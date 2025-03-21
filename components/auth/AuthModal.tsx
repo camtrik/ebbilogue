@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth } from 'contexts/AuthContext'
 import { useTranslation } from '@/utils/locale'
@@ -20,6 +20,21 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
   const [error, setError] = useState('')
 
   const USER_BASE_URL = process.env.NEXT_PUBLIC_USER_BASE_URL
+
+  // ESC close modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isOpen && e.key === 'Escape') {
+        onClose()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isOpen, onClose])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -63,24 +78,31 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
     <AnimatePresence>
       {isOpen && (
         <>
+          {/* background blur */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
             onClick={onClose}
+            role="button"
+            tabIndex={0}
           />
-
+          {/* modal */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             className="fixed inset-0 z-50 flex items-center justify-center"
             onClick={onClose}
+            role="button"
+            tabIndex={0}
           >
             <div
               className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-gray-800"
               onClick={(e) => e.stopPropagation()}
+              role="presentation"
+              tabIndex={-1}
             >
               <div className="absolute right-3 top-3">
                 <button

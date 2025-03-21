@@ -1,7 +1,7 @@
 ---
 title: 记录一些开发中遇到的问题
 date: '2024-01-09'
-lastmod: '2025-02-28'
+lastmod: '2025-03-21'
 tags: ['Web', 'notes']
 draft: false
 summary: Problems and Solutions
@@ -102,7 +102,7 @@ yarn dedupe '@types/react'
 
 ```
 
-# TOC类型问题
+# Next.js的TOC类型问题
 
 TOC的类型认证报错：
 
@@ -159,3 +159,50 @@ convert the expression to 'unknown' first.
 这样，当您在 TypeScript 项目中创建新文件时，缩进将默认为 2 个空格，而在 Go 项目中创建新文件时，缩进将默认为 4 个空格（实际上 Go 通常使用制表符而非空格，所以我设置了 `"editor.insertSpaces": false`）。
 
 VSCode 会自动识别并应用项目级别的设置，这样您就可以在不同项目中拥有不同的默认缩进了。
+
+# Eslint jsx-a11y问题
+
+```
+81:13  Error: Visible, non-interactive elements with click handlers must have at least one keyboard listener.  jsx-a11y/click-events-have-key-events
+81:13  Error: Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.  jsx-a11y/no-static-element-interactions
+```
+
+解决方法：
+在有onClick的元素上添加role和tabIndex，并处理onKeyDown事件
+如：
+
+```tsx
+<motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  exit={{ opacity: 0 }}
+  className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+  onClick={onClose}
+  role="button"
+  tabIndex={0}
+  onKeyDown={(e) => {
+    console.log('key down', e.key)
+    if (e.key === 'Escape') {
+      onClose()
+    }
+  }}
+/>
+```
+
+onKeyDown也可以设置为全局事件
+```tsx
+// ESC close modal
+useEffect(() => {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (isOpen && e.key === 'Escape') {
+      onClose()
+    }
+  }
+
+  window.addEventListener('keydown', handleKeyDown)
+
+  return () => {
+    window.removeEventListener('keydown', handleKeyDown)
+  }
+}, [isOpen, onClose])
+```
