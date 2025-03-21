@@ -48,7 +48,8 @@
     "welcome": "ようこそ、",
     "username": "ユーザー名",
     "email": "メールアドレス",
-    "password": "パスワード"
+    "password": "パスワード",
+    "need_access": "管理者の権限が必要です"
   },
   "home": {
     "ai_notice": "バナー画像はAIで生成されています"

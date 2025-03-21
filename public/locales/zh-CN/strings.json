@@ -49,7 +49,8 @@
     "welcome": "欢迎，",
     "username": "用户名",
     "email": "邮箱",
-    "password": "密码"
+    "password": "密码",
+    "need_access": "需要管理员权限"
   },
   "home": {
     "ai_notice": "封面图片由AI生成"

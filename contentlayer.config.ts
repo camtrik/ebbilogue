@@ -114,6 +114,7 @@ export const Blog = defineDocumentType(() => ({
     layout: { type: 'string' },
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
+    needAccess: { type: 'boolean', default: false },
   },
   computedFields: {
     ...computedFields,
