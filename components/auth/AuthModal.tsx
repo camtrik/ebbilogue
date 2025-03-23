@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth } from 'contexts/AuthContext'
 import { useTranslation } from '@/utils/locale'
 import { User } from '@/types/user'
+import Cookies from 'js-cookie'
+
 interface AuthModalProps {
   isOpen: boolean
   onClose: () => void
@@ -59,6 +61,8 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
       if (isLogin) {
         // save token and user info to localstorage
         localStorage.setItem('token', data.accessToken)
+        Cookies.set('token', data.accessToken)
+
         const userData = {
           id: data.id,
           username: data.username,

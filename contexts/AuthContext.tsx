@@ -2,6 +2,7 @@
 
 import { User } from '../types/user'
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import Cookies from 'js-cookie'
 
 interface AuthContextType {
   user: User | null
@@ -12,20 +13,39 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
 
   // check if user is logged in
   useEffect(() => {
+    const cookieUser = Cookies.get('user')
+    if (cookieUser) {
+      try {
+        setUser(JSON.parse(cookieUser))
+      } catch (e) {
+        console.error('Failed to parse user cookie:', e)
+      }
+    }
+
     const storedUser = localStorage.getItem('user')
     if (storedUser) {
-      setUser(JSON.parse(storedUser))
+      try {
+        setUser(JSON.parse(storedUser))
+        if (!cookieUser) {
+          Cookies.set('user', storedUser)
+        }
+      } catch (e) {
+        console.error('Failed to parse user cookie:', e)
+      }
     }
   }, [])
 
   // login func
   const login = (userData: User) => {
-    localStorage.setItem('user', JSON.stringify(userData))
+    const userStr = JSON.stringify(userData)
+    localStorage.setItem('user', userStr)
+    Cookies.set('user', userStr)
     setUser(userData)
   }
 
@@ -33,6 +53,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     localStorage.removeItem('user')
     localStorage.removeItem('token')
+    Cookies.remove('user')
+    Cookies.remove('token')
     setUser(null)
   }
 
