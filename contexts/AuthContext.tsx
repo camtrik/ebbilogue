@@ -6,7 +6,7 @@ import Cookies from 'js-cookie'
 
 interface AuthContextType {
   user: User | null
-  login: (userData: User) => void
+  login: (userData: User, token: string) => void
   logout: () => void
   haveAccess: boolean
 }
@@ -42,7 +42,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   // login func
-  const login = (userData: User) => {
+  const login = (userData: User, token: string) => {
+    localStorage.setItem('token', token)
+    Cookies.set('token', token)
     const userStr = JSON.stringify(userData)
     localStorage.setItem('user', userStr)
     Cookies.set('user', userStr)

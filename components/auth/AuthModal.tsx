@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 interface AuthModalProps {
   isOpen: boolean
   onClose: () => void
-  login: (userData: User) => void
+  login: (userData: User, token: string) => void
 }
 
 const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
@@ -59,9 +59,6 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
       }
 
       if (isLogin) {
-        // save token and user info to localstorage
-        localStorage.setItem('token', data.accessToken)
-        Cookies.set('token', data.accessToken)
 
         const userData = {
           id: data.id,
@@ -69,7 +66,7 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
           email: data.email,
           roles: data.roles,
         }
-        login(userData)
+        login(userData, data.accessToken)
       }
 
       onClose()
