@@ -15,6 +15,7 @@ import siteMetadata from '@/data/siteMetadata'
 import Image from 'next/image'
 import PostDate from '@/components/PostDate'
 import { useAuth } from 'contexts/AuthContext'
+import NeedAccessContent from '@/components/NeedAccessContent'
 
 interface PaginationProps {
   totalPages: number
@@ -133,65 +134,99 @@ export default function ListLayoutWithTags({
             <ul>
               {displayPosts.map((post) => {
                 const { path, date, title, summary, tags } = post
-                const canAccess = post.needAccess === true && !haveAccess
                 
                 return (
                   <li key={path} className="transform duration-300 hover:scale-[1.02]">
                     <section className="card mb-5 overflow-hidden border">
-                      <article className={`relative flex h-[240px] ${canAccess ? 'group' : ''}`}>
-                        {/* Left content */}
-                        <div className="relative z-10 w-2/3 bg-gradient-to-r from-white via-white/70 via-white/90 to-transparent p-8 dark:from-gray-900 dark:via-gray-900/70 dark:via-gray-900/90">
-                          <dl>
-                            <dt className="sr-only">Published on</dt>
-                            <dd className="text-base font-medium text-gray-500 dark:text-gray-400">
-                              {/* <time dateTime={date}>{formatDate(date, currentLang)}</time> */}
-                              <PostDate
-                                date={date}
-                                lastmod={post.lastmod}
-                                currentLang={currentLang}
+                      <NeedAccessContent 
+                        needAccess={post.needAccess}
+                        displayMode="hover"
+                        renderLock={(showLock) => (
+                          <article className="relative flex h-[240px] group">
+                            {/* Left content */}
+                            <div className="relative z-10 w-2/3 bg-gradient-to-r from-white via-white/70 via-white/90 to-transparent p-8 dark:from-gray-900 dark:via-gray-900/70 dark:via-gray-900/90">
+                              <dl>
+                                <dt className="sr-only">Published on</dt>
+                                <dd className="text-base font-medium text-gray-500 dark:text-gray-400">
+                                  <PostDate
+                                    date={date}
+                                    lastmod={post.lastmod}
+                                    currentLang={currentLang}
+                                  />
+                                </dd>
+                              </dl>
+                              <div className="mt-4 space-y-3">
+                                <h2 className="text-2xl font-bold leading-8 tracking-tight">
+                                  <span className="text-gray-900 dark:text-gray-100 cursor-not-allowed">
+                                    {title}
+                                  </span>
+                                </h2>
+                                <div className="flex flex-wrap">
+                                  {tags?.map((tag) => <Tag key={tag} text={tag} />)}
+                                </div>
+                                <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                                  {summary}
+                                </div>
+                              </div>
+                            </div>
+                            {/* Right image */}
+                            <div className="absolute inset-0 w-full">
+                              <Image
+                                src={post.images?.[0] || siteMetadata.banner.defaultImage}
+                                alt={title}
+                                fill
+                                className="object-cover"
                               />
-                            </dd>
-                          </dl>
-                          <div className="mt-4 space-y-3">
-                            <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                              {canAccess ? (
-                                <span className="text-gray-900 dark:text-gray-100 cursor-not-allowed">
-                                  {title}
-                                </span>
-                              ) : (
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 dark:group-hover:bg-black/60 flex items-center justify-center transition-all duration-300">
+                                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center">
+                                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-16 h-16 text-white">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                                  </svg>
+                                  <p className="text-white font-medium mt-3 text-center">{t('auth.need_access')}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </article>
+                        )}
+                      >
+                        <article className="relative flex h-[240px]">
+                          {/* Left content */}
+                          <div className="relative z-10 w-2/3 bg-gradient-to-r from-white via-white/70 via-white/90 to-transparent p-8 dark:from-gray-900 dark:via-gray-900/70 dark:via-gray-900/90">
+                            <dl>
+                              <dt className="sr-only">Published on</dt>
+                              <dd className="text-base font-medium text-gray-500 dark:text-gray-400">
+                                <PostDate
+                                  date={date}
+                                  lastmod={post.lastmod}
+                                  currentLang={currentLang}
+                                />
+                              </dd>
+                            </dl>
+                            <div className="mt-4 space-y-3">
+                              <h2 className="text-2xl font-bold leading-8 tracking-tight">
                                 <Link href={`/${path}`} className="text-gray-900 dark:text-gray-100">
                                   {title}
                                 </Link>
-                              )}
-                            </h2>
-                            <div className="flex flex-wrap">
-                              {tags?.map((tag) => <Tag key={tag} text={tag} />)}
-                            </div>
-                            <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                              {summary}
-                            </div>
-                          </div>
-                        </div>
-                        {/* Right image */}
-                        <div className="absolute inset-0 w-full">
-                          <Image
-                            src={post.images?.[0] || siteMetadata.banner.defaultImage}
-                            alt={title}
-                            fill
-                            className="object-cover"
-                          />
-                          {canAccess && (
-                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 dark:group-hover:bg-black/60 flex items-center justify-center transition-all duration-300">
-                              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-16 h-16 text-white">
-                                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-                                </svg>
-                                <p className="text-white font-medium mt-3 text-center">{t('auth.need_access')}</p>
+                              </h2>
+                              <div className="flex flex-wrap">
+                                {tags?.map((tag) => <Tag key={tag} text={tag} />)}
+                              </div>
+                              <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                                {summary}
                               </div>
                             </div>
-                          )}
-                        </div>
-                      </article>
+                          </div>
+                          {/* Right image */}
+                          <div className="absolute inset-0 w-full">
+                            <Image
+                              src={post.images?.[0] || siteMetadata.banner.defaultImage}
+                              alt={title}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        </article>
+                      </NeedAccessContent>
                     </section>
                   </li>
                 )

@@ -3,6 +3,7 @@
 import { User } from '../types/user'
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import Cookies from 'js-cookie'
+import { useRouter } from 'next/navigation'
 
 interface AuthContextType {
   user: User | null
@@ -16,6 +17,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
+  const router = useRouter()
 
   // check if user is logged in
   useEffect(() => {
@@ -58,6 +60,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     Cookies.remove('user')
     Cookies.remove('token')
     setUser(null)
+    
+    // 登出后重定向到登出缓冲页面
+    router.push('/waiting')
   }
 
   const haveAccess = (user?.roles.includes('ROLE_ADMIN') || user?.roles.includes('ROLE_MODERATOR')) ?? false

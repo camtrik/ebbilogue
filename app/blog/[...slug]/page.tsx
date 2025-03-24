@@ -97,6 +97,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
   const prev = sortedCoreContents[postIndex + 1]
   const next = sortedCoreContents[postIndex - 1]
   const post = allBlogs.find((p) => p.slug === slug) as Blog
+  
   const authorList = post?.authors || ['default']
   const authorDetails = authorList
     .map((author) => {
