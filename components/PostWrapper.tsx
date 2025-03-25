@@ -14,4 +14,4 @@ export default function PostWrapper({ needAccess = false, children }: PostWrappe
       {children}
     </NeedAccessContent>
   )
-} 
+}

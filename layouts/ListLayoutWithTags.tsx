@@ -135,15 +135,15 @@ export default function ListLayoutWithTags({
             <ul>
               {displayPosts.map((post) => {
                 const { path, date, title, summary, tags } = post
-                
+
                 return (
                   <li key={path} className="transform duration-300 hover:scale-[1.02]">
                     <section className="card mb-5 overflow-hidden border">
-                      <NeedAccessContent 
+                      <NeedAccessContent
                         needAccess={post.needAccess}
                         displayMode="hover"
                         renderLock={(showLock) => (
-                          <article className="relative flex h-[240px] group">
+                          <article className="group relative flex h-[240px]">
                             {/* Left content */}
                             <div className="relative z-10 w-2/3 bg-gradient-to-r from-white via-white/70 via-white/90 to-transparent p-8 dark:from-gray-900 dark:via-gray-900/70 dark:via-gray-900/90">
                               <dl>
@@ -158,7 +158,7 @@ export default function ListLayoutWithTags({
                               </dl>
                               <div className="mt-4 space-y-3">
                                 <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                                  <span className="text-gray-900 dark:text-gray-100 cursor-not-allowed">
+                                  <span className="cursor-not-allowed text-gray-900 dark:text-gray-100">
                                     {title}
                                   </span>
                                 </h2>
@@ -178,10 +178,16 @@ export default function ListLayoutWithTags({
                                 fill
                                 className="object-cover"
                               />
-                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 dark:group-hover:bg-black/60 flex items-center justify-center transition-all duration-300">
-                                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center">
-                                  <LockIcon strokeWidth={1.5} stroke="currentColor" className="w-16 h-16 text-white" />
-                                  <p className="text-white font-medium mt-3 text-center">{t('auth.need_access')}</p>
+                              <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/40 dark:group-hover:bg-black/60">
+                                <div className="flex flex-col items-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                  <LockIcon
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="h-16 w-16 text-white"
+                                  />
+                                  <p className="mt-3 text-center font-medium text-white">
+                                    {t('auth.need_access')}
+                                  </p>
                                 </div>
                               </div>
                             </div>
@@ -203,7 +209,10 @@ export default function ListLayoutWithTags({
                             </dl>
                             <div className="mt-4 space-y-3">
                               <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                                <Link href={`/${path}`} className="text-gray-900 dark:text-gray-100">
+                                <Link
+                                  href={`/${path}`}
+                                  className="text-gray-900 dark:text-gray-100"
+                                >
                                   {title}
                                 </Link>
                               </h2>

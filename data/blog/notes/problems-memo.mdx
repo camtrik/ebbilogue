@@ -191,6 +191,7 @@ VSCode 会自动识别并应用项目级别的设置，这样您就可以在不�
 ```
 
 onKeyDown也可以设置为全局事件
+
 ```tsx
 // ESC close modal
 useEffect(() => {
@@ -217,12 +218,12 @@ useEffect(() => {
 ```jsx
 // 父组件定义了一个函数
 const handleLoginSuccess = (userData) => {
-  setUser(userData);  // 更新状态
+  setUser(userData) // 更新状态
 }
 
 // 将这个函数作为prop传递给子组件
-<AuthModal 
-  onLoginSuccess={handleLoginSuccess} 
+;<AuthModal
+  onLoginSuccess={handleLoginSuccess}
   // ...其他props
 />
 
@@ -231,7 +232,7 @@ const handleSubmit = async () => {
   // ...登录逻辑
   if (loginSuccessful) {
     // 登录成功时调用父组件提供的回调函数
-    onLoginSuccess(userData);
+    onLoginSuccess(userData)
   }
 }
 ```
@@ -323,7 +324,7 @@ export function useAuth() {
         </AuthProvider>
 ```
 
-这样在其他地方调用的时候，就可以： 
+这样在其他地方调用的时候，就可以：
 
 ```jsx
 const { user, login, logout } = useAuth()
@@ -334,10 +335,12 @@ logout()
 # JAVA版本问题
 
 更改默认版本：
+
 ```
 sudo update-alternatives --config java
 ```
 
 # 初始化admin用户对不上的问题
+
 在mysql创建初始化admin用户的时候可以正常登录，但是postgres不行。
 原因疑似是初始化文件的用户名后面多了一个空格。

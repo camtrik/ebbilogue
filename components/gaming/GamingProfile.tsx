@@ -45,7 +45,11 @@ export default function GamingProfile({ steamURL, psnURL, images }: GamingProfil
                 className="!text-neutral-200 transition-colors hover:!text-white"
               >
                 <span className="sr-only">Steam</span>
-                <SocialIcon kind="steam" href={steamURL} className="h-8 w-8 text-neutral-200 hover:text-white" />
+                <SocialIcon
+                  kind="steam"
+                  href={steamURL}
+                  className="h-8 w-8 text-neutral-200 hover:text-white"
+                />
               </a>
             )}
             {psnURL && (
@@ -56,7 +60,11 @@ export default function GamingProfile({ steamURL, psnURL, images }: GamingProfil
                 className="!text-neutral-200 transition-colors hover:!text-white"
               >
                 <span className="sr-only">PlayStation Network</span>
-                <SocialIcon kind="psn" href={psnURL} className="h-8 w-8 text-neutral-200 hover:text-white" />
+                <SocialIcon
+                  kind="psn"
+                  href={psnURL}
+                  className="h-8 w-8 text-neutral-200 hover:text-white"
+                />
               </a>
             )}
           </div>

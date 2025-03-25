@@ -114,4 +114,3 @@ export function PSN(svgProps: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
-

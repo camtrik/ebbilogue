@@ -14,7 +14,6 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const router = useRouter()
@@ -60,12 +59,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     Cookies.remove('user')
     Cookies.remove('token')
     setUser(null)
-    
+
     // 登出后重定向到登出缓冲页面
     router.push('/waiting')
   }
 
-  const haveAccess = (user?.roles.includes('ROLE_ADMIN') || user?.roles.includes('ROLE_MODERATOR')) ?? false
+  const haveAccess =
+    (user?.roles.includes('ROLE_ADMIN') || user?.roles.includes('ROLE_MODERATOR')) ?? false
   // context value
   const value = {
     user,

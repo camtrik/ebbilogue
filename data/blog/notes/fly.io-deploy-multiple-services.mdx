@@ -10,10 +10,11 @@ layout: 'PostBannerInfo'
 
 Modify the Dockerfile can make it adapt to any languages
 
-# Start with Single Service 
+# Start with Single Service
+
 ## Full Pipeline
 
-Go app as example 
+Go app as example
 
 1. Install
 
@@ -39,7 +40,6 @@ fly launch
 # select app name, region, etc.
 # fly.toml generated automatically
 ```
-
 
 3. fly.toml settings
    A free tier example
@@ -141,7 +141,8 @@ The app will now auto-deploy on push to main branch
 
 # Add Multiple Services
 
-Directory as blow: 
+Directory as blow:
+
 ```
 .
 ├── service-1
@@ -151,47 +152,49 @@ Directory as blow:
 ├── fly.toml
 ├── Caddyfile
 ```
+
 Here use Caddy as reverse proxy
 
-1. Create Dockerfile for Multiple Services 
+1. Create Dockerfile for Multiple Services
+
 ```bash
-FROM golang:1.22-alpine AS go-builder 
+FROM golang:1.22-alpine AS go-builder
 
 # service-1
-WORKDIR /app/service-1 
-COPY ./service-1 . 
+WORKDIR /app/service-1
+COPY ./service-1 .
 RUN go mod download
 RUN go build -o main ./cmd/main.go
 
-# service-2 
-WORKDIR /app/service-2 
-COPY ./service-2 . 
+# service-2
+WORKDIR /app/service-2
+COPY ./service-2 .
 RUN go mod download
 RUN go build -o main ./cmd/main.go
 
-# service-3 
-FROM maven:3.8-openjdk-17-slim AS java-builder 
-WORKDIR /app/service-3 
-COPY ./service-3 . 
+# service-3
+FROM maven:3.8-openjdk-17-slim AS java-builder
+WORKDIR /app/service-3
+COPY ./service-3 .
 RUN mvn clean package -DskipTests
 
 
-# caddy 
-FROM caddy:2.7-alpine 
+# caddy
+FROM caddy:2.7-alpine
 
 # Install JRE for running the Java application
 RUN apk add --no-cache openjdk17-jre
 
 COPY ./Caddyfile /etc/caddy/Caddyfile
 
-# go builder 
+# go builder
 COPY --from=go-builder /app/service-1/main /usr/local/bin/service-1
 COPY --from=go-builder /app/service-2/main /usr/local/bin/service-2
 
-# java builder 
+# java builder
 COPY --from=java-builder /app/service-3/target/*.jar /usr/local/bin/service-3.jar
 
-# start script 
+# start script
 RUN printf '#!/bin/sh\nservice-1 &\nservice-2 &\njava -jar /usr/local/bin/service-3.jar &\ncaddy run --config /etc/caddy/Caddyfile\n' > /usr/local/bin/start.sh
 
 RUN chmod +x /usr/local/bin/start.sh
@@ -203,7 +206,8 @@ EXPOSE 7070
 CMD ["/usr/local/bin/start.sh"]
 ```
 
-start.sh: 
+start.sh:
+
 ```bash
 service-1 &
 service-2 &
@@ -211,48 +215,50 @@ java -jar /usr/local/bin/service-3.jar &
 caddy run --config /etc/caddy/Caddyfile
 ```
 
-2. Create Caddyfile 
+2. Create Caddyfile
+
 ```caddy
 :7070 {
     # service-1
     handle /service-1/* {
         # remove /service-1 from the request
-        uri strip_prefix /service-1 
+        uri strip_prefix /service-1
         reverse_proxy localhost:7071
     }
 
-    # service-2 
+    # service-2
     handle /service-2/* {
-        uri strip_prefix /service-2 
+        uri strip_prefix /service-2
         reverse_proxy localhost:7072
     }
 
-    # service-3 
+    # service-3
     handle /service-3/* {
-        uri strip_prefix /service-3 
+        uri strip_prefix /service-3
         reverse_proxy localhost:7073
     }
 
-    # homepage 
+    # homepage
     handle / {
         respond "NO CONTENT" 200
     }
 
     log {
-        output stdout 
+        output stdout
     }
 }
 ```
 
 # Other Configurations
-## Redis 
+
+## Redis
 
 1. Create Redis instance
 
 ```bash
 fly redis create
 # get Redis URL，e.g. redis://default:password@redis.xxx.fly.dev:6379
-# xxx is probably your app name 
+# xxx is probably your app name
 ```
 
 2. Set environmental variables
@@ -263,6 +269,7 @@ fly secrets set OTHER_ENV_VAR='value'
 ```
 
 ## PostgreSQL
+
 1. Create PostgreSQL instance
 
 ```bash
@@ -276,12 +283,14 @@ fly postgres attach --app your-app-name dbname-db
 ```
 
 This will return infomation like below:
+
 ```
 DATABASE_URL=postgres://dbname_user:randompassword@dbname-db.flycast:5432/dbname_db?sslmode=disable
 ```
 
-3. Set the environmental variable 
-Use Spring boot as example 
+3. Set the environmental variable
+   Use Spring boot as example
+
 ```
 spring.datasource.url=jdbc:postgresql://dbname-db.flycast:5432/dbname_db?sslmode=disable
 spring.datasource.username=dbname_user
@@ -289,8 +298,8 @@ spring.datasource.password=randompassword
 ```
 
 4. Deploy  
-Docker file is in the previous section (Multiple Services)  
-Modify the start.sh as below 
+   Docker file is in the previous section (Multiple Services)  
+   Modify the start.sh as below
 
 ```bash
 #!/bin/sh
@@ -326,6 +335,7 @@ caddy run --config /etc/caddy/Caddyfile
 ```
 
 Deploy
+
 ```bash
 fly deploy
 ```

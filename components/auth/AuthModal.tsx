@@ -59,7 +59,6 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
       }
 
       if (isLogin) {
-
         const userData = {
           id: data.id,
           username: data.username,
