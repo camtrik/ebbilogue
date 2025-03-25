@@ -1,0 +1,331 @@
+---
+title: Deploy Multiple Services App by fly.io (Java/Golang)
+date: '2025-03-23'
+tags: ['Web', 'Cloud']
+draft: false
+summary: Pipeline for deploying multiple services app by fly.io
+images:
+layout: 'PostBannerInfo'
+---
+
+Modify the Dockerfile can make it adapt to any languages
+
+# Start with Single Service 
+## Full Pipeline
+
+Go app as example 
+
+1. Install
+
+```bash
+curl -L https://fly.io/install.sh | sh
+fly auth signup # or fly auth login
+```
+
+follow the instruction to add the flyctl binary to your PATH
+
+```bash
+sudo nano ~/.bashrc
+
+# add the following lines
+export FLYCTL_INSTALL="/home/username/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+```
+
+2. Initialize your fly.io project
+
+```bash
+fly launch
+# select app name, region, etc.
+# fly.toml generated automatically
+```
+
+
+3. fly.toml settings
+   A free tier example
+
+```toml
+# fly.toml app configuration file generated for ebbilogue-backend on 2025-02-03T03:25:42+09:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'app-name'
+primary_region = 'nrt'
+
+[build]
+
+[http_service]
+  internal_port = 6061
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '256mb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+```
+
+4. Dockerfile
+
+```dockerfile
+FROM golang:1.22-alpine
+
+WORKDIR /app
+COPY . .
+
+RUN go mod download
+
+RUN CGO_ENABLED=0 GOOS=linux go build -o main ./cmd/main.go
+
+CMD ["/app/main"]
+```
+
+8. Deploy app
+
+```bash
+fly deploy
+```
+
+9. Check status
+
+```bash
+fly status
+fly logs
+```
+
+## Automatic Deployment with Github
+
+1. Create config file in your workdir: `.github/workflows/fly.yml`  
+   This would be created automatically when you run `fly deploy` for the first time
+
+```
+name: Fly Deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy to fly.io
+        run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+```
+
+2. Get your token
+
+```bash
+fly auth token
+```
+
+3. Add Github Secret
+
+- Go to Settings > Secrets and variables > Actions
+- Create FLY_API_TOKEN
+- Paste token
+
+The app will now auto-deploy on push to main branch
+
+# Add Multiple Services
+
+Directory as blow: 
+```
+.
+├── service-1
+├── service-2
+├── service-3
+├── Dockerfile
+├── fly.toml
+├── Caddyfile
+```
+Here use Caddy as reverse proxy
+
+1. Create Dockerfile for Multiple Services 
+```bash
+FROM golang:1.22-alpine AS go-builder 
+
+# service-1
+WORKDIR /app/service-1 
+COPY ./service-1 . 
+RUN go mod download
+RUN go build -o main ./cmd/main.go
+
+# service-2 
+WORKDIR /app/service-2 
+COPY ./service-2 . 
+RUN go mod download
+RUN go build -o main ./cmd/main.go
+
+# service-3 
+FROM maven:3.8-openjdk-17-slim AS java-builder 
+WORKDIR /app/service-3 
+COPY ./service-3 . 
+RUN mvn clean package -DskipTests
+
+
+# caddy 
+FROM caddy:2.7-alpine 
+
+# Install JRE for running the Java application
+RUN apk add --no-cache openjdk17-jre
+
+COPY ./Caddyfile /etc/caddy/Caddyfile
+
+# go builder 
+COPY --from=go-builder /app/service-1/main /usr/local/bin/service-1
+COPY --from=go-builder /app/service-2/main /usr/local/bin/service-2
+
+# java builder 
+COPY --from=java-builder /app/service-3/target/*.jar /usr/local/bin/service-3.jar
+
+# start script 
+RUN printf '#!/bin/sh\nservice-1 &\nservice-2 &\njava -jar /usr/local/bin/service-3.jar &\ncaddy run --config /etc/caddy/Caddyfile\n' > /usr/local/bin/start.sh
+
+RUN chmod +x /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/service-1
+RUN chmod +x /usr/local/bin/service-2
+
+EXPOSE 7070
+
+CMD ["/usr/local/bin/start.sh"]
+```
+
+start.sh: 
+```bash
+service-1 &
+service-2 &
+java -jar /usr/local/bin/service-3.jar &
+caddy run --config /etc/caddy/Caddyfile
+```
+
+2. Create Caddyfile 
+```caddy
+:7070 {
+    # service-1
+    handle /service-1/* {
+        # remove /service-1 from the request
+        uri strip_prefix /service-1 
+        reverse_proxy localhost:7071
+    }
+
+    # service-2 
+    handle /service-2/* {
+        uri strip_prefix /service-2 
+        reverse_proxy localhost:7072
+    }
+
+    # service-3 
+    handle /service-3/* {
+        uri strip_prefix /service-3 
+        reverse_proxy localhost:7073
+    }
+
+    # homepage 
+    handle / {
+        respond "NO CONTENT" 200
+    }
+
+    log {
+        output stdout 
+    }
+}
+```
+
+# Other Configurations
+## Redis 
+
+1. Create Redis instance
+
+```bash
+fly redis create
+# get Redis URL，e.g. redis://default:password@redis.xxx.fly.dev:6379
+# xxx is probably your app name 
+```
+
+2. Set environmental variables
+
+```bash
+fly secrets set REDIS_URL='redis://default:password@redis.xxx.fly.dev:6379'
+fly secrets set OTHER_ENV_VAR='value'
+```
+
+## PostgreSQL
+1. Create PostgreSQL instance
+
+```bash
+fly postgres create --name dbname-db --region nrt
+```
+
+2. Attach to your app
+
+```
+fly postgres attach --app your-app-name dbname-db
+```
+
+This will return infomation like below:
+```
+DATABASE_URL=postgres://dbname_user:randompassword@dbname-db.flycast:5432/dbname_db?sslmode=disable
+```
+
+3. Set the environmental variable 
+Use Spring boot as example 
+```
+spring.datasource.url=jdbc:postgresql://dbname-db.flycast:5432/dbname_db?sslmode=disable
+spring.datasource.username=dbname_user
+spring.datasource.password=randompassword
+```
+
+4. Deploy  
+Docker file is in the previous section (Multiple Services)  
+Modify the start.sh as below 
+
+```bash
+#!/bin/sh
+
+set -e
+
+# Wait for database to be available
+echo "Waiting for database to be available..."
+until pg_isready -d "$DATABASE_URL"; do
+  echo "Database is unavailable - sleeping"
+  sleep 2
+done
+echo "Database is up!"
+
+# Execute SQL initialization script
+echo "Executing init.sql script..."
+psql "$DATABASE_URL" -f /app/init.sql
+
+# Start Java service
+echo "Starting service-3..."
+java -jar /usr/local/bin/service-3.jar &
+
+# Start Go service
+echo "Starting service-1..."
+service-1 &
+
+echo "Starting service-2..."
+service-2 &
+
+# Start Caddy as a foreground process
+echo "Starting Caddy web server..."
+caddy run --config /etc/caddy/Caddyfile
+```
+
+Deploy
+```bash
+fly deploy
+```

@@ -330,3 +330,14 @@ const { user, login, logout } = useAuth()
 login(userData)
 logout()
 ```
+
+# JAVA版本问题
+
+更改默认版本：
+```
+sudo update-alternatives --config java
+```
+
+# 初始化admin用户对不上的问题
+在mysql创建初始化admin用户的时候可以正常登录，但是postgres不行。
+原因疑似是初始化文件的用户名后面多了一个空格。
