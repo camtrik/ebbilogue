@@ -1,4 +1,4 @@
-import SocialIcon from '@/components/social-icons'
+import SocialIcon from '@/components/icons'
 import siteMetadata from '@/data/siteMetadata'
 
 export default function IconBox() {

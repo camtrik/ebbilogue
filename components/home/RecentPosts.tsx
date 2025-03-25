@@ -11,6 +11,8 @@ import siteMetadata from '@/data/siteMetadata'
 import PostDate from '@/components/PostDate'
 import { useAuth } from 'contexts/AuthContext'
 import NeedAccessContent from '@/components/NeedAccessContent'
+import { LockIcon } from '../icons/icons'
+
 
 const MAX_DISPLAY = 10
 
@@ -49,9 +51,7 @@ export default function RecentPosts() {
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 dark:group-hover:bg-black/60 flex items-center justify-center transition-all duration-300">
                         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-16 h-16 text-white">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-                          </svg>
+                          <LockIcon strokeWidth={1.5} stroke="currentColor" className="w-16 h-16 text-white" />
                           <p className="text-white font-medium mt-3 text-center">{t('auth.need_access')}</p>
                         </div>
                       </div>

@@ -9,7 +9,9 @@ import {
   Threads,
   Instagram,
   UserProfile,
-} from './icons'
+  Steam,
+  PSN,
+} from './social-icons'
 
 const components = {
   mail: Mail,
@@ -22,6 +24,8 @@ const components = {
   threads: Threads,
   instagram: Instagram,
   userprofile: UserProfile,
+  steam: Steam,
+  psn: PSN,
 }
 
 type SocialIconProps = {

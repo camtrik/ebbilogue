@@ -2,7 +2,7 @@
 import { ReactNode, useContext } from 'react'
 import type { Authors } from 'contentlayer/generated'
 import { allAuthors } from 'contentlayer/generated'
-import SocialIcon from '@/components/social-icons'
+import SocialIcon from '@/components/icons'
 import Image from '@/components/Image'
 import Link from '@/components/Link'
 import { useTranslation, LanguageContext } from 'utils/locale'
