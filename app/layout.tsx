@@ -16,7 +16,7 @@ import { LanguageProvider } from 'utils/locale'
 import { ImageOverlayProvider } from '@/components/overlay/providers'
 import ImageViewOverlay from '@/components/overlay/ImageOverlay'
 import ChatButton from '@/components/chat/ChatButton'
-import { AuthProvider } from 'contexts/AuthContext'
+import { AuthProvider } from '@/components/auth/AuthContext'
 
 // default english text
 const pangolin = Pangolin({

@@ -50,7 +50,15 @@
     "username": "用户名",
     "email": "邮箱",
     "password": "密码",
-    "need_access": "需要管理员权限"
+    "need_access": "需要管理员权限",
+    "avatar_url": "头像URL",
+    "restricted_content": "内容受限",
+    "need_access": "您需要访问权限才能查看此内容",
+    "admin_contact": "请联系管理员获取访问权限",
+    "profile": "用户资料",
+    "profile_title": "个人资料",
+    "have_account": "已有账号？",
+    "need_account": "没有账号？"
   },
   "home": {
     "ai_notice": "封面图片由AI生成"

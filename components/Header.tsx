@@ -14,8 +14,9 @@ import { useTranslation } from 'utils/locale'
 import DropdownMenu from './DropdownMenu'
 import { MenuItem } from '@/types/menu'
 import AuthModal from './auth/AuthModal'
-import { useAuth } from 'contexts/AuthContext'
-
+import { useAuth } from '@/components/auth/AuthContext'
+import UserProfileModal from '@/components/auth/UserProfileModal'
+import { UserIcon } from '@/components/icons/icons'
 const Header = () => {
   const { t } = useTranslation()
   const [navShow, setNavShow] = useState(false)
@@ -27,6 +28,7 @@ const Header = () => {
   // user login
   const { user, logout, login } = useAuth()
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false)
 
   // mount initial scroll position
   useEffect(() => {
@@ -68,6 +70,27 @@ const Header = () => {
     })
   }
 
+  // 生成用户名首字母作为头像
+  const getInitialAvatar = () => {
+    if (!user || !user.username) return null
+
+    return (
+      <button
+        className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md bg-primary-500 text-xl font-bold text-white"
+        onClick={() => setIsProfileModalOpen(true)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            setIsProfileModalOpen(true)
+          }
+        }}
+        tabIndex={0}
+        aria-label={`${user.username}'s profile`}
+      >
+        {user.username.charAt(0).toUpperCase()}
+      </button>
+    )
+  }
+
   return (
     <>
       <motion.header
@@ -102,25 +125,27 @@ const Header = () => {
 
           <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
             {user ? (
-              <div className="flex items-center space-x-4">
-                <span className="text-xl font-medium text-gray-900 dark:text-gray-100">
-                  Welcome, {user.username}
-                </span>
-                <button
-                  onClick={logout}
-                  className="text-xl font-medium text-gray-900 transition duration-300 
-                  hover:text-primary-400 dark:text-gray-100 dark:hover:text-primary-300"
-                >
-                  {t('auth.logout')}
-                </button>
+              <div className="flex items-center">
+                {user.avatarUrl ? (
+                  <Image
+                    src={user.avatarUrl}
+                    alt={user.username}
+                    width={40}
+                    height={40}
+                    className="cursor-pointer rounded-md"
+                    onClick={() => setIsProfileModalOpen(true)}
+                  />
+                ) : (
+                  getInitialAvatar()
+                )}
               </div>
             ) : (
               <button
                 onClick={() => setIsAuthModalOpen(true)}
-                className="text-xl font-medium text-gray-900 transition duration-300 
-                hover:text-primary-400 dark:text-gray-100 dark:hover:text-primary-300"
+                className="flex items-center space-x-2 rounded-md bg-primary-500 px-3 py-1.5 text-white transition-colors hover:bg-primary-600"
               >
-                {t('auth.login')}
+                <UserIcon className="h-5 w-5" fill="currentColor" />
+                <span>{t('auth.login')}</span>
               </button>
             )}
 
@@ -159,6 +184,14 @@ const Header = () => {
       </motion.header>
       <MobileNav navShow={navShow} onToggleNav={onToggleNav} />
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} login={login} />
+      {user && (
+        <UserProfileModal
+          isOpen={isProfileModalOpen}
+          onClose={() => setIsProfileModalOpen(false)}
+          user={user}
+          logout={logout}
+        />
+      )}
     </>
   )
 }

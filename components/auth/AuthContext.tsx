@@ -1,6 +1,6 @@
 'use client'
 
-import { User } from '../types/user'
+import { User } from 'types/user'
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
@@ -60,7 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     Cookies.remove('token')
     setUser(null)
 
-    // 登出后重定向到登出缓冲页面
+    // redirect to waiting page
     router.push('/waiting')
   }
 

@@ -14,7 +14,7 @@ import { useContext } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import Image from 'next/image'
 import PostDate from '@/components/PostDate'
-import { useAuth } from 'contexts/AuthContext'
+import { useAuth } from '@/components/auth/AuthContext'
 import NeedAccessContent from '@/components/NeedAccessContent'
 import { LockIcon } from '@/components/icons/icons'
 

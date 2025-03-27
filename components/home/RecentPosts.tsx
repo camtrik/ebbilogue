@@ -9,7 +9,7 @@ import { useContext } from 'react'
 import Image from 'next/image'
 import siteMetadata from '@/data/siteMetadata'
 import PostDate from '@/components/PostDate'
-import { useAuth } from 'contexts/AuthContext'
+import { useAuth } from '@/components/auth/AuthContext'
 import NeedAccessContent from '@/components/NeedAccessContent'
 import { LockIcon } from '../icons/icons'
 

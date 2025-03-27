@@ -49,7 +49,15 @@
     "username": "ユーザー名",
     "email": "メールアドレス",
     "password": "パスワード",
-    "need_access": "管理者の権限が必要です"
+    "need_access": "管理者の権限が必要です",
+    "avatar_url": "アバターURL",
+    "restricted_content": "コンテンツが制限されています",
+    "need_access": "このコンテンツを表示するにはアクセス権が必要です",
+    "admin_contact": "管理者に連絡してアクセス権を取得してください",
+    "profile": "ユーザー資料",
+    "profile_title": "個人資料",
+    "have_account": "ログインはこちら",
+    "no_account": "新規登録はこちら"
   },
   "home": {
     "ai_notice": "バナー画像はAIで生成されています"
