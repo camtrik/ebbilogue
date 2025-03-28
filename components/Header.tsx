@@ -177,6 +177,18 @@ const Header = () => {
           onClose={() => setIsProfileModalOpen(false)}
           user={user}
           logout={logout}
+          onUpdateProfile={(updatedUser) => {
+            // 更新本地存储的用户信息
+            const currentUser = JSON.parse(localStorage.getItem('user') || '{}')
+            const updatedUserData = {
+              ...currentUser,
+              ...updatedUser,
+            }
+            localStorage.setItem('user', JSON.stringify(updatedUserData))
+
+            // 更新全局状态
+            login(updatedUser, localStorage.getItem('token') || '')
+          }}
         />
       )}
     </>

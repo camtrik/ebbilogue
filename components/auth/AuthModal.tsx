@@ -411,7 +411,7 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
                                   width={64}
                                   height={64}
                                   // style={{visibility: avatarPreviewStatus === 'success' ? 'visible' : 'hidden'}}
-                                  style={{opacity: avatarPreviewStatus === 'success' ? 1 : 0}}
+                                  style={{ opacity: avatarPreviewStatus === 'success' ? 1 : 0 }}
                                   className="h-full w-full object-cover"
                                   onLoad={handleAvatarLoad}
                                   onError={handleAvatarError}
@@ -427,7 +427,9 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
 
                       {/* Avatar status message */}
                       <div className="text-center text-xs text-gray-400">
-                        {avatarPreviewStatus === 'empty' && formData.avatarUrl === '' && 'Enter a URL to preview your avatar'}
+                        {avatarPreviewStatus === 'empty' &&
+                          formData.avatarUrl === '' &&
+                          'Enter a URL to preview your avatar'}
                         {avatarPreviewStatus === 'success' && 'Avatar preview'}
                         {avatarPreviewStatus === 'error' && 'Invalid image URL'}
                         {avatarPreviewStatus === 'loading' && 'Loading preview...'}

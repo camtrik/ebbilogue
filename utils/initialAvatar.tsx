@@ -42,4 +42,4 @@ export const getInitialAvatar = ({
       {username.charAt(0).toUpperCase()}
     </Element>
   )
-} 
+}
