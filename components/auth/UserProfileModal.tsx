@@ -225,7 +225,7 @@ const UserProfileModal = ({
                               )}
                               {avatarPreviewStatus === 'error' && (
                                 <div className="absolute inset-0 flex items-center justify-center rounded-full bg-gray-900/50">
-                                  <div className="text-sm text-red-500">加载失败</div>
+                                  <div className="text-sm text-red-500">Failed to load image</div>
                                 </div>
                               )}
                             </div>
@@ -268,7 +268,7 @@ const UserProfileModal = ({
                           htmlFor="username"
                           className="mb-1 block text-sm font-medium text-gray-300"
                         >
-                          用户名
+                          {t('auth.username')}
                         </label>
                         <input
                           type="text"
@@ -286,7 +286,7 @@ const UserProfileModal = ({
                           htmlFor="email"
                           className="mb-1 block text-sm font-medium text-gray-300"
                         >
-                          邮箱
+                          {t('auth.email')}
                         </label>
                         <input
                           type="email"
@@ -304,7 +304,7 @@ const UserProfileModal = ({
                           htmlFor="avatarUrl"
                           className="mb-1 block text-sm font-medium text-gray-300"
                         >
-                          头像 URL
+                          {t('auth.avatarUrl')}
                         </label>
                         <input
                           type="url"
@@ -313,7 +313,7 @@ const UserProfileModal = ({
                           value={formData.avatarUrl}
                           onChange={handleFormChange}
                           className="w-full rounded-md border border-gray-700 bg-gray-800 px-3 py-1.5 text-base text-white focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                          placeholder="可选"
+                          placeholder="Optional"
                         />
                       </div>
 
@@ -323,14 +323,14 @@ const UserProfileModal = ({
                           disabled={isLoading}
                           className="flex-1 rounded-md bg-indigo-500 px-4 py-2 text-white transition-colors hover:bg-indigo-600 disabled:opacity-50"
                         >
-                          {isLoading ? '保存中...' : '保存'}
+                          {isLoading ? t('saving') : t('save')}
                         </button>
                         <button
                           type="button"
                           onClick={handleCancel}
                           className="flex-1 rounded-md border border-gray-700 bg-gray-800 px-4 py-2 text-white transition-colors hover:bg-gray-700"
                         >
-                          取消
+                          {t('cancel')}
                         </button>
                       </div>
                     </form>
@@ -371,7 +371,7 @@ const UserProfileModal = ({
                           type="button"
                         >
                           <EditIcon className="mr-2 h-5 w-5" fill="currentColor" />
-                          编辑资料
+                          {t('auth.edit_profile')}
                         </button>
 
                         {/* Logout button */}
@@ -381,7 +381,7 @@ const UserProfileModal = ({
                           type="button"
                         >
                           <LogoutIcon className="mr-2 h-5 w-5" fill="currentColor" />
-                          {t('auth.logout') || '退出登录'}
+                          {t('auth.logout')}
                         </button>
                       </div>
                     </>

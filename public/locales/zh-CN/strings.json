@@ -58,8 +58,13 @@
     "profile": "用户资料",
     "profile_title": "个人资料",
     "have_account": "已有账号？",
-    "need_account": "没有账号？"
+    "need_account": "没有账号？",
+    "edit_profile": "编辑资料"
   },
+  "cancel": "取消",
+  "save": "保存",
+  "saving": "保存中...",
+  "saved": "已保存",
   "home": {
     "ai_notice": "封面图片由AI生成"
   }

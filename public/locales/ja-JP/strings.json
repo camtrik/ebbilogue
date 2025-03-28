@@ -57,8 +57,13 @@
     "profile": "ユーザー資料",
     "profile_title": "個人資料",
     "have_account": "ログインはこちら",
-    "no_account": "新規登録はこちら"
+    "no_account": "新規登録はこちら",
+    "edit_profile": "プロフィールを編集"
   },
+  "cancel": "キャンセル",
+  "save": "保存",
+  "saving": "保存中...",
+  "saved": "保存しました",
   "home": {
     "ai_notice": "バナー画像はAIで生成されています"
   }
