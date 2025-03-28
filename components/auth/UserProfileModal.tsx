@@ -4,6 +4,8 @@ import { User } from '@/types/user'
 import Image from 'next/image'
 import { LogoutIcon } from '@/components/icons/icons'
 import { useEffect } from 'react'
+import { getInitialAvatar } from '@/utils/initialAvatar'
+
 interface UserProfileModalProps {
   isOpen: boolean
   onClose: () => void
@@ -29,17 +31,6 @@ const UserProfileModal = ({ isOpen, onClose, user, logout }: UserProfileModalPro
   const handleLogout = () => {
     logout()
     onClose()
-  }
-
-  // Generate initial avatar from username's first letter
-  const getInitialAvatar = () => {
-    if (!user || !user.username) return null
-
-    return (
-      <div className="flex h-28 w-28 items-center justify-center rounded-full bg-indigo-500 text-4xl font-bold text-white">
-        {user.username.charAt(0).toUpperCase()}
-      </div>
-    )
   }
 
   // Map role IDs to friendly display names
@@ -136,7 +127,11 @@ const UserProfileModal = ({ isOpen, onClose, user, logout }: UserProfileModalPro
                           className="rounded-full"
                         />
                       ) : (
-                        getInitialAvatar()
+                        getInitialAvatar({
+                          username: user.username,
+                          size: 110,
+                          shape: 'circle',
+                        })
                       )}
                     </div>
                   </div>

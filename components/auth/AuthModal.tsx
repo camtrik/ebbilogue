@@ -5,6 +5,7 @@ import { useTranslation } from '@/utils/locale'
 import { User } from '@/types/user'
 import { GoogleIcon, GithubIcon, ErrorIcon, LoadingIcon } from '@/components/icons/icons'
 import Image from 'next/image'
+import { getInitialAvatar } from '@/utils/initialAvatar'
 
 interface AuthModalProps {
   isOpen: boolean
@@ -66,17 +67,6 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
         setAvatarPreviewStatus('loading')
       }
     }
-  }
-
-  // Generate initial avatar from username's first letter
-  const getInitialAvatar = () => {
-    if (!formData.username) return null
-
-    return (
-      <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-indigo-500 text-2xl font-bold text-white">
-        {formData.username.charAt(0).toUpperCase()}
-      </div>
-    )
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -378,7 +368,11 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
                             <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-lg bg-gray-800">
                               {avatarPreviewStatus === 'empty' &&
                                 (formData.username ? (
-                                  getInitialAvatar()
+                                  getInitialAvatar({
+                                    username: formData.username,
+                                    size: 64,
+                                    shape: 'square',
+                                  })
                                 ) : (
                                   <div className="text-gray-500">
                                     <svg

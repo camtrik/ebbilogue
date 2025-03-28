@@ -17,6 +17,8 @@ import AuthModal from './auth/AuthModal'
 import { useAuth } from '@/components/auth/AuthContext'
 import UserProfileModal from '@/components/auth/UserProfileModal'
 import { UserIcon } from '@/components/icons/icons'
+import { getInitialAvatar } from '@/utils/initialAvatar'
+
 const Header = () => {
   const { t } = useTranslation()
   const [navShow, setNavShow] = useState(false)
@@ -70,27 +72,6 @@ const Header = () => {
     })
   }
 
-  // 生成用户名首字母作为头像
-  const getInitialAvatar = () => {
-    if (!user || !user.username) return null
-
-    return (
-      <button
-        className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md bg-primary-500 text-xl font-bold text-white"
-        onClick={() => setIsProfileModalOpen(true)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            setIsProfileModalOpen(true)
-          }
-        }}
-        tabIndex={0}
-        aria-label={`${user.username}'s profile`}
-      >
-        {user.username.charAt(0).toUpperCase()}
-      </button>
-    )
-  }
-
   return (
     <>
       <motion.header
@@ -136,13 +117,19 @@ const Header = () => {
                     onClick={() => setIsProfileModalOpen(true)}
                   />
                 ) : (
-                  getInitialAvatar()
+                  getInitialAvatar({
+                    username: user.username,
+                    size: 40,
+                    shape: 'square',
+                    onClick: () => setIsProfileModalOpen(true),
+                    className: 'cursor-pointer',
+                  })
                 )}
               </div>
             ) : (
               <button
                 onClick={() => setIsAuthModalOpen(true)}
-                className="flex items-center space-x-2 rounded-md bg-primary-500 px-3 py-1.5 text-white transition-colors hover:bg-primary-600"
+                className="flex items-center space-x-2 rounded-md bg-secondary-500 px-3 py-1.5 text-white transition-colors hover:bg-secondary-600"
               >
                 <UserIcon className="h-5 w-5" fill="currentColor" />
                 <span>{t('auth.login')}</span>
