@@ -440,32 +440,42 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
 
                       {/* Avatar status message */}
                       <div className="text-center text-xs text-gray-400">
-                        {avatarPreviewStatus === 'empty' &&
+                        {/* {avatarPreviewStatus === 'empty' &&
                           formData.avatarUrl === '' &&
                           'Enter a URL to preview your avatar'}
-                        {avatarPreviewStatus === 'success' && 'Avatar preview'}
+                        {avatarPreviewStatus === 'success' && 'Avatar preview'} */}
                         {avatarPreviewStatus === 'error' && 'Invalid image URL'}
-                        {avatarPreviewStatus === 'loading' && 'Loading preview...'}
+                        {/* {avatarPreviewStatus === 'loading' && 'Loading preview...'} */}
                       </div>
                     </div>
 
                     <div className="mx-auto max-w-md">
                       {/* Social Login Options */}
                       <div className="mb-4 flex gap-2">
-                        <button
-                          type="button"
-                          className="flex w-1/2 items-center justify-center gap-2 rounded-md bg-gray-800 px-4 py-2 text-white transition-colors hover:bg-gray-700"
-                        >
-                          <GoogleIcon className="h-4 w-4" fill="currentColor" />
-                          Google
-                        </button>
-                        <button
-                          type="button"
-                          className="flex w-1/2 items-center justify-center gap-2 rounded-md bg-gray-800 px-4 py-2 text-white transition-colors hover:bg-gray-700"
-                        >
-                          <GithubIcon className="h-5 w-5" fill="currentColor" />
-                          Github
-                        </button>
+                        <div className="group relative w-1/2">
+                          <button
+                            type="button"
+                            className="flex w-full items-center justify-center gap-2 rounded-md bg-gray-800 px-4 py-2 text-white transition-colors hover:bg-gray-700"
+                          >
+                            <GoogleIcon className="h-4 w-4" fill="currentColor" />
+                            Google
+                          </button>
+                          <div className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-sm text-white opacity-0 transition-opacity group-hover:opacity-100">
+                            {t('not_implemented')}
+                          </div>
+                        </div>
+                        <div className="group relative w-1/2">
+                          <button
+                            type="button"
+                            className="flex w-full items-center justify-center gap-2 rounded-md bg-gray-800 px-4 py-2 text-white transition-colors hover:bg-gray-700"
+                          >
+                            <GithubIcon className="h-5 w-5" fill="currentColor" />
+                            Github
+                          </button>
+                          <div className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-sm text-white opacity-0 transition-opacity group-hover:opacity-100">
+                            {t('not_implemented')}
+                          </div>
+                        </div>
                       </div>
 
                       {/* Divider */}

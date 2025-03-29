@@ -70,6 +70,7 @@
   "save": "保存",
   "saving": "保存中...",
   "saved": "保存しました",
+  "not_implemented": "未実装",
   "home": {
     "ai_notice": "バナー画像はAIで生成されています"
   }

@@ -71,6 +71,7 @@
   "save": "保存",
   "saving": "保存中...",
   "saved": "已保存",
+  "not_implemented": "未实装",
   "home": {
     "ai_notice": "封面图片由AI生成"
   }
