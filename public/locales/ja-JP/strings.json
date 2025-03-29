@@ -58,7 +58,13 @@
     "profile_title": "個人資料",
     "have_account": "ログインはこちら",
     "no_account": "新規登録はこちら",
-    "edit_profile": "プロフィールを編集"
+    "edit_profile": "プロフィールを編集",
+    "forgot_password_username": "パスワード/ユーザー名を忘れた",
+    "verification_code": "検証コード",
+    "new_password": "新しいパスワード",
+    "confirm_password": "確認パスワード",
+    "send_verification_code": "検証コードを送信",
+    "reset_password": "パスワードをリセット"
   },
   "cancel": "キャンセル",
   "save": "保存",

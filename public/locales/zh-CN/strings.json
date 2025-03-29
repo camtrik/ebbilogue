@@ -59,7 +59,13 @@
     "profile_title": "个人资料",
     "have_account": "已有账号？",
     "need_account": "没有账号？",
-    "edit_profile": "编辑资料"
+    "edit_profile": "编辑资料",
+    "forgot_password_username": "忘记密码/用户名？",
+    "verification_code": "验证码",
+    "new_password": "新密码",
+    "confirm_password": "确认密码",
+    "send_verification_code": "发送验证码",
+    "reset_password": "重置密码"
   },
   "cancel": "取消",
   "save": "保存",

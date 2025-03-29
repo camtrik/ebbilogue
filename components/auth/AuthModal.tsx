@@ -6,6 +6,7 @@ import { User } from '@/types/user'
 import { GoogleIcon, GithubIcon, ErrorIcon, LoadingIcon } from '@/components/icons/icons'
 import Image from 'next/image'
 import { getInitialAvatar } from '@/utils/initialAvatar'
+import ForgotPasswordModal from './ForgotPasswordModal'
 
 interface AuthModalProps {
   isOpen: boolean
@@ -16,6 +17,7 @@ interface AuthModalProps {
 const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
   const { t } = useTranslation()
   const [isLogin, setIsLogin] = useState(true)
+  const [showForgotPassword, setShowForgotPassword] = useState(false)
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -140,9 +142,9 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
-            onClick={onClose}
-            role="button"
-            tabIndex={0}
+            // onClick={onClose}
+            // role="button"
+            // tabIndex={0}
           />
 
           {/* Modal container */}
@@ -151,14 +153,14 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             className="fixed inset-0 z-50 flex items-center justify-center"
-            onClick={onClose}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                onClose()
-              }
-            }}
-            role="button"
-            tabIndex={0}
+            // onClick={onClose}
+            // onKeyDown={(e) => {
+            //   if (e.key === 'Enter' || e.key === ' ') {
+            //     onClose()
+            //   }
+            // }}
+            // role="button"
+            // tabIndex={0}
           >
             <div
               className="relative w-full max-w-4xl overflow-hidden rounded-lg shadow-xl"
@@ -288,6 +290,17 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
                         >
                           {t('auth.login')}
                         </button>
+
+                        {/* Add forgot password link */}
+                        <div className="mt-2 text-center">
+                          <button
+                            type="button"
+                            onClick={() => setShowForgotPassword(true)}
+                            className="text-sm text-gray-400 hover:text-gray-300"
+                          >
+                            {t('auth.forgot_password_username')}
+                          </button>
+                        </div>
                       </form>
                     </div>
                   </motion.div>
@@ -570,6 +583,12 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
               </div>
             </div>
           </motion.div>
+
+          {/* Add ForgotPasswordModal */}
+          <ForgotPasswordModal
+            isOpen={showForgotPassword}
+            onClose={() => setShowForgotPassword(false)}
+          />
         </>
       )}
     </AnimatePresence>

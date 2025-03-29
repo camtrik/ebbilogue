@@ -84,15 +84,18 @@ const UserProfileModal = ({
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.message || '更新失败')
+        throw new Error(data.message || 'Update failed')
       }
 
       if (onUpdateProfile) {
-        onUpdateProfile(data)
+        onUpdateProfile({
+          ...user,
+          ...formData,
+        })
       }
       setIsEditing(false)
     } catch (err) {
-      setError(err instanceof Error ? err.message : '更新失败')
+      setError(err instanceof Error ? err.message : 'Update failed')
     } finally {
       setIsLoading(false)
     }
@@ -141,27 +144,27 @@ const UserProfileModal = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
-            onClick={onClose}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                onClose()
-              }
-            }}
-            role="button"
-            tabIndex={0}
+            // onClick={onClose}
+            // onKeyDown={(e) => {
+            //   if (e.key === 'Enter' || e.key === ' ') {
+            //     onClose()
+            //   }
+            // }}
+            // role="button"
+            // tabIndex={0}
           />
 
           {/* Modal content - centered position */}
           <div
             className="fixed inset-0 z-50 flex items-center justify-center"
-            onClick={onClose}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                onClose()
-              }
-            }}
-            role="button"
-            tabIndex={0}
+            // onClick={onClose}
+            // onKeyDown={(e) => {
+            //   if (e.key === 'Enter' || e.key === ' ') {
+            //     onClose()
+            //   }
+            // }}
+            // role="button"
+            // tabIndex={0}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: -20 }}
@@ -304,7 +307,7 @@ const UserProfileModal = ({
                           htmlFor="avatarUrl"
                           className="mb-1 block text-sm font-medium text-gray-300"
                         >
-                          {t('auth.avatarUrl')}
+                          {t('auth.avatar_url')}
                         </label>
                         <input
                           type="url"
