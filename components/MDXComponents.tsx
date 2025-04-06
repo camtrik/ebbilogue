@@ -11,6 +11,7 @@ import GamingViewProfile from './gaming/GamingViewProfile'
 import CareerTimeline from './about/Career'
 import EducationTimeline from './about/Education'
 import JumpingCat from './about/JumpingCat'
+import QuoteTranslation from './about/QuoteTranslation'
 
 export const components: MDXComponents = {
   Image,
@@ -25,4 +26,5 @@ export const components: MDXComponents = {
   CareerTimeline,
   EducationTimeline,
   JumpingCat,
+  QuoteTranslation,
 }
