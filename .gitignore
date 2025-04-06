@@ -50,7 +50,7 @@ yarn-error.log*
 *Zone.Identifier
 
 test_blog*.mdx
-bannersUrl.json
+bannerUrls.json
 
 # OLD files
 *_OLD.*

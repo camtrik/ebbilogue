@@ -8,6 +8,8 @@ import TypedBios from './TypedBio'
 import { LanguageContext } from 'utils/locale'
 import { useRef, useEffect, useContext } from 'react'
 import GamingViewProfile from '@/components/gaming/GamingViewProfile'
+import CareerTimeline from '@/components/about/Career'
+import EducationTimeline from '@/components/about/Education'
 // import { genPageMetadata } from 'app/seo'
 
 // export const metadata = genPageMetadata({ title: 'About' })
@@ -30,11 +32,9 @@ export default function Page() {
   return (
     <>
       <AuthorLayout content={mainContentRef.current}>
-        <TypedBios />
+        {/* <TypedBios /> */}
+
         <MDXLayoutRenderer code={authorRef.current?.body.code} components={components} />
-        <div className="not-prose">
-          <GamingViewProfile />
-        </div>
       </AuthorLayout>
     </>
   )
