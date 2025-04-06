@@ -7,6 +7,7 @@ import { GoogleIcon, GithubIcon, ErrorIcon, LoadingIcon } from '@/components/ico
 import Image from 'next/image'
 import { getInitialAvatar } from '@/utils/initialAvatar'
 import ForgotPasswordModal from './ForgotPasswordModal'
+import Tooltip from '@/utils/Tooltip'
 
 interface AuthModalProps {
   isOpen: boolean
@@ -221,20 +222,38 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
                     <div className="mx-auto max-w-md">
                       {/* Social Login Options */}
                       <div className="mb-6 flex gap-2">
-                        <button
-                          type="button"
-                          className="flex w-1/2 items-center justify-center gap-2 rounded-md bg-gray-800 px-4 py-2.5 text-white transition-colors hover:bg-gray-700"
-                        >
-                          <GoogleIcon className="h-4 w-4" fill="currentColor" />
-                          Google
-                        </button>
-                        <button
-                          type="button"
-                          className="flex w-1/2 items-center justify-center gap-2 rounded-md bg-gray-800 px-4 py-2.5 text-white transition-colors hover:bg-gray-700"
-                        >
-                          <GithubIcon className="h-5 w-5" fill="currentColor" />
-                          Github
-                        </button>
+                        <div className="group relative w-1/2">
+                          <Tooltip
+                            title={t('not_implemented')}
+                            placement="bottom"
+                            distance={5}
+                            minWidth="150px"
+                          >
+                            <button
+                              type="button"
+                              className="flex w-full items-center justify-center gap-2 rounded-md bg-gray-800 px-4 py-2 text-white transition-colors hover:bg-gray-700"
+                            >
+                              <GoogleIcon className="h-4 w-4" fill="currentColor" />
+                              Google
+                            </button>
+                          </Tooltip>
+                        </div>
+                        <div className="group relative w-1/2">
+                          <Tooltip
+                            title={t('not_implemented')}
+                            placement="bottom"
+                            distance={15}
+                            minWidth="150px"
+                          >
+                            <button
+                              type="button"
+                              className="flex w-full items-center justify-center gap-2 rounded-md bg-gray-800 px-4 py-2 text-white transition-colors hover:bg-gray-700"
+                            >
+                              <GithubIcon className="h-5 w-5" fill="currentColor" />
+                              Github
+                            </button>
+                          </Tooltip>
+                        </div>
                       </div>
 
                       {/* Divider */}
@@ -453,28 +472,36 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
                       {/* Social Login Options */}
                       <div className="mb-4 flex gap-2">
                         <div className="group relative w-1/2">
-                          <button
-                            type="button"
-                            className="flex w-full items-center justify-center gap-2 rounded-md bg-gray-800 px-4 py-2 text-white transition-colors hover:bg-gray-700"
+                          <Tooltip
+                            title={t('not_implemented')}
+                            placement="bottom"
+                            distance={5}
+                            minWidth="150px"
                           >
-                            <GoogleIcon className="h-4 w-4" fill="currentColor" />
-                            Google
-                          </button>
-                          <div className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-sm text-white opacity-0 transition-opacity group-hover:opacity-100">
-                            {t('not_implemented')}
-                          </div>
+                            <button
+                              type="button"
+                              className="flex w-full items-center justify-center gap-2 rounded-md bg-gray-800 px-4 py-2 text-white transition-colors hover:bg-gray-700"
+                            >
+                              <GoogleIcon className="h-4 w-4" fill="currentColor" />
+                              Google
+                            </button>
+                          </Tooltip>
                         </div>
                         <div className="group relative w-1/2">
-                          <button
-                            type="button"
-                            className="flex w-full items-center justify-center gap-2 rounded-md bg-gray-800 px-4 py-2 text-white transition-colors hover:bg-gray-700"
+                          <Tooltip
+                            title={t('not_implemented')}
+                            placement="bottom"
+                            distance={5}
+                            minWidth="150px"
                           >
-                            <GithubIcon className="h-5 w-5" fill="currentColor" />
-                            Github
-                          </button>
-                          <div className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-sm text-white opacity-0 transition-opacity group-hover:opacity-100">
-                            {t('not_implemented')}
-                          </div>
+                            <button
+                              type="button"
+                              className="flex w-full items-center justify-center gap-2 rounded-md bg-gray-800 px-4 py-2 text-white transition-colors hover:bg-gray-700"
+                            >
+                              <GithubIcon className="h-4 w-4" fill="currentColor" />
+                              Github
+                            </button>
+                          </Tooltip>
                         </div>
                       </div>
 
