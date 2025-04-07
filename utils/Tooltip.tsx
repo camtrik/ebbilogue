@@ -1,5 +1,5 @@
 'use client'
-import { useState, ReactNode, cloneElement, isValidElement } from 'react'
+import { useState, ReactNode, useRef, useEffect } from 'react'
 
 interface TooltipProps {
   children: ReactNode
@@ -19,116 +19,132 @@ export default function Tooltip({
   className = '',
 }: TooltipProps) {
   const [isHovered, setIsHovered] = useState(false)
+  const tooltipRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  const getPositionStyles = () => {
-    switch (placement) {
-      case 'top':
-        return {
-          position: 'top-0 left-1/2 -translate-x-1/2 -translate-y-full',
-          spacing: { marginTop: -distance },
-          transform: isHovered
-            ? 'translate(-50%, -100%)'
-            : `translate(-50%, calc(-100% + ${distance}px))`,
-          arrow:
-            'bottom-0 left-1/2 translate-y-full -translate-x-1/2 border-l-8 border-r-8 border-t-8 border-transparent border-t-gray-200 dark:border-t-gray-700',
-        }
-      case 'bottom':
-        return {
-          position: 'bottom-0 left-1/2 -translate-x-1/2 translate-y-full',
-          spacing: { marginBottom: -distance },
-          transform: isHovered
-            ? 'translate(-50%, 100%)'
-            : `translate(-50%, calc(100% - ${distance}px))`,
-          arrow:
-            'top-0 left-1/2 -translate-y-full -translate-x-1/2 border-l-8 border-r-8 border-b-8 border-transparent border-b-gray-200 dark:border-b-gray-700',
-        }
-      case 'left':
-        return {
-          position: 'left-0 top-1/2 -translate-x-full -translate-y-1/2',
-          spacing: { marginLeft: -distance },
-          transform: isHovered
-            ? 'translate(-100%, -50%)'
-            : `translate(calc(-100% + ${distance}px), -50%)`,
-          arrow:
-            'right-0 top-1/2 translate-x-full -translate-y-1/2 border-t-8 border-b-8 border-l-8 border-transparent border-l-gray-200 dark:border-l-gray-700',
-        }
-      case 'right':
-        return {
-          position: 'right-0 top-1/2 translate-x-full -translate-y-1/2',
-          spacing: { marginRight: -distance },
-          transform: isHovered
-            ? 'translate(100%, -50%)'
-            : `translate(calc(100% - ${distance}px), -50%)`,
-          arrow:
-            'left-0 top-1/2 -translate-x-full -translate-y-1/2 border-t-8 border-b-8 border-r-8 border-transparent border-r-gray-200 dark:border-r-gray-700',
-        }
-      default:
-        return {
-          position: 'top-0 left-1/2 -translate-x-1/2 -translate-y-full',
-          spacing: { marginTop: -distance },
-          transform: isHovered
-            ? 'translate(-50%, -100%)'
-            : `translate(-50%, calc(-100% + ${distance}px))`,
-          arrow:
-            'bottom-0 left-1/2 translate-y-full -translate-x-1/2 border-l-8 border-r-8 border-t-8 border-transparent border-t-gray-200 dark:border-t-gray-700',
-        }
-    }
-  }
-
-  const { position, transform, arrow, spacing } = getPositionStyles()
-
-  // 处理鼠标事件
   const handleMouseEnter = () => setIsHovered(true)
   const handleMouseLeave = () => setIsHovered(false)
 
-  // 渲染子元素
-  const renderChildren = () => {
-    // 如果是字符串，使用 blockquote
-    if (typeof children === 'string') {
-      return (
-        <blockquote
-          className="cursor-help italic"
-          style={{
-            margin: '0',
-            padding: '0 0 0 1rem',
-          }}
-        >
-          {children}
-        </blockquote>
-      )
+  // 计算tooltip的位置样式
+  const getTooltipStyle = () => {
+    const style: React.CSSProperties = {
+      position: 'absolute',
+      minWidth,
+      opacity: isHovered ? 1 : 0,
+      pointerEvents: 'none',
+      zIndex: 10,
     }
 
-    // 如果是有效的 React 元素，复制它并添加事件处理程序
-    if (isValidElement(children)) {
-      // 不再尝试包装元素，直接返回
-      return children
+    switch (placement) {
+      case 'top':
+        style.bottom = '100%'
+        style.left = '50%'
+        style.transform = 'translateX(-50%)'
+        style.marginBottom = distance
+        break
+      case 'bottom':
+        style.top = '100%'
+        style.left = '50%'
+        style.transform = 'translateX(-50%)'
+        style.marginTop = distance
+        break
+      case 'left':
+        style.right = '100%'
+        style.top = '50%'
+        style.transform = 'translateY(-50%)'
+        style.marginRight = distance
+        break
+      case 'right':
+      default:
+        style.left = '100%'
+        style.top = '50%'
+        style.transform = 'translateY(-50%)'
+        style.marginLeft = distance
+        break
     }
 
-    // 其他情况
-    return children
+    return style
+  }
+
+  // 计算箭头的位置样式
+  const getArrowStyle = () => {
+    const style: React.CSSProperties = {
+      position: 'absolute',
+      width: 0,
+      height: 0,
+    }
+
+    switch (placement) {
+      case 'top':
+        style.bottom = -8
+        style.left = '50%'
+        style.transform = 'translateX(-50%)'
+        style.borderLeft = '8px solid transparent'
+        style.borderRight = '8px solid transparent'
+        style.borderTop = '8px solid'
+        style.borderTopColor = 'var(--tooltip-bg-color)'
+        break
+      case 'bottom':
+        style.top = -8
+        style.left = '50%'
+        style.transform = 'translateX(-50%)'
+        style.borderLeft = '8px solid transparent'
+        style.borderRight = '8px solid transparent'
+        style.borderBottom = '8px solid'
+        style.borderBottomColor = 'var(--tooltip-bg-color)'
+        break
+      case 'left':
+        style.right = -8
+        style.top = '50%'
+        style.transform = 'translateY(-50%)'
+        style.borderTop = '8px solid transparent'
+        style.borderBottom = '8px solid transparent'
+        style.borderLeft = '8px solid'
+        style.borderLeftColor = 'var(--tooltip-bg-color)'
+        break
+      case 'right':
+      default:
+        style.left = -8
+        style.top = '50%'
+        style.transform = 'translateY(-50%)'
+        style.borderTop = '8px solid transparent'
+        style.borderBottom = '8px solid transparent'
+        style.borderRight = '8px solid'
+        style.borderRightColor = 'var(--tooltip-bg-color)'
+        break
+    }
+
+    return style
   }
 
   return (
-    <div className={`${className}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      {renderChildren()}
+    <div
+      ref={containerRef}
+      className={`relative inline-block ${className}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {children}
 
       <div
-        className={`
-          absolute ${position} max-w-md rounded-lg border border-gray-200 
-          bg-white p-4 shadow-lg dark:border-gray-700 dark:bg-gray-800
-          ${isHovered ? 'opacity-100' : 'opacity-0'} 
-          z-10 transition-all duration-300 ease-in-out
-        `}
+        ref={tooltipRef}
+        className="absolute rounded-lg border border-gray-200 bg-white p-4 shadow-lg transition-opacity duration-300 ease-in-out dark:border-gray-700 dark:bg-gray-800"
         style={{
-          minWidth: minWidth,
-          transform: transform,
-          ...spacing,
+          ...getTooltipStyle(),
+          position: 'absolute',
+          visibility: isHovered ? 'visible' : 'hidden',
         }}
       >
-        <div className={`absolute ${arrow} h-0 w-0`}></div>
-        <p className="text-sm">
-          <span className="font-semibold text-gray-500 dark:text-gray-400"></span> {title}
-        </p>
+        <style jsx>{`
+          :root {
+            --tooltip-bg-color: white;
+          }
+          .dark :root {
+            --tooltip-bg-color: #1f2937;
+          }
+        `}</style>
+        <div style={getArrowStyle()}></div>
+        <p className="text-sm">{title}</p>
       </div>
     </div>
   )
