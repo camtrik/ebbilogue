@@ -477,6 +477,7 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
                             placement="bottom"
                             distance={5}
                             minWidth="150px"
+                            className="w-full"
                           >
                             <button
                               type="button"
@@ -493,6 +494,7 @@ const AuthModal = ({ isOpen, onClose, login }: AuthModalProps) => {
                             placement="bottom"
                             distance={5}
                             minWidth="150px"
+                            className="w-full"
                           >
                             <button
                               type="button"
