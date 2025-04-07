@@ -2,14 +2,15 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import ActivityCalendar, { ThemeInput, Activity } from 'react-activity-calendar'
 import Spinner from '@/components/Spinner'
+import { Tooltip as MuiTooltip } from '@mui/material'
 
-const minimalTheme: ThemeInput = {
-  light: ['#eee6ff', '#884dff'],
-  dark: ['#313244', '#cba6f7'],
+const explicitTheme: ThemeInput = {
+  light: ['#383838', '#90c1fa'],
+  dark: ['#383838', '#90c1fa'],
 }
 
-const DAYS = 98
-const USERNAME = 'amoschenzixuan'
+const DAYS = 180
+const USERNAME = 'camtrik'
 
 function selectLastNDays(contributions: Array<Activity>): Array<Activity> {
   return contributions.slice(-DAYS)
@@ -41,14 +42,34 @@ export default function GithubCalendar({ className = '' }) {
 
   return (
     <section className={`${className} p-5`}>
-      <ActivityCalendar
-        data={selectLastNDays(data.contributions)}
-        hideColorLegend={true}
-        hideMonthLabels={false}
-        hideTotalCount={true}
-        blockRadius={5}
-        theme={minimalTheme}
-      />
+      <div className="mb-3 flex items-center">
+        <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
+          Github Contributions
+        </h3>
+        <span className="border-gray ml-auto rounded-md border bg-blue-400 bg-opacity-20 px-2 py-1 text-sm text-gray-800 backdrop-blur-sm dark:text-white">
+          {data.contributions.length > 0 ? `Last ${DAYS} days` : 'No data'}
+        </span>
+      </div>
+      <div className="bg-transparent">
+        <ActivityCalendar
+          data={selectLastNDays(data.contributions)}
+          hideMonthLabels={false}
+          blockRadius={2}
+          blockSize={10}
+          theme={explicitTheme}
+          labels={{
+            totalCount: '{{count}} contributions',
+          }}
+          renderBlock={(block, activity) => (
+            <MuiTooltip title={`${activity.count} activities on ${activity.date}`}>
+              {block}
+            </MuiTooltip>
+          )}
+          renderColorLegend={(block, level) => (
+            <MuiTooltip title={`Level: ${level}`}>{block}</MuiTooltip>
+          )}
+        />
+      </div>
     </section>
   )
 }

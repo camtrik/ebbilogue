@@ -4429,6 +4429,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^1.8.4":
+  version: 1.8.4
+  resolution: "axios@npm:1.8.4"
+  dependencies:
+    follow-redirects: ^1.15.6
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: e901dc1730bdcd769839b3d93ae6d6457a53d79b19a0eb623ebfea333441259ab51e63ca118baa47a5156567401466ac739f31087b4ee5e6770ab2e227484538
+  languageName: node
+  linkType: hard
+
 "axobject-query@npm:^4.1.0":
   version: 4.1.0
   resolution: "axobject-query@npm:4.1.0"
@@ -4990,7 +5001,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"combined-stream@npm:^1.0.6":
+"combined-stream@npm:^1.0.6, combined-stream@npm:^1.0.8":
   version: 1.0.8
   resolution: "combined-stream@npm:1.0.8"
   dependencies:
@@ -6693,6 +6704,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"follow-redirects@npm:^1.15.6":
+  version: 1.15.9
+  resolution: "follow-redirects@npm:1.15.9"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: 859e2bacc7a54506f2bf9aacb10d165df78c8c1b0ceb8023f966621b233717dab56e8d08baadc3ad3b9db58af290413d585c999694b7c146aaf2616340c3d2a6
+  languageName: node
+  linkType: hard
+
 "for-each@npm:^0.3.3":
   version: 0.3.4
   resolution: "for-each@npm:0.3.4"
@@ -6721,6 +6742,18 @@ __metadata:
     mime-types: ^2.1.12
     safe-buffer: ^5.2.1
   checksum: 89ed3d96238d6fa874d75435e20f1aad28a1c22a88ab4e726ac4f6b0d29bef33d7e5aca51248c1070eccbbf4df94020a53842e800b2f1fb63073881a268113b4
+  languageName: node
+  linkType: hard
+
+"form-data@npm:^4.0.0":
+  version: 4.0.2
+  resolution: "form-data@npm:4.0.2"
+  dependencies:
+    asynckit: ^0.4.0
+    combined-stream: ^1.0.8
+    es-set-tostringtag: ^2.1.0
+    mime-types: ^2.1.12
+  checksum: e887298b22c13c7c9c5a8ba3716f295a479a13ca78bfd855ef11cbce1bcf22bc0ae2062e94808e21d46e5c667664a1a1a8a7f57d7040193c1fefbfb11af58aab
   languageName: node
   linkType: hard
 
@@ -10916,6 +10949,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"proxy-from-env@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "proxy-from-env@npm:1.1.0"
+  checksum: ed7fcc2ba0a33404958e34d95d18638249a68c430e30fcb6c478497d72739ba64ce9810a24f53a7d921d0c065e5b78e3822759800698167256b04659366ca4d4
+  languageName: node
+  linkType: hard
+
 "psn-api@npm:^2.11.0":
   version: 2.11.0
   resolution: "psn-api@npm:2.11.0"
@@ -11003,6 +11043,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-activity-calendar@npm:^2.7.8":
+  version: 2.7.10
+  resolution: "react-activity-calendar@npm:2.7.10"
+  dependencies:
+    date-fns: ^4.1.0
+  peerDependencies:
+    react: ^18.0.0 || ^19.0.0
+  checksum: 48cfe4c01969527382908d9e883f5cb98ecd2cbc0995cc3824cb66a3d2a113ac41ee3551dacdda907b32b89ee8da8b0172878ff3a413dae20f726cb3a4d3b126
+  languageName: node
+  linkType: hard
+
 "react-dom@npm:18":
   version: 18.3.1
   resolution: "react-dom@npm:18.3.1"
@@ -11012,6 +11063,29 @@ __metadata:
   peerDependencies:
     react: ^18.3.1
   checksum: 298954ecd8f78288dcaece05e88b570014d8f6dce5db6f66e6ee91448debeb59dcd31561dddb354eee47e6c1bb234669459060deb238ed0213497146e555a0b9
+  languageName: node
+  linkType: hard
+
+"react-error-boundary@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "react-error-boundary@npm:5.0.0"
+  dependencies:
+    "@babel/runtime": ^7.12.5
+  peerDependencies:
+    react: ">=16.13.1"
+  checksum: 4fa78890bb254fe1f0ee1eed893ac161a27482c4567f7667ef83a8339432eb99e323ee69757f01f4864e0037b01a9b6822735ea122f02e749d0bf7a781d9ea53
+  languageName: node
+  linkType: hard
+
+"react-github-calendar@npm:^4.5.6":
+  version: 4.5.6
+  resolution: "react-github-calendar@npm:4.5.6"
+  dependencies:
+    react-activity-calendar: ^2.7.8
+    react-error-boundary: ^5.0.0
+  peerDependencies:
+    react: ^18.0.0 || ^19.0.0
+  checksum: 3d6202f2e5059434ca30cfb52bbf350d3e94e9547bb52e8164992739f5d4cc73cf33bb0a60b6a647e9b4a10870ccf46ed9349aef5db949d2816f87a3f82c5cfc
   languageName: node
   linkType: hard
 
@@ -12896,6 +12970,7 @@ search-insights@latest:
     acorn: ^8.14.0
     algoliasearch: latest
     autoprefixer: ^10.4.13
+    axios: ^1.8.4
     class-variance-authority: ^0.7.1
     cloudinary: ^2.5.1
     clsx: ^2.1.1
@@ -12932,6 +13007,7 @@ search-insights@latest:
     react: 18
     react-activity-calendar: ^2.2.8
     react-dom: 18
+    react-github-calendar: ^4.5.6
     react-icons: ^5.2.0
     react-responsive: ^10.0.0
     react-responsive-masonry: ^2.2.0

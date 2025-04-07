@@ -48,6 +48,16 @@
   );
 }
 
+.bg-purple-pink {
+  background: rgba(238, 174, 202, 1);
+  background: linear-gradient(
+    280deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(199, 180, 215, 1) 40%,
+    rgba(148, 187, 233, 1) 100%
+  );
+}
+
 .bg-blue-gray {
   background: rgb(138, 137, 143);
   background: linear-gradient(
@@ -55,6 +65,16 @@
     rgba(96, 165, 250, 1) 0%,
     rgb(122, 122, 219) 20%,
     rgba(138, 137, 143, 1) 100%
+  );
+}
+
+.bg-purple-gray {
+  background: rgb(138, 137, 143);
+  background: linear-gradient(
+    258deg,
+    rgb(122, 122, 219) 0%,
+    rgba(131, 131, 184, 1) 50%,
+    rgb(114, 114, 114) 100%
   );
 }
 
