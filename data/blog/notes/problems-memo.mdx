@@ -8,6 +8,27 @@ summary: Problems and Solutions
 layout: 'PostBannerInfo'
 needAccess: true
 ---
+# vscode go debug settings
+
+in .vscode/launch.json
+```
+{
+    "version": "0.2.0", 
+    "configurations": [
+        {
+            "name": "Launch Package",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd/main.go",
+            "cwd": "${workspaceFolder}",  // 添加工作目录
+
+        }
+    ]
+}
+```
+
+
 
 # 使中文和日文分别应用自己的字体
 
@@ -344,3 +365,36 @@ sudo update-alternatives --config java
 
 在mysql创建初始化admin用户的时候可以正常登录，但是postgres不行。
 原因疑似是初始化文件的用户名后面多了一个空格。
+
+
+# postgres常用命令
+
+进入postgres: 
+```
+psql -U postgres
+
+# 有时这个不行，则用：
+sudo -u postgres psql
+```
+
+列出数据库：
+```
+\l
+```
+
+列出表：
+```
+\dt
+```
+
+创建数据库：
+```
+CREATE DATABASE db_name;
+```
+
+删除数据库：
+```
+DROP DATABASE db_name;
+```
+
+
