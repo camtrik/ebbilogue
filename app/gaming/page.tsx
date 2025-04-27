@@ -4,6 +4,7 @@ import { genPageMetadata } from 'app/seo'
 import GamingProfile from '@/components/gaming/GamingProfile'
 import GamingViewProfile from '@/components/gaming/GamingViewProfile'
 import SteamOverview from '@/components/gaming/SteamOverview'
+import RecentlyPlayedGames from '@/components/gaming/RecentlyPlayedGames'
 
 export const metadata: Metadata = genPageMetadata({ title: 'PSN Trophies' })
 
@@ -25,6 +26,7 @@ export default function TrophiesPage() {
           '/static/images/games/age-of-stars.jpg',
         ]}
       />
+      <RecentlyPlayedGames />
       <PSOverview />
       <SteamOverview steamId={steamId} />
       {/* <SteamOverview /> */}
