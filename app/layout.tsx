@@ -4,6 +4,7 @@ import 'css/colors.css'
 import 'pliny/search/algolia.css'
 
 import { Pangolin, ZCOOL_KuaiLe, Orbitron, Zen_Maru_Gothic } from 'next/font/google'
+import localFont from 'next/font/local'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
 import Header from '@/components/Header'
@@ -35,11 +36,18 @@ const zcool_kuaile = ZCOOL_KuaiLe({
 })
 
 // default Japanese text
-const zenMaruGothic = Zen_Maru_Gothic({
-  subsets: ['latin'],
-  display: 'swap',
+// const zenMaruGothic = Zen_Maru_Gothic({
+//   subsets: ['latin'],
+//   display: 'swap',
+//   variable: '--font-zen-maru',
+//   weight: ['400', '500', '700'],
+// })
+
+const zenMaruGothic = localFont({
+  src: '../public/static/fonts/ZenMaruGothic-Regular.ttf',
+  weight: '400',
   variable: '--font-zen-maru',
-  weight: ['400', '500', '700'],
+  style: 'normal',
 })
 
 // logo Font

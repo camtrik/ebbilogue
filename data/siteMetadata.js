@@ -100,7 +100,6 @@ const siteMetadata = {
     defaultImage: 'https://picsum.photos/seed/picsum/800/400',
     defaultCover: 'static/images/default-cover.png',
   },
-
 }
 
 module.exports = siteMetadata
