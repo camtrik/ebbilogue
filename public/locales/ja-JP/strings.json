@@ -27,6 +27,13 @@
   "gaming_title": "もう一つの世界",
   "gaming_platinum": "プラチナ",
   "gaming_playing": "プレイ中",
+  "gaming": {
+    "recently_played": "最近のアクティビティ",
+    "play_time": "総プレイ時間",
+    "last_played": "最後のプレイ",
+    "achievements": "トロフィー",
+    "store_page": "ストアページ"
+  },
   "Latest": "最新",
   "All Posts": "すべての記事",
   "img_overlay_hint": "長押しでドラッグ。スクロールでズーム。",

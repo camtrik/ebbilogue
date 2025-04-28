@@ -29,6 +29,13 @@
   "gaming_title": "Another World",
   "gaming_platinum": "Platinum",
   "gaming_playing": "Playing",
+  "gaming": {
+    "recently_played": "Recent Activity",
+    "play_time": "Total Played",
+    "last_played": "Last Played",
+    "achievements": "Achievements",
+    "store_page": "View Store Page"
+  },
   "img_overlay_hint": "Drag to move. Scroll to Zoom.",
   "img_overlay_hint_mobile": "Drag to move. Pinch to Zoom.",
   "toc": "TOC",

@@ -28,6 +28,14 @@
   "gaming_title": "另一个世界",
   "gaming_platinum": "白金",
   "gaming_playing": "进行中",
+  "gaming": {
+    "recently_played": "最新动态",
+    "play_time": "总游戏时间",
+    "last_played": "最后游玩",
+    "achievements": "成就",
+    "store_page": "查看商店页面"
+  },
+
   "Latest": "最新",
   "All Posts": "所有文章",
   "img_overlay_hint": "长按拖动。滚动缩放。",
