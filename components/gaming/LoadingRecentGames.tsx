@@ -46,4 +46,4 @@ const LoadingRecentGames = () => {
   )
 }
 
-export default LoadingRecentGames 
+export default LoadingRecentGames

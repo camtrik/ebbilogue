@@ -15,10 +15,10 @@ function formatPlayTime(minutes: number): string {
 // Unix timestamp to date
 function formatLastPlayed(timestamp: number): string {
   const date = new Date(timestamp * 1000)
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1; // 注意：getMonth() 从 0 开始
-  const day = date.getDate();
-  return `${year}/${month}/${day}`;
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1 // 注意：getMonth() 从 0 开始
+  const day = date.getDate()
+  return `${year}/${month}/${day}`
   // return date.toLocaleDateString('ja-JP', {
   //   year: 'numeric',
   //   month: 'long',
@@ -70,15 +70,21 @@ export default function RecentlyPlayedGames() {
       <div className="space-y-6">
         <div className="flex items-center gap-2">
           <Trophy className="h-5 w-5 text-blue-500" />
-          <span className="text-lg">{t('gaming.achievements')}: {game.EarnedAchievements}</span>
+          <span className="text-lg">
+            {t('gaming.achievements')}: {game.EarnedAchievements}
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <Clock className="h-5 w-5 text-blue-500" />
-          <span className="text-lg">{t('gaming.play_time')}: {formatPlayTime(game.PlayTime)}</span>
+          <span className="text-lg">
+            {t('gaming.play_time')}: {formatPlayTime(game.PlayTime)}
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <Calendar className="h-5 w-5 text-blue-500" />
-          <span className="text-lg">{t('gaming.last_played')}: {formatLastPlayed(game.LastPlayedTime)}</span>
+          <span className="text-lg">
+            {t('gaming.last_played')}: {formatLastPlayed(game.LastPlayedTime)}
+          </span>
         </div>
         <a
           href={game.StoreUrl}
