@@ -4,6 +4,7 @@ import { useTranslation } from 'utils/locale'
 import { Trophy, Clock, Calendar } from 'lucide-react'
 import { RecentlyPlayedGame } from '@/types/gameCommon'
 import { Carousel, Card } from '@/components/gaming/GameCardsCarousel'
+import LoadingRecentGames from '@/components/gaming/LoadingRecentGames'
 
 // hours to minutes
 function formatPlayTime(minutes: number): string {
@@ -59,7 +60,7 @@ export default function RecentlyPlayedGames() {
     fetchRecentlyPlayed()
   }, [])
 
-  if (isLoading) return <div className="animate-pulse">加载中...</div>
+  if (isLoading) return <LoadingRecentGames />
   if (error) return <div>错误: {error}</div>
   if (games.length === 0) return <div>没有找到最近游玩的游戏</div>
 
@@ -109,8 +110,8 @@ export default function RecentlyPlayedGames() {
   })
 
   return (
-    <div className="space-y-8">
-      <div className="space-y-2 pb-8 pt-6 md:space-y-5">
+    <div className="space-y-6">
+      <div className="space-y-2 pb-4 pt-6">
         <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
           {t('gaming.recently_played')}
         </h1>
