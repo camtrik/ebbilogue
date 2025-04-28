@@ -3,6 +3,7 @@ export interface RecentlyPlayedGame {
   PlayTime: number
   LastPlayedTime: number
   ArtUrl: string
+  VArtUrl: string
   EarnedAchievements: number
   StoreUrl: string
   Platform: string

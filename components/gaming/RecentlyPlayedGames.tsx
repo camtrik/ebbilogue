@@ -1,9 +1,9 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'utils/locale'
-import Image from 'next/image'
 import { Trophy, Clock, Calendar } from 'lucide-react'
 import { RecentlyPlayedGame } from '@/types/gameCommon'
+import { Carousel, Card } from '@/components/ui/apple-cards-carousel'
 
 // 格式化游戏时间（分钟转小时）
 function formatPlayTime(minutes: number): string {
@@ -35,11 +35,22 @@ function getPlatformIcon(platform: string): string {
   }
 }
 
+// 默认游戏封面图
+const DEFAULT_GAME_COVER = '/static/gallery/bannersAIGC/00073-441946684.png'
+
 export default function RecentlyPlayedGames() {
   const { t } = useTranslation()
   const [games, setGames] = useState<RecentlyPlayedGame[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [imgErrors, setImgErrors] = useState<Record<string, boolean>>({})
+
+  const handleImageError = (gameId: string) => {
+    setImgErrors(prev => ({
+      ...prev,
+      [gameId]: true
+    }))
+  }
 
   useEffect(() => {
     const fetchRecentlyPlayed = async () => {
@@ -62,6 +73,48 @@ export default function RecentlyPlayedGames() {
   if (error) return <div>错误: {error}</div>
   if (games.length === 0) return <div>没有找到最近游玩的游戏</div>
 
+  const cards = games.map((game, index) => {
+    const gameId = `${game.Name}-${game.Platform}`
+    const gameContent = (
+      <div className="space-y-6">
+        <div className="flex items-center gap-2">
+          <Trophy className="h-5 w-5 text-blue-500" />
+          <span className="text-lg">已获得 {game.EarnedAchievements} 个成就</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Clock className="h-5 w-5 text-blue-500" />
+          <span className="text-lg">游戏时间: {formatPlayTime(game.PlayTime)}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Calendar className="h-5 w-5 text-blue-500" />
+          <span className="text-lg">最后游玩: {formatLastPlayed(game.LastPlayedTime)}</span>
+        </div>
+        <a
+          href={game.StoreUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block rounded-lg bg-blue-500 px-6 py-3 text-white hover:bg-blue-600 transition-colors"
+        >
+          查看商店页面
+        </a>
+      </div>
+    )
+
+    return (
+      <Card
+        key={gameId}
+        card={{
+          src: imgErrors[gameId] ? DEFAULT_GAME_COVER : game.VArtUrl,
+          title: game.Name,
+          category: game.Platform,
+          content: gameContent
+        }}
+        index={index}
+        layout={true}
+      />
+    )
+  })
+
   return (
     <div className="space-y-8">
       <div className="space-y-2 pb-8 pt-6 md:space-y-5">
@@ -69,59 +122,7 @@ export default function RecentlyPlayedGames() {
           最近游玩
         </h1>
       </div>
-
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {games.map((game) => (
-          <div
-            key={`${game.Name}-${game.Platform}`}
-            className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900/90 to-gray-800/90 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
-          >
-            <div className="relative aspect-[16/9]">
-              {/* 游戏封面图 */}
-              <Image
-                src={game.ArtUrl}
-                alt={game.Name}
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent opacity-60 transition-opacity group-hover:opacity-80" />
-
-              {/* 成就数量 */}
-              <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-blue-800/25 px-3 py-1">
-                <Trophy className="text-white-400 h-4 w-4" />
-                <span className="text-white-400 text-sm font-medium">{game.EarnedAchievements}</span>
-              </div>
-
-              {/* 平台图标 */}
-              <div className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-blue-800/25 px-3 py-1">
-                <Image
-                  src={getPlatformIcon(game.Platform)}
-                  alt={game.Platform}
-                  width={16}
-                  height={16}
-                  className="h-4 w-4"
-                />
-                <span className="text-white-400 text-sm font-medium">{game.Platform}</span>
-              </div>
-
-              {/* 游戏信息 */}
-              <div className="absolute bottom-0 left-0 right-0 p-4">
-                <div className="flex flex-col gap-1">
-                  <h3 className="line-clamp-1 text-lg font-bold text-white">{game.Name}</h3>
-                  <div className="flex items-center gap-2 text-sm text-gray-300">
-                    <Clock className="h-4 w-4" />
-                    <span>{formatPlayTime(game.PlayTime)}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-300">
-                    <Calendar className="h-4 w-4" />
-                    <span>{formatLastPlayed(game.LastPlayedTime)}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Carousel items={cards} />
     </div>
   )
 } 
