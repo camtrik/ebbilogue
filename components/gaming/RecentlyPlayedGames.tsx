@@ -3,39 +3,29 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'utils/locale'
 import { Trophy, Clock, Calendar } from 'lucide-react'
 import { RecentlyPlayedGame } from '@/types/gameCommon'
-import { Carousel, Card } from '@/components/ui/apple-cards-carousel'
+import { Carousel, Card } from '@/components/gaming/GameCardsCarousel'
 
-// 格式化游戏时间（分钟转小时）
+// hours to minutes
 function formatPlayTime(minutes: number): string {
   const hours = Math.floor(minutes / 60)
-  return `${hours} 小时`
+  return `${hours} hours`
 }
 
-// 格式化Unix时间戳为可读日期
+// Unix timestamp to date
 function formatLastPlayed(timestamp: number): string {
   const date = new Date(timestamp * 1000)
-  return date.toLocaleDateString('zh-CN', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1; // 注意：getMonth() 从 0 开始
+  const day = date.getDate();
+  return `${year}/${month}/${day}`;
+  // return date.toLocaleDateString('ja-JP', {
+  //   year: 'numeric',
+  //   month: 'long',
+  //   day: 'numeric',
+  // })
 }
 
-// 根据平台返回对应的图标
-function getPlatformIcon(platform: string): string {
-  switch (platform.toLowerCase()) {
-    case 'steam':
-      return '/static/images/platforms/steam.svg'
-    case 'xbox':
-      return '/static/images/platforms/xbox.svg'
-    case 'playstation':
-      return '/static/images/platforms/playstation.svg'
-    default:
-      return '/static/images/platforms/generic.svg'
-  }
-}
-
-// 默认游戏封面图
+// default cover when game cover is not found
 const DEFAULT_GAME_COVER = '/static/gallery/bannersAIGC/00073-441946684.png'
 
 export default function RecentlyPlayedGames() {
@@ -79,15 +69,15 @@ export default function RecentlyPlayedGames() {
       <div className="space-y-6">
         <div className="flex items-center gap-2">
           <Trophy className="h-5 w-5 text-blue-500" />
-          <span className="text-lg">已获得 {game.EarnedAchievements} 个成就</span>
+          <span className="text-lg">{t('gaming.achievements')}: {game.EarnedAchievements}</span>
         </div>
         <div className="flex items-center gap-2">
           <Clock className="h-5 w-5 text-blue-500" />
-          <span className="text-lg">游戏时间: {formatPlayTime(game.PlayTime)}</span>
+          <span className="text-lg">{t('gaming.play_time')}: {formatPlayTime(game.PlayTime)}</span>
         </div>
         <div className="flex items-center gap-2">
           <Calendar className="h-5 w-5 text-blue-500" />
-          <span className="text-lg">最后游玩: {formatLastPlayed(game.LastPlayedTime)}</span>
+          <span className="text-lg">{t('gaming.last_played')}: {formatLastPlayed(game.LastPlayedTime)}</span>
         </div>
         <a
           href={game.StoreUrl}
@@ -95,7 +85,7 @@ export default function RecentlyPlayedGames() {
           rel="noopener noreferrer"
           className="inline-block rounded-lg bg-blue-500 px-6 py-3 text-white transition-colors hover:bg-blue-600"
         >
-          查看商店页面
+          {t('gaming.store_page')}
         </a>
       </div>
     )
@@ -122,7 +112,7 @@ export default function RecentlyPlayedGames() {
     <div className="space-y-8">
       <div className="space-y-2 pb-8 pt-6 md:space-y-5">
         <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-          最近游玩
+          {t('gaming.recently_played')}
         </h1>
       </div>
       <Carousel items={cards} />
