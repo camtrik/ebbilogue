@@ -1,4 +1,3 @@
-
 # Personal Blog
 
 Frontend system for my personal website [EbbiLogue](https://ebbilogue.com).  
@@ -11,17 +10,19 @@ This is a [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com
 Some features and designs are inspired by [Azurtelie](https://github.com/AmosChenZixuan/Azurtelier.com). Thanks!
 
 ## Website
+
 ![](https://res.cloudinary.com/camtrik/image/upload/v1744214119/homepage_svupnl.png)
 
 ## New Features by me
+
 - Role-based user system supported by a [Spring Security user management system](https://github.com/camtrik/auth-service-spring-security)
 - Random banner images from [Claudinary]/Local
 - AI Assistant Support (WIP)
   - An AI assistant that supports introducing the website creator (me) and blog content
   - Powered by Tencent Cloud’s LKE [LLM Knowledge Engine](https://cloud.tencent.com/product/lke)
 
-
 ## TODO:
+
 - [x] Random banner images from Claudinary/GooglePhotos/Local
 - [x] Banner preview for blogs
 - [x] Japanese support
@@ -32,7 +33,6 @@ Some features and designs are inspired by [Azurtelie](https://github.com/AmosChe
 - [ ] New blog list design
 - [x] AI Chat Avatar Support
 - [ ] New album design
-
 
 ## Installation
 

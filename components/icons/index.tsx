@@ -11,6 +11,7 @@ import {
   UserProfile,
   Steam,
   PSN,
+  Xbox,
 } from './social-icons'
 
 const components = {
@@ -26,6 +27,7 @@ const components = {
   userprofile: UserProfile,
   steam: Steam,
   psn: PSN,
+  xbox: Xbox,
 }
 
 type SocialIconProps = {

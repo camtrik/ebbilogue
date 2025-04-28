@@ -17,7 +17,7 @@ function formatLastPlayed(timestamp: number): string {
   return date.toLocaleDateString('zh-CN', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   })
 }
 
@@ -46,16 +46,16 @@ export default function RecentlyPlayedGames() {
   const [imgErrors, setImgErrors] = useState<Record<string, boolean>>({})
 
   const handleImageError = (gameId: string) => {
-    setImgErrors(prev => ({
+    setImgErrors((prev) => ({
       ...prev,
-      [gameId]: true
+      [gameId]: true,
     }))
   }
 
   useEffect(() => {
     const fetchRecentlyPlayed = async () => {
       try {
-        const response = await fetch('/api/gameAllPlatforms/recentlyPlayed?timeRange=one_month')
+        const response = await fetch('/api/gameAllPlatforms/recentlyPlayed?timeRange=three_months')
         if (!response.ok) throw new Error('获取最近游戏数据失败')
         const data = await response.json()
         setGames(data)
@@ -93,7 +93,7 @@ export default function RecentlyPlayedGames() {
           href={game.StoreUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block rounded-lg bg-blue-500 px-6 py-3 text-white hover:bg-blue-600 transition-colors"
+          className="inline-block rounded-lg bg-blue-500 px-6 py-3 text-white transition-colors hover:bg-blue-600"
         >
           查看商店页面
         </a>
@@ -105,9 +105,12 @@ export default function RecentlyPlayedGames() {
         key={gameId}
         card={{
           src: imgErrors[gameId] ? DEFAULT_GAME_COVER : game.VArtUrl,
+          fullSrc: imgErrors[gameId] ? DEFAULT_GAME_COVER : game.ArtUrl,
           title: game.Name,
           category: game.Platform,
-          content: gameContent
+          content: gameContent,
+          playTime: formatPlayTime(game.PlayTime),
+          lastPlayed: formatLastPlayed(game.LastPlayedTime),
         }}
         index={index}
         layout={true}
@@ -125,4 +128,4 @@ export default function RecentlyPlayedGames() {
       <Carousel items={cards} />
     </div>
   )
-} 
+}
