@@ -5,6 +5,7 @@ import { Trophy, Clock, Calendar } from 'lucide-react'
 import { RecentlyPlayedGame } from '@/types/gameCommon'
 import { Carousel, Card } from '@/components/gaming/GameCardsCarousel'
 import LoadingRecentGames from '@/components/gaming/LoadingRecentGames'
+import siteMetadata from '@/data/siteMetadata'
 
 // hours to minutes
 function formatPlayTime(minutes: number): string {
@@ -27,7 +28,7 @@ function formatLastPlayed(timestamp: number): string {
 }
 
 // default cover when game cover is not found
-const DEFAULT_GAME_COVER = '/static/gallery/bannersAIGC/00073-441946684.png'
+const DEFAULT_GAME_COVER = siteMetadata.banner.defaultCover
 
 export default function RecentlyPlayedGames() {
   const { t } = useTranslation()
@@ -47,7 +48,7 @@ export default function RecentlyPlayedGames() {
     const fetchRecentlyPlayed = async () => {
       try {
         const response = await fetch('/api/gameAllPlatforms/recentlyPlayed?timeRange=three_months')
-        if (!response.ok) throw new Error('获取最近游戏数据失败')
+        if (!response.ok) throw new Error('fetch recently played games failed')
         const data = await response.json()
         setGames(data)
       } catch (err) {
@@ -61,8 +62,8 @@ export default function RecentlyPlayedGames() {
   }, [])
 
   if (isLoading) return <LoadingRecentGames />
-  if (error) return <div>错误: {error}</div>
-  if (games.length === 0) return <div>没有找到最近游玩的游戏</div>
+  if (error) return <div>Error: {error}</div>
+  if (games.length === 0) return <div>Recently Played Games Not found</div>
 
   const cards = games.map((game, index) => {
     const gameId = `${game.Name}-${game.Platform}`

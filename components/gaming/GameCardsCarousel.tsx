@@ -9,6 +9,7 @@ import { useOutsideClick } from 'hooks/use-outside-click'
 import { Steam, PSN, Xbox } from '@/components/icons/social-icons'
 import { Clock, Calendar } from 'lucide-react'
 import { useTranslation } from 'utils/locale'
+import siteMetadata from '@/data/siteMetadata'
 
 interface CarouselProps {
   items: JSX.Element[]
@@ -296,7 +297,7 @@ export const Card = ({
 export const BlurImage = ({ height, width, src, className, alt, ...rest }: ImageProps) => {
   const [isLoading, setLoading] = useState(true)
   const [error, setError] = useState(false)
-  const defaultImage = '/static/gallery/bannersAIGC/00073-441946684.png'
+  const defaultImage = siteMetadata.banner.defaultCover
 
   return (
     <img
@@ -323,11 +324,6 @@ export const BlurImage = ({ height, width, src, className, alt, ...rest }: Image
 }
 
 function renderPlatformIcon(platform: string) {
-  const steamId = process.env.STEAM_ID || ''
-  const psnId = process.env.PSN_ID || ''
-  const steamURL = 'https://steamcommunity.com/profiles/' + steamId
-  const psnURL = 'https://psnprofiles.com/' + psnId
-
   const iconProps = { className: 'h-5 w-5' }
 
   switch (platform.toLowerCase()) {
