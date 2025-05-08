@@ -5,8 +5,8 @@ import Spinner from '@/components/Spinner'
 import { Tooltip as MuiTooltip } from '@mui/material'
 
 const explicitTheme: ThemeInput = {
-  light: ['#383838', '#90c1fa'],
-  dark: ['#383838', '#90c1fa'],
+  light: ['#383838', '#567496', '#739ac8', '#82aee1', '#90c1fa'],
+  dark: ['#383838', '#567496', '#739ac8', '#82aee1', '#90c1fa'],
 }
 
 const DAYS = 180
