@@ -105,7 +105,7 @@ const Header = () => {
           </Link>
 
           <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
-            {user ? (
+            {/* {user ? (
               <div className="flex items-center">
                 {user.avatarUrl ? (
                   <Image
@@ -134,7 +134,7 @@ const Header = () => {
                 <UserIcon className="h-5 w-5" fill="currentColor" />
                 <span>{t('auth.login')}</span>
               </button>
-            )}
+            )} */}
 
             <SearchButton />
             {useHeaderNavLinks(t)

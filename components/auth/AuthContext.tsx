@@ -64,8 +64,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     router.push('/waiting')
   }
 
-  const haveAccess =
-    (user?.roles.includes('ROLE_ADMIN') || user?.roles.includes('ROLE_MODERATOR')) ?? false
+  // const haveAccess =
+  //   (user?.roles.includes('ROLE_ADMIN') || user?.roles.includes('ROLE_MODERATOR')) ?? false
+
+  const haveAccess = true
   // context value
   const value = {
     user,
