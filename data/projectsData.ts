@@ -14,12 +14,6 @@ const projectsData: Project[] = [
     href: '/blog/notes/unity-metal-viewer-for-4dgs',
   },
   {
-    title: 'ProjectErio',
-    description: `Homework project during the C++ internship at Bandai Namco Studio Inc. A simple Mario-style game made by C++ 17 using SFML`,
-    imgSrc: '/static/images/projects/erio.png',
-    href: 'https://github.com/camtrik/ProjectErio',
-  },
-  {
     title: 'Personal Website: Ebbilogue (WIP)',
     description: `A Next.js, Tailwind CSS project which is based on Next App directory with React Server Component and uses Contentlayer to manage markdown content. 
       Based on the tailwind-nextjs-starter-blog.`,
@@ -27,10 +21,22 @@ const projectsData: Project[] = [
     href: 'https://github.com/camtrik/ebbilogue',
   },
   {
+    title: 'Money Manager Flutter',
+    description: `A minimalist expense tracking app built with Flutter. UI inspired by 1Money.`,
+    imgSrc: 'https://res.cloudinary.com/camtrik/image/upload/v1747836474/banner_famh60.jpg',
+    href: 'https://github.com/camtrik/money-manager-flutter',
+  },
+  {
     title: 'PSN & Steam APIs in Golang (WIP)',
     description: `A Golang project that provides APIs for PSN and Steam. It allows users to fetch data from PSN and Steam.`,
     imgSrc: '/static/images/projects/ginblog.png',
     href: 'https://res.cloudinary.com/camtrik/image/upload/v1738572135/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_2025-02-03_164150_caqufb.png',
+  },
+  {
+    title: 'ProjectErio',
+    description: `Homework project during the C++ internship at Bandai Namco Studio Inc. A simple Mario-style game made by C++ 17 using SFML`,
+    imgSrc: '/static/images/projects/erio.png',
+    href: 'https://github.com/camtrik/ProjectErio',
   },
 ]
 
