@@ -19,6 +19,8 @@
   "btn_prev": "前のページ",
   "btn_next": "次のページ",
   "label_learn_more": "もっと見る",
+  "unknown": "不明",
+
   "footer": {
     "desc": "Made by Nextjs and Tailwind",
     "view_source": "Template here"

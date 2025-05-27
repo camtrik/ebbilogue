@@ -277,7 +277,9 @@ export const Card = ({
             {card.playTime && (
               <div className="flex items-center gap-1 text-gray-300">
                 <Clock className="h-3 w-3" />
-                <span className="text-xs">{card.playTime}</span>
+                <span className="text-xs">
+                  {card.playTime === '0 hours' ? t('unknown') : card.playTime}
+                </span>
               </div>
             )}
 

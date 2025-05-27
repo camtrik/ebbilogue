@@ -20,6 +20,7 @@
   "btn_prev": "Previous",
   "btn_next": "Next",
   "label_learn_more": "Learn more",
+  "unknown": "Unknown",
 
   "footer": {
     "desc": "Made by Nextjs and Tailwind",

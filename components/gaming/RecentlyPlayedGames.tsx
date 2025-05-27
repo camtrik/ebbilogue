@@ -78,7 +78,8 @@ export default function RecentlyPlayedGames() {
         <div className="flex items-center gap-2">
           <Clock className="h-5 w-5 text-blue-500" />
           <span className="text-lg">
-            {t('gaming.play_time')}: {formatPlayTime(game.PlayTime)}
+            {t('gaming.play_time')}:{' '}
+            {game.PlayTime < 60 ? t('unknown') : formatPlayTime(game.PlayTime)}
           </span>
         </div>
         <div className="flex items-center gap-2">
