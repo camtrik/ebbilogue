@@ -400,3 +400,48 @@ CREATE DATABASE db_name;
 ```
 DROP DATABASE db_name;
 ```
+
+
+# Manage Java in macOS (brew + jenv)
+1. install jenv
+```
+brew install jenv
+```
+
+2. add jenv to .zshrc
+```
+# For Zsh
+echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(jenv init -)"' >> ~/.zshrc
+
+# For Bash
+echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(jenv init -)"' >> ~/.bash_profile
+```
+
+3. install different versions of java and add to environment variable
+```
+brew install openjdk@21
+brew install openjdk@24
+```
+
+```
+echo 'export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"' >> ~/.zshrc
+echo 'export PATH="/opt/homebrew/opt/openjdk@24/bin:$PATH"' >> ~/.zshrc
+```
+
+4. add java to jenv
+```
+jenv add /opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home
+jenv add /opt/homebrew/opt/openjdk@24/libexec/openjdk.jdk/Contents/Home
+```
+
+5. set default java version
+```
+jenv global 21
+```
+
+6. set local java version (for specific directory only)
+```
+jenv local 21
+```
