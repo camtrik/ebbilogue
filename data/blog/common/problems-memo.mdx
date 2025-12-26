@@ -401,6 +401,7 @@ CREATE DATABASE db_name;
 DROP DATABASE db_name;
 ```
 
+
 # Spring 热重载
 最主要是要配置好devtools
 docker的话需要挂载volumes(之后整理)
@@ -410,4 +411,42 @@ spring.devtools.restart.enabled=true
 spring.devtools.livereload.enabled=true
 spring.devtools.restart.additional-paths=src/main/java
 
+```
+# Manage Java in macOS (brew + jenv)
+1. install jenv
+```
+brew install jenv
+```
+
+2. add jenv to .zshrc
+```
+# For Zsh
+echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(jenv init -)"' >> ~/.zshrc
+
+# For Bash
+echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(jenv init -)"' >> ~/.bash_profile
+```
+
+3. install different versions of java 
+```
+brew install openjdk@21
+brew install openjdk@24
+```
+
+4. add java to jenv
+```
+jenv add /opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home
+jenv add /opt/homebrew/opt/openjdk@24/libexec/openjdk.jdk/Contents/Home
+```
+
+5. set default java version
+```
+jenv global 21
+```
+
+6. set local java version (for specific directory only)
+```
+jenv local 21
 ```
