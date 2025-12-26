@@ -400,3 +400,14 @@ CREATE DATABASE db_name;
 ```
 DROP DATABASE db_name;
 ```
+
+# Spring 热重载
+最主要是要配置好devtools
+docker的话需要挂载volumes(之后整理)
+```
+# DevTools配置
+spring.devtools.restart.enabled=true
+spring.devtools.livereload.enabled=true
+spring.devtools.restart.additional-paths=src/main/java
+
+```
